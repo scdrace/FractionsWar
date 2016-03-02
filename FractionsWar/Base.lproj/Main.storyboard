@@ -18,15 +18,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-jt-36P">
-                                <rect key="frame" x="340" y="268" width="46" height="30"/>
+                                <rect key="frame" x="275" y="493" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="cardFlip:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3tu-W1-kUH"/>
+                                </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mlz-Dy-bqc">
+                                <rect key="frame" x="69" y="41" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Nb-qR-tx5">
+                                <rect key="frame" x="177" y="192" width="157" height="238"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="yTp-w9-qOw" appends="YES" id="hGK-E4-IG9"/>
+                            <outletCollection property="gestureRecognizers" destination="eFU-pX-BuF" appends="YES" id="2QO-3p-BCC"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="cardView" destination="6Nb-qR-tx5" id="4Cf-Vs-d5E"/>
+                        <outlet property="swipeView" destination="Mlz-Dy-bqc" id="CEv-am-UE3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="yTp-w9-qOw">
+                    <connections>
+                        <action selector="swipeGesture:" destination="BYZ-38-t0r" id="8Vw-Eb-QfX"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="eFU-pX-BuF">
+                    <connections>
+                        <action selector="swipeGesture:" destination="BYZ-38-t0r" id="gH0-T7-SkX"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="305" y="366"/>
         </scene>
     </scenes>
 </document>

@@ -12,6 +12,12 @@
 		5534AFD51C84E516006188CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFD31C84E516006188CB /* Main.storyboard */; };
 		5534AFD71C84E516006188CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFD61C84E516006188CB /* Assets.xcassets */; };
 		5534AFDA1C84E516006188CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFD81C84E516006188CB /* LaunchScreen.storyboard */; };
+		5534AFEA1C860E19006188CB /* png in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFE91C860E19006188CB /* png */; };
+		5534AFEC1C860F2A006188CB /* 2_of_clubs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFEB1C860F2A006188CB /* 2_of_clubs@2x.png */; };
+		5534AFEE1C860FFE006188CB /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFED1C860FFE006188CB /* back.png */; };
+		5534AFF01C86100A006188CB /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFEF1C86100A006188CB /* back@2x.png */; };
+		5534AFF21C862F70006188CB /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534AFF11C862F70006188CB /* Card.swift */; };
+		5534B0071C877045006188CB /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534B0061C877045006188CB /* Deck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,12 @@
 		5534AFD61C84E516006188CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5534AFD91C84E516006188CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5534AFDB1C84E516006188CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5534AFE91C860E19006188CB /* png */ = {isa = PBXFileReference; lastKnownFileType = folder; path = png; sourceTree = "<group>"; };
+		5534AFEB1C860F2A006188CB /* 2_of_clubs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "2_of_clubs@2x.png"; path = "png/2_of_clubs@2x.png"; sourceTree = "<group>"; };
+		5534AFED1C860FFE006188CB /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back.png; path = png/back.png; sourceTree = "<group>"; };
+		5534AFEF1C86100A006188CB /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back@2x.png"; path = "png/back@2x.png"; sourceTree = "<group>"; };
+		5534AFF11C862F70006188CB /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		5534B0061C877045006188CB /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +68,14 @@
 			children = (
 				5534AFCF1C84E516006188CB /* AppDelegate.swift */,
 				5534AFD11C84E516006188CB /* ViewController.swift */,
+				5534B0061C877045006188CB /* Deck.swift */,
+				5534AFF11C862F70006188CB /* Card.swift */,
 				5534AFD31C84E516006188CB /* Main.storyboard */,
 				5534AFD61C84E516006188CB /* Assets.xcassets */,
+				5534AFEB1C860F2A006188CB /* 2_of_clubs@2x.png */,
+				5534AFED1C860FFE006188CB /* back.png */,
+				5534AFEF1C86100A006188CB /* back@2x.png */,
+				5534AFE91C860E19006188CB /* png */,
 				5534AFD81C84E516006188CB /* LaunchScreen.storyboard */,
 				5534AFDB1C84E516006188CB /* Info.plist */,
 			);
@@ -121,6 +139,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5534AFEA1C860E19006188CB /* png in Resources */,
+				5534AFEC1C860F2A006188CB /* 2_of_clubs@2x.png in Resources */,
+				5534AFEE1C860FFE006188CB /* back.png in Resources */,
+				5534AFF01C86100A006188CB /* back@2x.png in Resources */,
 				5534AFDA1C84E516006188CB /* LaunchScreen.storyboard in Resources */,
 				5534AFD71C84E516006188CB /* Assets.xcassets in Resources */,
 				5534AFD51C84E516006188CB /* Main.storyboard in Resources */,
@@ -134,7 +156,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5534B0071C877045006188CB /* Deck.swift in Sources */,
 				5534AFD21C84E516006188CB /* ViewController.swift in Sources */,
+				5534AFF21C862F70006188CB /* Card.swift in Sources */,
 				5534AFD01C84E516006188CB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +307,7 @@
 				5534AFE01C84E516006188CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
