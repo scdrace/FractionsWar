@@ -51,6 +51,9 @@ class Card: UIView {
         self.front = UIImageView(image: UIImage(named: "2_of_clubs.png"))
         self.front!.center = cardViewCenter
         self.front!.tag = 2
+        
+        back!.frame = CGRect(origin: CGPointMake(0,0), size: CGSize(width: self.frame.width, height: self.frame.height))
+        front!.frame = CGRect(origin: CGPointMake(0,0), size: CGSize(width: self.frame.width, height: self.frame.height))
 
     }
 
