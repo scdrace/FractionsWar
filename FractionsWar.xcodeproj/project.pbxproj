@@ -15,6 +15,8 @@
 		5534AFF01C86100A006188CB /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFEF1C86100A006188CB /* back@2x.png */; };
 		5534AFF21C862F70006188CB /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534AFF11C862F70006188CB /* Card.swift */; };
 		5534B0071C877045006188CB /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534B0061C877045006188CB /* Deck.swift */; };
+		55BE81991CAC35D7006E16E4 /* HZViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BE81981CAC35D7006E16E4 /* HZViewController.swift */; };
+		55BE819F1CADD25F006E16E4 /* SwipeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BE819E1CADD25F006E16E4 /* SwipeLogic.swift */; };
 		55CF7E241CA5182500B1BE0C /* Card2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E231CA5182500B1BE0C /* Card2.swift */; };
 		55CF7E261CA51DF700B1BE0C /* Hand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E251CA51DF700B1BE0C /* Hand.swift */; };
 		55CF7E281CA51EFA00B1BE0C /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E271CA51EFA00B1BE0C /* Round.swift */; };
@@ -77,7 +79,6 @@
 		55CF7E9D1CA9B60B00B1BE0C /* queen_of_hearts.png in Resources */ = {isa = PBXBuildFile; fileRef = 55CF7E661CA9B60B00B1BE0C /* queen_of_hearts.png */; };
 		55CF7E9E1CA9B60B00B1BE0C /* queen_of_spades.png in Resources */ = {isa = PBXBuildFile; fileRef = 55CF7E671CA9B60B00B1BE0C /* queen_of_spades.png */; };
 		55CF7E9F1CA9B60B00B1BE0C /* red_joker.png in Resources */ = {isa = PBXBuildFile; fileRef = 55CF7E681CA9B60B00B1BE0C /* red_joker.png */; };
-		55CF7EA11CAB17BF00B1BE0C /* SwipeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7EA01CAB17BF00B1BE0C /* SwipeLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,8 @@
 		5534AFEF1C86100A006188CB /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back@2x.png"; path = "png/back@2x.png"; sourceTree = "<group>"; };
 		5534AFF11C862F70006188CB /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		5534B0061C877045006188CB /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		55BE81981CAC35D7006E16E4 /* HZViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HZViewController.swift; path = ../HZViewController.swift; sourceTree = "<group>"; };
+		55BE819E1CADD25F006E16E4 /* SwipeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeLogic.swift; path = ../SwipeLogic.swift; sourceTree = "<group>"; };
 		55CF7E231CA5182500B1BE0C /* Card2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card2.swift; sourceTree = "<group>"; };
 		55CF7E251CA51DF700B1BE0C /* Hand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hand.swift; sourceTree = "<group>"; };
 		55CF7E271CA51EFA00B1BE0C /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Round.swift; sourceTree = "<group>"; };
@@ -153,7 +156,6 @@
 		55CF7E661CA9B60B00B1BE0C /* queen_of_hearts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = queen_of_hearts.png; path = png/queen_of_hearts.png; sourceTree = "<group>"; };
 		55CF7E671CA9B60B00B1BE0C /* queen_of_spades.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = queen_of_spades.png; path = png/queen_of_spades.png; sourceTree = "<group>"; };
 		55CF7E681CA9B60B00B1BE0C /* red_joker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = red_joker.png; path = png/red_joker.png; sourceTree = "<group>"; };
-		55CF7EA01CAB17BF00B1BE0C /* SwipeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,22 +190,31 @@
 			children = (
 				5534AFCF1C84E516006188CB /* AppDelegate.swift */,
 				5534AFD11C84E516006188CB /* ViewController.swift */,
-				55CF7EA01CAB17BF00B1BE0C /* SwipeLogic.swift */,
+				55BE819E1CADD25F006E16E4 /* SwipeLogic.swift */,
 				55CF7E291CA51F1700B1BE0C /* Game.swift */,
 				55CF7E2B1CA8E44C00B1BE0C /* Player.swift */,
 				55CF7E271CA51EFA00B1BE0C /* Round.swift */,
 				55CF7E251CA51DF700B1BE0C /* Hand.swift */,
 				55CF7E231CA5182500B1BE0C /* Card2.swift */,
-				55CF7E2D1CA992C700B1BE0C /* CardView.swift */,
 				5534B0061C877045006188CB /* Deck.swift */,
-				5534AFF11C862F70006188CB /* Card.swift */,
 				5534AFD31C84E516006188CB /* Main.storyboard */,
 				5534AFD61C84E516006188CB /* Assets.xcassets */,
 				55CF7E2F1CA9B5A200B1BE0C /* CardPics */,
 				5534AFD81C84E516006188CB /* LaunchScreen.storyboard */,
 				5534AFDB1C84E516006188CB /* Info.plist */,
+				55BE81A01CADD325006E16E4 /* Unused */,
 			);
 			path = FractionsWar;
+			sourceTree = "<group>";
+		};
+		55BE81A01CADD325006E16E4 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				55CF7E2D1CA992C700B1BE0C /* CardView.swift */,
+				55BE81981CAC35D7006E16E4 /* HZViewController.swift */,
+				5534AFF11C862F70006188CB /* Card.swift */,
+			);
+			name = Unused;
 			sourceTree = "<group>";
 		};
 		55CF7E2F1CA9B5A200B1BE0C /* CardPics */ = {
@@ -403,11 +414,12 @@
 				55CF7E241CA5182500B1BE0C /* Card2.swift in Sources */,
 				55CF7E2E1CA992C700B1BE0C /* CardView.swift in Sources */,
 				5534AFF21C862F70006188CB /* Card.swift in Sources */,
+				55BE81991CAC35D7006E16E4 /* HZViewController.swift in Sources */,
 				55CF7E281CA51EFA00B1BE0C /* Round.swift in Sources */,
+				55BE819F1CADD25F006E16E4 /* SwipeLogic.swift in Sources */,
 				5534AFD01C84E516006188CB /* AppDelegate.swift in Sources */,
 				55CF7E2C1CA8E44C00B1BE0C /* Player.swift in Sources */,
 				55CF7E2A1CA51F1700B1BE0C /* Game.swift in Sources */,
-				55CF7EA11CAB17BF00B1BE0C /* SwipeLogic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +534,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FractionsWar.FractionsWar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -533,6 +546,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FractionsWar.FractionsWar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

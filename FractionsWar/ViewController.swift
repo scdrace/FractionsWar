@@ -16,37 +16,46 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var cardView: UIView! //UIView that contains Card object
     @IBOutlet weak var swipeView: UIView! //UIview that moves when swipe occurs
 
+    //Ports in which Card2.view is placed
+    //Ports are used so that we can set up constraints in IB
     @IBOutlet weak var p1Numerator: UIView!
     @IBOutlet weak var p1Denominator: UIView!
-    @IBOutlet weak var p1Area: UIView!
-    
     @IBOutlet weak var p2Numerator: UIView!
     @IBOutlet weak var p2Denominator: UIView!
-    @IBOutlet weak var p2Area: UIView!
     
-    @IBOutlet weak var boardMidline: UIView!
+    @IBOutlet weak var boardMidline: UIView! //An IB object used to help with autoLayout
     
+    //Decimal value of hands
     @IBOutlet weak var p1DecimalValue: UILabel!
     @IBOutlet weak var p2DecimalValue: UILabel!
     
+    //Player Scores
     @IBOutlet weak var p1Score: UILabel!
     @IBOutlet weak var p2Score: UILabel!
     
+    //Cards left in deck
     @IBOutlet weak var cardsLeft: UILabel!
     
+    //These view sit on top of everything, so that they can detect a touch
+    //!!!P1AreaX will eventually be P1AreaV, for the vertial layout; it we keep it
     var p1AreaX: UIView!
     var p2AreaX: UIView!
+    var p1AreaH: UIView!
+    var p2AreaH: UIView!
     
-    let moveDistance: CGFloat = 600
     
-    var game = Game()
+    let moveDistance: CGFloat = 900 //Distance for cards to move
     
+    var game = Game() //COntroller interacts with game through Game interface
+    
+    //Used to resize Card2 to port size
     var cardFrame: CGRect {
         
         return CGRect(origin: CGPointMake(0, 0), size:  CGSize(width: p1Numerator.frame.width,
             height: p1Numerator.frame.height))
     }
     
+    //May not use this anymore
     var cardBack: UIImageView {
         let back = UIImageView(image: UIImage(named: "back@2x.png.png"))
         back.frame = cardFrame
@@ -54,6 +63,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return back
     }
     
+    //Return the cardPorts, used for swiping
     var getCardPorts: [UIView] {
         return [p1Numerator, p1Denominator, p2Numerator, p2Denominator]
     }
@@ -62,64 +72,37 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-       // p1Area.frame.size.width = self.view.frame.size.width
-        //p1Area.center.x = self.view.center.x
+
         
         p1AreaX = UIView(frame: CGRectMake(0, self.view.center.y, self.view.frame.size.width, self.view.frame.size.height/2))
         p1AreaX.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(p1AreaX)
-        self.view.bringSubviewToFront(p1AreaX)
+        //self.view.addSubview(p1AreaX)
+        //self.view.bringSubviewToFront(p1AreaX)
         
-        p2AreaX = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height/2))
+        p2AreaX = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height))
         p2AreaX.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(p2AreaX)
-        self.view.bringSubviewToFront(p2AreaX)
+        //self.view.addSubview(p2AreaX)
+        //self.view.bringSubviewToFront(p2AreaX)
         
-        /*
-        let swipeUp = UISwipeGestureRecognizer(target: self.p1AreaX, action: #selector(foo))
-        swipeUp.direction = .Up
+        p1AreaH = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height))
+        p1AreaH.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(p1AreaH)
+        self.view.bringSubviewToFront(p1AreaH)
         
-        swipeUp.delegate = self
-        p1AreaX.userInteractionEnabled = true
-        p1AreaX.addGestureRecognizer(swipeUp)
-*/
-        /*
-        // create an instance of UITapGestureRecognizer and tell it to run
-        // an action we'll call "handleTap:"
-        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
-        // we use our delegate
-        tap.delegate = self
-        // allow for user interaction
-        tapView.userInteractionEnabled = true
-        // add tap as a gestureRecognizer to tapView
-        tapView.addGestureRecognizer(tap)
-        */
+        p2AreaH = UIView(frame: CGRectMake(self.view.center.x, 0, self.view.frame.size.width/2, self.view.frame.size.height))
+        p2AreaH.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(p2AreaH)
+        self.view.bringSubviewToFront(p2AreaH)
     }
 
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let swipeUpP1 = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeGesture(_:)))
-        swipeUpP1.direction = .Up
-        
-        let swipeDownP1 = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeGesture(_:)))
-        swipeDownP1.direction = .Down
-        
-        p1AreaX.userInteractionEnabled = true
-        p1AreaX.addGestureRecognizer(swipeUpP1)
-        p1AreaX.addGestureRecognizer(swipeDownP1)
+        addSwipeGesture(p1AreaH)
+        addSwipeGesture(p2AreaH)
         
         
-        let swipeUpP2 = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeGesture(_:)))
-        swipeUpP2.direction = .Up
-        
-        let swipeDownP2 = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeGesture(_:)))
-        swipeDownP2.direction = .Down
-        
-        p2AreaX.userInteractionEnabled = true
-        p2AreaX.addGestureRecognizer(swipeUpP2)
-        p2AreaX.addGestureRecognizer(swipeDownP2)
-
         self.view.bringSubviewToFront(flipButton)
         self.view.bringSubviewToFront(boardMidline)
         
@@ -129,31 +112,51 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
-    func foo(sender: UISwipeGestureRecognizer) {
-        print("SWIPE")
+    
+    //Adds swipeGestureRecognizer to each player area
+    func addSwipeGesture(swipeArea: UIView) {
+        
+        swipeArea.userInteractionEnabled = true
+        
+        let direction = [UISwipeGestureRecognizerDirection.Up, UISwipeGestureRecognizerDirection.Down,
+                         UISwipeGestureRecognizerDirection.Left, UISwipeGestureRecognizerDirection.Right]
+        
+        for i in 0...3 {
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeGesture(_:)))
+            swipe.direction = direction[i]
+            swipeArea.addGestureRecognizer(swipe)
+        }
     }
+    
+    
     func setupCards() {
         game.nextRound()
         
         
+        //Size the Cards according to the cardPorts in Interface-Builder
         game.resizeCards(cardFrame)
+        
+        //Add Card2.view to corresponding card-port
         addCardImage()
         
         
+        //Display the value of each hand
+        //Used for debugging; REMOVE FOR FINAL PRODUCT
         p1DecimalValue.text = "Hand Value: " + String(round(100 * game.getPlayer1().getHand().decimalValue) / 100)
         p2DecimalValue.text = "Hand Value: " + String(round(100 * game.getPlayer2().getHand().decimalValue) / 100)
         
-        
+        //Stand-in to display scores
         p1Score.text = "Score: " + String(game.getPlayer1().points)
         p2Score.text = "Score: " + String(game.getPlayer2().points)
         
+        //Stand-in to display text
         cardsLeft.text = "Cards Left: " + String(game.deck.deckRandom.count)
         
         
+        //Prints each players hand in text-output
+        //Used for debugging
         print("Player2: \(game.player2.hand!)")
         print("Player1: \(game.player1.hand!)")
-        //print(game.deck.deckRandom)
-
     }
     
     
@@ -184,103 +187,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         game.flipCards()
 
-    }
-    
-    
-    func swipeUp() {
-        
-        let cardPorts = self.getCardPorts
-        
-        UIView.animateWithDuration(0.8, animations: {
-            
-            for port in cardPorts {
-                port.center.y -= self.moveDistance
-            }
-
-            }, completion: { finished in
-                
-                self.game.imageClean()
-                
-                self.setupCards()
-                
-                for port in cardPorts {
-                    port.center.y += self.moveDistance
-                }
-        })
-    }
-    
-    func swipeDown() {
-        
-        let cardPorts = self.getCardPorts
-        
-        UIView.animateWithDuration(0.8, animations: {
-            
-            for port in cardPorts {
-                port.center.y += self.moveDistance
-            }
-
-            }, completion: { finished in
-                
-                self.game.imageClean()
-                
-                self.setupCards()
-                
-                for port in cardPorts {
-                    port.center.y -= self.moveDistance
-                }
-                
-        })
-    }
-    
-    
-    func p1SwipePoints(sender: UISwipeGestureRecognizer) {
-        
-        if game.getRound().highHand != "player1" {
-            
-            if sender.view === self.p1AreaX {
-                game.getPlayer1().addPoints(1)
-            }
-            else if sender.view === self.p2AreaX {
-                game.getPlayer2().addPoints(1)
-            }
-        }
-    }
-
-    
-    func p2SwipePoints(sender: UISwipeGestureRecognizer) {
-        
-        if game.getRound().highHand != "player2" {
-            if sender.view === self.p1AreaX {
-                game.getPlayer1().addPoints(1)
-            }
-            else if sender.view === self.p2AreaX {
-                game.getPlayer2().addPoints(1)
-            }
-        }
-    }
-
-        
-    //A demo of swiping. Note that you need a UISwipeGestureRecognizer for each direction
-    //UISwipeGestureRecognizers were added in IB
-    @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
-        print(sender.direction)
-        
-        if sender.direction == .Up {
-            print("swipeUp")
-            
-            p1SwipePoints(sender)
-            swipeUp()
-        }
-            
-        else if sender.direction == .Down {
-            print("swipeDown")
-            
-            p2SwipePoints(sender)
-            swipeDown()
-        }
-        
-        print("Player1: \(game.player1.points)")
-        print("Player2: \(game.player2.points)")
     }
     
     override func didReceiveMemoryWarning() {

@@ -53,9 +53,6 @@ class Game: CustomStringConvertible {
         player2.hand!.flipCards()
     }
     
-    func getHand(hand: Hand) {
-        
-    }
     
     func resizeCards(cardFrame: CGRect) {
         player1.hand!.resizeCards(cardFrame)
@@ -97,9 +94,5 @@ class Game: CustomStringConvertible {
     
     func highHand() -> String {
         return round.highHand
-    }
- 
-    func makeHand() {
-        //round.makeHand(self.deck)
     }
 }
