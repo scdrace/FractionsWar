@@ -57,7 +57,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     //May not use this anymore
     var cardBack: UIImageView {
-        let back = UIImageView(image: UIImage(named: "back@2x.png.png"))
+        let back = UIImageView(image: UIImage(named: "back1.png"))
         back.frame = cardFrame
         
         return back
@@ -72,7 +72,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
         
         p1AreaX = UIView(frame: CGRectMake(0, self.view.center.y, self.view.frame.size.width, self.view.frame.size.height/2))
         p1AreaX.backgroundColor = UIColor.clearColor()

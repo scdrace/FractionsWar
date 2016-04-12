@@ -30,7 +30,9 @@ class Card2: CustomStringConvertible {
     init(rank: Double, suit: String) {
         self.rank = rank
         self.suit = suit
-        self.imageName =  String(Int(self.rank)) + "_of_" + self.suit + ".png"
+        
+        let shortSuit = Card2.shortenSuitName(suit)
+        self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-n.png"
         //print(imageName)
         
         self.cardView = UIView(frame: CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100)))
@@ -38,7 +40,7 @@ class Card2: CustomStringConvertible {
         //let casinoGreen = UIColor(red: 0, green: 153, blue: 0, alpha:1)
         //cardView.backgroundColor = casinoGreen
         //front.backgroundColor = UIColor.whiteColor()
-        self.back = UIImageView(image: UIImage(named: "back.png"))
+        self.back = UIImageView(image: UIImage(named: "back2.png"))
         self.front = UIImageView(image: UIImage(named: imageName))
         front.backgroundColor = UIColor.whiteColor()
         cardView.addSubview(back)
@@ -79,5 +81,22 @@ class Card2: CustomStringConvertible {
     func imageClean() {
         self.front.removeFromSuperview()
         self.back.removeFromSuperview()
+    }
+    
+    private class func shortenSuitName(suit: String) -> String {
+        var shortSuit: String? = nil
+        
+        switch suit {
+        case "diamonds":
+            shortSuit = "dm"
+        case "hearts":
+            shortSuit = "hr"
+        case "spades":
+            shortSuit = "sp"
+        default:
+            shortSuit = "cl"
+        }
+        
+        return shortSuit!
     }
 }
