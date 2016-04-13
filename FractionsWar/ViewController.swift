@@ -13,6 +13,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var flipButton: UIButton!
     
+    //These views are in the storyboard purely to help with AutoLayout
+    @IBOutlet weak var farLeftView: UIView!
+    @IBOutlet weak var midLeftView: UIView!
+    @IBOutlet weak var midRightView: UIView!
+    @IBOutlet weak var farRightView: UIView!
+    
     @IBOutlet weak var cardView: UIView! //UIView that contains Card object
     @IBOutlet weak var swipeView: UIView! //UIview that moves when swipe occurs
 
@@ -105,7 +111,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         
         self.view.bringSubviewToFront(flipButton)
-        self.view.bringSubviewToFront(boardMidline)
+        // self.view.bringSubviewToFront(boardMidline)
         
         
         setupCards()

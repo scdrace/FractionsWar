@@ -11,7 +11,6 @@ import UIKit
 
 extension ViewController {
     
-    
     //Add point for swipe
     func points(sender: UISwipeGestureRecognizer) {
         
@@ -60,7 +59,6 @@ extension ViewController {
         let swipeDirection = sender.direction
         let cardPorts = getCardPorts
         
-        
         func moveHorizontal(distance: CGFloat) {
             for port in cardPorts {
                 port.center.x += distance
@@ -73,24 +71,21 @@ extension ViewController {
             }
         }
         
-        
         func animation(direction: (CGFloat)->(), distanceAway: CGFloat, distanceBack: CGFloat) {
             
-            UIView.animateWithDuration(0.8, animations: {
-                direction(distanceAway)
-                
-                
-                }, completion: { finished in
+            UIView.animateWithDuration(0.8,
+                animations: {
+                    direction(distanceAway)
+                },
+                completion: {
+                    finished in
                     
                     self.game.imageClean()
-                    
                     self.setupCards()
-                    
                     direction(distanceBack)
-                    
-            })
+                }
+            )
         }
-        
         
         switch swipeDirection {
         case UISwipeGestureRecognizerDirection.Up:

@@ -11,9 +11,7 @@ import Foundation
 class Round {
     var player1: Player
     var player2: Player
-    //var deck: [Card2]
     var round = 0
-    
     
     var highHand: String {
         
@@ -28,13 +26,10 @@ class Round {
         }
     }
     
-    
     init(player1: Player, player2: Player) {
         self.player1 = player1
         self.player2 = player2
-        //self.deck = deck
     }
-    
     
     func makeHand(deck: [Card2]) {
         
@@ -43,13 +38,11 @@ class Round {
             return
         }
 
-        self.round++
-        
+        self.round += 1
         
         player1.hand = Hand(card1: deck[0], card2: deck[1])
         player2.hand = Hand(card1: deck[2], card2: deck[3])
     }
-    
     
     func imageClean() {
         player1.getHand().imageClean()

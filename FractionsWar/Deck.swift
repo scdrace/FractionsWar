@@ -17,7 +17,7 @@ import UIKit
 */
 
 class Deck {
-    let rank = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+    let rank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     let suit = ["clubs", "diamonds", "hearts", "spades"]
     
     var deckOrdered = [Card2]()

@@ -26,27 +26,20 @@ class Card2: CustomStringConvertible {
         return "\(self.rank), \(self.suit)"
     }
  
-    
     init(rank: Double, suit: String) {
         self.rank = rank
         self.suit = suit
         
         let shortSuit = Card2.shortenSuitName(suit)
         self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-n.png"
-        //print(imageName)
         
         self.cardView = UIView(frame: CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100)))
         
-        //let casinoGreen = UIColor(red: 0, green: 153, blue: 0, alpha:1)
-        //cardView.backgroundColor = casinoGreen
-        //front.backgroundColor = UIColor.whiteColor()
         self.back = UIImageView(image: UIImage(named: "back2.png"))
         self.front = UIImageView(image: UIImage(named: imageName))
         front.backgroundColor = UIColor.whiteColor()
         cardView.addSubview(back)
-        
     }
-    
     
     func resizeCard(frame: CGRect) {
         self.cardView.frame = frame
@@ -55,12 +48,26 @@ class Card2: CustomStringConvertible {
     }
     
     func flipCard() {
-        //print(self.imageName)
-        
         UIView.transitionFromView(back, toView: self.front, duration: 0.5, options: [
             .TransitionFlipFromLeft], completion: nil)
     }
-
+    
+    private class func shortenSuitName(suit: String) -> String {
+        var shortSuit: String? = nil
+        
+        switch suit {
+        case "diamonds":
+            shortSuit = "dm"
+        case "hearts":
+            shortSuit = "hr"
+        case "spades":
+            shortSuit = "sp"
+        default:
+            shortSuit = "cl"
+        }
+        
+        return shortSuit!
+    }
     
     func getRank() -> Double {
         return rank
@@ -81,22 +88,5 @@ class Card2: CustomStringConvertible {
     func imageClean() {
         self.front.removeFromSuperview()
         self.back.removeFromSuperview()
-    }
-    
-    private class func shortenSuitName(suit: String) -> String {
-        var shortSuit: String? = nil
-        
-        switch suit {
-        case "diamonds":
-            shortSuit = "dm"
-        case "hearts":
-            shortSuit = "hr"
-        case "spades":
-            shortSuit = "sp"
-        default:
-            shortSuit = "cl"
-        }
-        
-        return shortSuit!
     }
 }

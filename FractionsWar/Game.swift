@@ -40,7 +40,6 @@ class Game: CustomStringConvertible {
             let d = self.deck.deckRandom.removeLast()
             
             let e = [a, b, c, d]
-            //print(e)
             self.round.makeHand(e)
         }
         else {
@@ -72,7 +71,6 @@ class Game: CustomStringConvertible {
         let cards = Cards(p1Numerator: player1.getNumerator(), p1Denominator: player1.getDenominator(),
         p2Numerator: player2.getNumerator(), p2Denominator: player2.getDenominator())
         
-    
         return cards
     }
     

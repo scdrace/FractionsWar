@@ -21,7 +21,6 @@ class Hand: CustomStringConvertible {
         return "\(self.numerator), \(self.denominator), \(self.decimalValue)"
     }
     
-    
     init(card1: Card2, card2: Card2) {
         
         if card1.rank > card2.rank {
@@ -43,7 +42,6 @@ class Hand: CustomStringConvertible {
         numerator.resizeCard(cardFrame)
         denominator.resizeCard(cardFrame)
     }
-    
     
     func getNumerator() -> Card2 {
         return self.numerator

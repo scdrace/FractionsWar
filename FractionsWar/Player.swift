@@ -13,7 +13,6 @@ class Player: CustomStringConvertible {
     var points = 0
     var hand: Hand?
     
-
     var description: String {
         return ""
     }
@@ -33,5 +32,4 @@ class Player: CustomStringConvertible {
     func addPoints(points: Int = 1) {
         self.points += points
     }
-    
 }

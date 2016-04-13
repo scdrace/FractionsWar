@@ -1,14 +1,14 @@
 //
-//  HZViewController.swift
+//  GameViewController.swift
 //  FractionsWar
 //
-//  Created by David Race on 3/30/16.
+//  Created by Stephen Gaschignard on 4/13/16.
 //
 //
 
 import UIKit
 
-class HZViewController: ViewController {
+class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
