@@ -20,8 +20,8 @@ class Deck {
     let rank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     let suit = ["clubs", "diamonds", "hearts", "spades"]
     
-    var deckOrdered = [Card2]()
-    var deckRandom = [Card2]()
+    var deckOrdered = [Card]()
+    var deckRandom = [Card]()
     
     init() {
         makeDeck()
@@ -31,7 +31,7 @@ class Deck {
     func makeDeck() {
         for number in rank {
             for name in suit {
-                deckOrdered.append(Card2(rank: Double(number), suit: name))
+                deckOrdered.append(Card(rank: Double(number), suit: name))
             }
         }
     }

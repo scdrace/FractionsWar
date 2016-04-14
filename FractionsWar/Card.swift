@@ -1,5 +1,5 @@
 //
-//  Card2.swift
+//  Card.swift
 //  FractionsWar
 //
 //  Created by David Race on 3/25/16.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Card2: CustomStringConvertible {
+class Card: CustomStringConvertible {
     var rank: Double
     var suit: String
     var imageName: String
@@ -30,14 +30,13 @@ class Card2: CustomStringConvertible {
         self.rank = rank
         self.suit = suit
         
-        let shortSuit = Card2.shortenSuitName(suit)
+        let shortSuit = Card.shortenSuitName(suit)
         self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-n.png"
         
         self.cardView = UIView(frame: CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100)))
         
         self.back = UIImageView(image: UIImage(named: "back2.png"))
         self.front = UIImageView(image: UIImage(named: imageName))
-        front.backgroundColor = UIColor.whiteColor()
         cardView.addSubview(back)
     }
     

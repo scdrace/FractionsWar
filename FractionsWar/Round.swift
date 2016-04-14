@@ -31,7 +31,7 @@ class Round {
         self.player2 = player2
     }
     
-    func makeHand(deck: [Card2]) {
+    func makeHand(deck: [Card]) {
         
         if deck.isEmpty {
             print("Winner")

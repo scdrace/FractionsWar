@@ -17,11 +17,11 @@ class Player: CustomStringConvertible {
         return ""
     }
     
-    func getNumerator() -> Card2 {
+    func getNumerator() -> Card {
         return self.hand!.getNumerator()
     }
     
-    func getDenominator() -> Card2 {
+    func getDenominator() -> Card {
         return self.hand!.getDenominator()
     }
     

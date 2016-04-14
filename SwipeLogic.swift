@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension ViewController {
+extension GameViewController {
     
     //Add point for swipe
     func points(sender: UISwipeGestureRecognizer) {

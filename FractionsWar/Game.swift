@@ -16,10 +16,10 @@ class Game: CustomStringConvertible {
     var player2 = Player()
     
     struct Cards {
-        var p1Numerator: Card2
-        var p1Denominator: Card2
-        var p2Numerator: Card2
-        var p2Denominator: Card2
+        var p1Numerator: Card
+        var p1Denominator: Card
+        var p2Numerator: Card
+        var p2Denominator: Card
     }
     
     var description: String {
@@ -58,11 +58,11 @@ class Game: CustomStringConvertible {
         player2.hand!.resizeCards(cardFrame)
     }
     
-    func getP1Numerator() -> Card2 {
+    func getP1Numerator() -> Card {
         return player1.getNumerator()
     }
 
-    func getP1Denominator() -> Card2 {
+    func getP1Denominator() -> Card {
         return player1.getNumerator()
     }
     
