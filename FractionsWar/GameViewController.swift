@@ -16,6 +16,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var p2Name: UILabel!
     @IBOutlet weak var p1Score: UILabel!
     @IBOutlet weak var p2Score: UILabel!
+    @IBOutlet weak var p1Cards: UILabel!
+    @IBOutlet weak var p2Cards: UILabel!
     
     // On screen buttons
     @IBOutlet weak var p1PauseButton: UIButton!
@@ -23,7 +25,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var p2PauseButton: UIButton!
     @IBOutlet weak var p2WarButton: UIButton!
     
-    // Custom game font
+    // Custom game fonts
     var gameFont: UIFont {
         return UIFont(name: "DINCond-Bold", size: 22)!
     }
@@ -101,17 +103,28 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         flipCards()
     }
     
+    @IBAction func pressPauseP1Button(sender: AnyObject) {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.performSegueWithIdentifier("unwindToMenu", sender: self)
+        })
+    }
+    
+    @IBAction func pressPauseP2Button(sender: AnyObject) {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.performSegueWithIdentifier("unwindToMenu", sender: self)
+        })
+    }
+    
     // MARK: - Game Display Setup
     
     internal func prepareBoard() {
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
         
-        UILabel.appearance().font = gameFont
-        p1PauseButton.titleLabel!.font = gameFont
-        p1WarButton.titleLabel!.font = gameFont
-        p2PauseButton.titleLabel!.font = gameFont
-        p2WarButton.titleLabel!.font = gameFont
+        setFonts()
+        decoratePlayerInfo()
+        decorateDeckCounters()
+        decorateButtons()
         
         // Add swipe views
         p1AreaH = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height))
@@ -122,8 +135,31 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.bringSubviewToFront(p1AreaH)
         self.view.addSubview(p2AreaH)
         self.view.bringSubviewToFront(p2AreaH)
+    }
+    
+    internal func setFonts() {
         
-        // Decorate label backgrounds
+        UILabel.appearance().font = gameFont
+        
+        p1PauseButton.titleLabel!.font = gameFont
+        p1WarButton.titleLabel!.font = gameFont
+        p2PauseButton.titleLabel!.font = gameFont
+        p2WarButton.titleLabel!.font = gameFont
+    }
+    
+    internal func decorateButtons() {
+        
+        p1PauseButton.setTitleColor(UIColor.lightGrayColor().colorWithAlphaComponent(0.4), forState: UIControlState.Normal)
+        p1PauseButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        p1PauseButton.titleEdgeInsets.left = -(p1PauseButton.frame.size.width/3)
+        
+        p2PauseButton.setTitleColor(UIColor.lightGrayColor().colorWithAlphaComponent(0.4), forState: UIControlState.Normal)
+        p2PauseButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        p2PauseButton.titleEdgeInsets.left = -(p2PauseButton.frame.size.width/3)
+    }
+    
+    internal func decoratePlayerInfo() {
+        
         let p1back: UIImage = UIImage(named: "p1back")!
         let p1NameSize: CGSize = p1Name.frame.size
         UIGraphicsBeginImageContext(p1NameSize)
@@ -141,6 +177,33 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         p2Name.backgroundColor = UIColor(patternImage: newP2back)
     }
     
+    internal func decorateDeckCounters() {
+        
+        let dot: UIImage = UIImage(named: "dot")!
+        let size: CGSize = p1Cards.frame.size
+        UIGraphicsBeginImageContext(size)
+        dot.drawInRect(CGRectMake(0, 0, size.width, size.height))
+        let dotBack: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        
+        p1Cards.backgroundColor = UIColor(patternImage: dotBack)
+        p2Cards.backgroundColor = UIColor(patternImage: dotBack)
+    }
+    
+    internal func addCardImage() {
+        
+        // Create structure that holds current cards
+        let cards = game.getCards()
+        
+        // Add the View of each card to user interface
+        self.p1Numerator.addSubview(cards.p1Numerator.getCardView())
+        self.p1Denominator.addSubview(cards.p1Denominator.getCardView())
+        self.p2Numerator.addSubview(cards.p2Numerator.getCardView())
+        self.p2Denominator.addSubview(cards.p2Denominator.getCardView())
+    }
+    
+    // Card Maintenance
+    
     internal func setupCards() {
         
         game.nextRound()
@@ -157,22 +220,17 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         p1Score.text = String(game.getPlayer1().points) + " Points"
         p2Score.text = String(game.getPlayer2().points) + " Points"
         
+        updateCardCounters()
+        
         // Debugging
         print("Cards Left: " + String(game.deck.deckRandom.count))
         print("Player2: \(game.player2.hand!)")
         print("Player1: \(game.player1.hand!)")
     }
     
-    internal func addCardImage() {
-        
-        // Create structure that holds current cards
-        let cards = game.getCards()
-        
-        // Add the View of each card to user interface
-        self.p1Numerator.addSubview(cards.p1Numerator.getCardView())
-        self.p1Denominator.addSubview(cards.p1Denominator.getCardView())
-        self.p2Numerator.addSubview(cards.p2Numerator.getCardView())
-        self.p2Denominator.addSubview(cards.p2Denominator.getCardView())
+    internal func updateCardCounters() {
+        p1Cards.text = String(game.deck.deckRandom.count)
+        p2Cards.text = String(game.deck.deckRandom.count)
     }
 
     // MARK: - Game Interaction

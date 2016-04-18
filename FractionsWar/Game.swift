@@ -63,7 +63,7 @@ class Game: CustomStringConvertible {
     }
 
     func getP1Denominator() -> Card {
-        return player1.getNumerator()
+        return player1.getDenominator()
     }
     
     func getCards() ->  Cards {
