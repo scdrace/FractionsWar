@@ -23,7 +23,7 @@ class Card: CustomStringConvertible {
     }
     
     var description: String {
-        return "\(self.rank), \(self.suit)"
+        return "\(self.rank) of \(self.suit)"
     }
  
     init(rank: Double, suit: String) {
@@ -32,6 +32,7 @@ class Card: CustomStringConvertible {
         
         let shortSuit = Card.shortenSuitName(suit)
         self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-n.png"
+        print("testing image name: "+imageName)
         
         self.cardView = UIView(frame: CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100)))
         
@@ -49,6 +50,11 @@ class Card: CustomStringConvertible {
     func flipCard() {
         UIView.transitionFromView(back, toView: self.front, duration: 0.5, options: [
             .TransitionFlipFromLeft], completion: nil)
+    }
+    
+    func flipDown() {
+        UIView.transitionFromView(front, toView: self.back, duration: 0.5, options: [
+            .TransitionFlipFromRight], completion: nil)
     }
     
     private class func shortenSuitName(suit: String) -> String {

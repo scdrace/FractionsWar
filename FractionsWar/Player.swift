@@ -12,9 +12,10 @@ class Player: CustomStringConvertible {
     
     var points = 0
     var hand: Hand?
+    var cards = [Card]()
     
     var description: String {
-        return ""
+        return "\(self.points) points & \(self.hand!.description) hand & \(self.cards.debugDescription) all cards"
     }
     
     func getNumerator() -> Card {
@@ -31,5 +32,12 @@ class Player: CustomStringConvertible {
     
     func addPoints(points: Int = 1) {
         self.points += points
+    }
+    
+    func addToCards(hands: [Hand]) {
+        for hand in hands {
+            cards.insert(hand.numerator, atIndex: 0)
+            cards.insert(hand.denominator, atIndex: 0)
+        }
     }
 }

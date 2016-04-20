@@ -38,6 +38,11 @@ class Hand: CustomStringConvertible {
         denominator.flipCard()
     }
     
+    func flipDown() {
+        numerator.flipDown()
+        denominator.flipDown()
+    }
+    
     func resizeCards(cardFrame: CGRect) {
         numerator.resizeCard(cardFrame)
         denominator.resizeCard(cardFrame)

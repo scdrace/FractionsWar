@@ -212,25 +212,20 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         // Add Card.view to corresponding card-port
         addCardImage()
         
-        // Used for debugging; REMOVE FOR FINAL PRODUCT
-        print("Hand Value: " + String(round(100 * game.getPlayer1().getHand().decimalValue) / 100))
-        print("Hand Value: " + String(round(100 * game.getPlayer2().getHand().decimalValue) / 100))
-        
-        // Stand-in to display scores
+        // Update scores
         p1Score.text = String(game.getPlayer1().points) + " Points"
         p2Score.text = String(game.getPlayer2().points) + " Points"
         
         updateCardCounters()
         
         // Debugging
-        print("Cards Left: " + String(game.deck.deckRandom.count))
         print("Player2: \(game.player2.hand!)")
         print("Player1: \(game.player1.hand!)")
     }
     
     internal func updateCardCounters() {
-        p1Cards.text = String(game.deck.deckRandom.count)
-        p2Cards.text = String(game.deck.deckRandom.count)
+        p1Cards.text = String(game.player1.cards.count)
+        p2Cards.text = String(game.player2.cards.count)
     }
 
     // MARK: - Game Interaction

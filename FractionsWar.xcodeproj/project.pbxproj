@@ -31,13 +31,13 @@
 		5534AFD61C84E516006188CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5534AFD91C84E516006188CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5534AFDB1C84E516006188CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5534B0061C877045006188CB /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		5534B0061C877045006188CB /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Deck.swift; path = FractionsWar/Deck.swift; sourceTree = "<group>"; };
 		55BE819E1CADD25F006E16E4 /* SwipeLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeLogic.swift; path = ../SwipeLogic.swift; sourceTree = "<group>"; };
-		55CF7E231CA5182500B1BE0C /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		55CF7E251CA51DF700B1BE0C /* Hand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hand.swift; sourceTree = "<group>"; };
-		55CF7E271CA51EFA00B1BE0C /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Round.swift; sourceTree = "<group>"; };
-		55CF7E291CA51F1700B1BE0C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		55CF7E2B1CA8E44C00B1BE0C /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		55CF7E231CA5182500B1BE0C /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = FractionsWar/Card.swift; sourceTree = "<group>"; };
+		55CF7E251CA51DF700B1BE0C /* Hand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hand.swift; path = FractionsWar/Hand.swift; sourceTree = "<group>"; };
+		55CF7E271CA51EFA00B1BE0C /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Round.swift; path = FractionsWar/Round.swift; sourceTree = "<group>"; };
+		55CF7E291CA51F1700B1BE0C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = FractionsWar/Game.swift; sourceTree = "<group>"; };
+		55CF7E2B1CA8E44C00B1BE0C /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = FractionsWar/Player.swift; sourceTree = "<group>"; };
 		DC762AA31CC490F3002A6445 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		DCC2001B1CBCD187004F7B55 /* Cards.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Cards.xcassets; sourceTree = "<group>"; };
 		DCC89E441CBEF00D0047657B /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +58,12 @@
 		5534AFC31C84E516006188CB = {
 			isa = PBXGroup;
 			children = (
+				55CF7E291CA51F1700B1BE0C /* Game.swift */,
+				55CF7E2B1CA8E44C00B1BE0C /* Player.swift */,
+				55CF7E271CA51EFA00B1BE0C /* Round.swift */,
+				55CF7E251CA51DF700B1BE0C /* Hand.swift */,
+				55CF7E231CA5182500B1BE0C /* Card.swift */,
+				5534B0061C877045006188CB /* Deck.swift */,
 				5534AFCE1C84E516006188CB /* FractionsWar */,
 				5534AFCD1C84E516006188CB /* Products */,
 			);
@@ -78,12 +84,6 @@
 				DC762AA31CC490F3002A6445 /* MenuViewController.swift */,
 				DCC89E441CBEF00D0047657B /* GameViewController.swift */,
 				55BE819E1CADD25F006E16E4 /* SwipeLogic.swift */,
-				55CF7E291CA51F1700B1BE0C /* Game.swift */,
-				55CF7E2B1CA8E44C00B1BE0C /* Player.swift */,
-				55CF7E271CA51EFA00B1BE0C /* Round.swift */,
-				55CF7E251CA51DF700B1BE0C /* Hand.swift */,
-				55CF7E231CA5182500B1BE0C /* Card.swift */,
-				5534B0061C877045006188CB /* Deck.swift */,
 				5534AFD31C84E516006188CB /* Main.storyboard */,
 				5534AFD61C84E516006188CB /* Assets.xcassets */,
 				DCC2001B1CBCD187004F7B55 /* Cards.xcassets */,

@@ -15,10 +15,14 @@ class Round {
     
     var highHand: String {
         
+        let hands = [player1.getHand(), player2.getHand()]
+        
         if player1.getHand().decimalValue - player2.getHand().decimalValue > 0 {
+            player1.addToCards(hands)
             return "player1"
         }
         else if player1.getHand().decimalValue - player2.getHand().decimalValue < 0 {
+            player2.addToCards(hands)
            return "player2"
         }
         else {

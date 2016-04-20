@@ -35,21 +35,13 @@ extension GameViewController {
             }
         }
         
-        
         switch swipeDirection {
-        case UISwipeGestureRecognizerDirection.Up where highHand != "player1":
-            assignPoints()
-        case UISwipeGestureRecognizerDirection.Right where highHand != "player1":
-            assignPoints()
-        case UISwipeGestureRecognizerDirection.Down where highHand != "player2":
-            assignPoints()
-        case UISwipeGestureRecognizerDirection.Left where highHand != "player2":
-            assignPoints()
-        default:
-            break
+        case UISwipeGestureRecognizerDirection.Up where highHand != "player1": assignPoints()
+        case UISwipeGestureRecognizerDirection.Right where highHand != "player1": assignPoints()
+        case UISwipeGestureRecognizerDirection.Down where highHand != "player2": assignPoints()
+        case UISwipeGestureRecognizerDirection.Left where highHand != "player2": assignPoints()
+        default: break
         }
-        
-        
         
     }
     
@@ -80,7 +72,7 @@ extension GameViewController {
                 completion: {
                     finished in
                     
-                    self.game.imageClean()
+                    self.game.flipDown()
                     self.setupCards()
                     direction(distanceBack)
                 }
@@ -100,17 +92,10 @@ extension GameViewController {
             break
         }
     }
-    
-    
-    //Calls appropriate functions when swip occurs
+
+    //Calls appropriate functions when swipe occurs
     @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
-        print(sender.direction)
-        
         points(sender)
         move(sender)
-        
-        //Debugging
-        print("Player1: \(game.player1.points)")
-        print("Player2: \(game.player2.points)")
     }
 }
