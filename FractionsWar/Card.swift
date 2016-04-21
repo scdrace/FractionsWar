@@ -2,92 +2,103 @@
 //  Card.swift
 //  FractionsWar
 //
-//  Created by David Race on 3/1/16.
+//  Created by David Race on 3/25/16.
 //
 //
 
+import Foundation
 import UIKit
 
-/*  At the moment, the Card class is a UIView containing two UIImage views for the back and front of the card.
+class Card: CustomStringConvertible {
     
-    I placed it wihtin a UIView that I created with Interface Builder (IB). I did this so that we can use IB to handle
-    layout constraints.
-
-    Added a method to flip the Card when a button is pressed. Just a demonstration, as there are other ways to do this.
-
-    Future Goals:
-        - Initializer that has parameters for rank and suit.
-        - Determine whether the card should be contained within an IB object
-        - Modify current methods
-        - Add new methods
-        - Figure out what dimensions (width X height) are best for design
-        - Possibly create a Card Protocol (similar to Java Interface)
-
-*/
-
-
-class Card: UIView {
-    var back: UIImageView?
-    var front: UIImageView?
+    var rank: Double
+    var suit: String
+    var imageName: String
     
-    //Computed property
-    var cardViewCenter: CGPoint {
-         return CGPointMake(self.frame.width/2, self.frame.height/2)
-        
+    var cardView: UIView
+    var back: UIImageView
+    var front: UIImageView
+    
+    let sH = SettingsHelper()
+    
+    var cardSize: CGRect {
+        return CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100))
     }
     
-    override init(frame: CGRect) {
-        
-        super.init(frame : frame)
-        self.backgroundColor = UIColor.orangeColor()
-        
-        
-        //Initialize Cards
-        self.back = UIImageView(image: UIImage(named: "back@2x.png.png"))
-        self.back!.center = cardViewCenter
-        self.back!.tag = 1
-        self.addSubview(self.back!)
-        
-        self.front = UIImageView(image: UIImage(named: "2_of_clubs.png"))
-        self.front!.center = cardViewCenter
-        self.front!.tag = 2
-        
-        back!.frame = CGRect(origin: CGPointMake(0,0), size: CGSize(width: self.frame.width, height: self.frame.height))
-        front!.frame = CGRect(origin: CGPointMake(0,0), size: CGSize(width: self.frame.width, height: self.frame.height))
-
+    var description: String {
+        return "\(self.rank) of \(self.suit)"
     }
-
-    //It seems that inheritance requires "required init?(...)". I just played around with it until it worked
-    //Probably not the best solution
-    
-    /*
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    */
-    
-    /*
-    required init(coder: NSCoder) {
-        fatalError("NSCoding not supported")
-    }
-    */
-    
-    required init(coder aDecoder: NSCoder!) {
-        //foo = "some string"
-        //bar = 9001
+ 
+    init(rank: Double, suit: String) {
         
-        super.init(coder: aDecoder)!
+        sH.formPlistPath()
+        let cardType = sH.retrieveFromSettings(sH.cardTypeDictionaryKey) as! String
+        
+        self.rank = rank
+        self.suit = suit
+        
+        let shortSuit = Card.shortenSuitName(suit)
+        self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-"+cardType+".png"
+        print("testing image name: "+imageName)
+        
+        self.cardView = UIView(frame: CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100)))
+        
+        self.back = UIImageView(image: UIImage(named: "back2.png"))
+        self.front = UIImageView(image: UIImage(named: imageName))
+        cardView.addSubview(back)
+    }
+    
+    func resizeCard(frame: CGRect) {
+        self.cardView.frame = frame
+        self.back.frame = frame
+        self.front.frame = frame
     }
     
     func flipCard() {
+        UIView.transitionFromView(back, toView: self.front, duration: 0.5, options: [
+            .TransitionFlipFromLeft], completion: nil)
+    }
+    
+    func flipDown() {
+        UIView.transitionFromView(front, toView: self.back, duration: 0.5, options: [
+            .TransitionFlipFromRight], completion: nil)
+    }
+    
+    private class func shortenSuitName(suit: String) -> String {
+        var shortSuit: String? = nil
         
-        if let back = self.viewWithTag(1) {
-            UIView.transitionFromView(back, toView: self.front!, duration: 0.5, options: [
-                .TransitionFlipFromLeft], completion: nil)
+        switch suit {
+        case "diamonds":
+            shortSuit = "dm"
+        case "hearts":
+            shortSuit = "hr"
+        case "spades":
+            shortSuit = "sp"
+        default:
+            shortSuit = "cl"
         }
-        else {
-            UIView.transitionFromView(self.viewWithTag(2)!, toView: self.back!, duration: 0.5, options: [
-                .TransitionFlipFromLeft], completion: nil)
-        }
+        
+        return shortSuit!
+    }
+    
+    func getRank() -> Double {
+        return rank
+    }
+    
+    func getSuit() -> String {
+        return suit
+    }
+    
+    func getImageName() -> String {
+        return imageName
+    }
+    
+    func getCardView() -> UIView {
+        return cardView
+    }
+    
+    func imageClean() {
+        self.front.removeFromSuperview()
+        self.back.removeFromSuperview()
     }
 }

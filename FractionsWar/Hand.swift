@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class Hand: CustomStringConvertible {
-    var numerator: Card2
-    var denominator: Card2
+    var numerator: Card
+    var denominator: Card
     
     var decimalValue: Double {
         return self.numerator.getRank() / self.denominator.getRank()
@@ -21,8 +21,7 @@ class Hand: CustomStringConvertible {
         return "\(self.numerator), \(self.denominator), \(self.decimalValue)"
     }
     
-    
-    init(card1: Card2, card2: Card2) {
+    init(card1: Card, card2: Card) {
         
         if card1.rank > card2.rank {
             self.numerator = card2
@@ -39,17 +38,21 @@ class Hand: CustomStringConvertible {
         denominator.flipCard()
     }
     
+    func flipDown() {
+        numerator.flipDown()
+        denominator.flipDown()
+    }
+    
     func resizeCards(cardFrame: CGRect) {
         numerator.resizeCard(cardFrame)
         denominator.resizeCard(cardFrame)
     }
     
-    
-    func getNumerator() -> Card2 {
+    func getNumerator() -> Card {
         return self.numerator
     }
     
-    func getDenominator() -> Card2 {
+    func getDenominator() -> Card {
         return self.denominator
     }
     

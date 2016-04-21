@@ -16,10 +16,10 @@ class Game: CustomStringConvertible {
     var player2 = Player()
     
     struct Cards {
-        var p1Numerator: Card2
-        var p1Denominator: Card2
-        var p2Numerator: Card2
-        var p2Denominator: Card2
+        var p1Numerator: Card
+        var p1Denominator: Card
+        var p2Numerator: Card
+        var p2Denominator: Card
     }
     
     var description: String {
@@ -28,23 +28,39 @@ class Game: CustomStringConvertible {
     
     init() {
         self.round = Round(player1: player1, player2: player2)
-        print(deck.deckRandom.count)
+        while (!deck.deckRandom.isEmpty) {
+            player1.cards.append(self.deck.deckRandom.removeLast())
+            player2.cards.append(self.deck.deckRandom.removeLast())
+        }
     }
     
     func nextRound() {
-        if deck.deckRandom.count > 0 {
+        
+        if (player1.cards.count > 1 && player2.cards.count > 1) {
             
-            let a = self.deck.deckRandom.removeLast()
-            let b = self.deck.deckRandom.removeLast()
-            let c = self.deck.deckRandom.removeLast()
-            let d = self.deck.deckRandom.removeLast()
+            print("Player one deck: "+player1.cards.debugDescription)
+            print("Player two deck: "+player2.cards.debugDescription)
             
-            let e = [a, b, c, d]
-            //print(e)
-            self.round.makeHand(e)
+            let p1n = self.player1.cards.removeLast()
+            let p1d = self.player1.cards.removeLast()
+            let p2n = self.player2.cards.removeLast()
+            let p2d = self.player2.cards.removeLast()
+            
+            let h = [p1n, p1d, p2n, p2d]
+            
+            print("NEW HAND: "+h.debugDescription)
+
+            self.round.makeHand(h)
         }
+            
         else {
-            print("Winner!")
+            if (player1.points > player2.points) {
+                print("Player one wins")
+                self.imageClean()
+            } else {
+                print("Player two wins")
+                self.imageClean()
+            }
         }
     }
     
@@ -53,26 +69,29 @@ class Game: CustomStringConvertible {
         player2.hand!.flipCards()
     }
     
+    func flipDown() {
+        player1.hand!.flipDown()
+        player2.hand!.flipDown()
+    }
     
     func resizeCards(cardFrame: CGRect) {
         player1.hand!.resizeCards(cardFrame)
         player2.hand!.resizeCards(cardFrame)
     }
     
-    func getP1Numerator() -> Card2 {
+    func getP1Numerator() -> Card {
         return player1.getNumerator()
     }
 
-    func getP1Denominator() -> Card2 {
-        return player1.getNumerator()
+    func getP1Denominator() -> Card {
+        return player1.getDenominator()
     }
     
-    func getCards() ->  Cards {
+    func getCards() -> Cards {
         
         let cards = Cards(p1Numerator: player1.getNumerator(), p1Denominator: player1.getDenominator(),
         p2Numerator: player2.getNumerator(), p2Denominator: player2.getDenominator())
         
-    
         return cards
     }
     

@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 
-extension ViewController {
-    
+extension GameViewController {
     
     //Add point for swipe
     func points(sender: UISwipeGestureRecognizer) {
@@ -36,21 +35,13 @@ extension ViewController {
             }
         }
         
-        
         switch swipeDirection {
-        case UISwipeGestureRecognizerDirection.Up where highHand != "player1":
-            assignPoints()
-        case UISwipeGestureRecognizerDirection.Right where highHand != "player1":
-            assignPoints()
-        case UISwipeGestureRecognizerDirection.Down where highHand != "player2":
-            assignPoints()
-        case UISwipeGestureRecognizerDirection.Left where highHand != "player2":
-            assignPoints()
-        default:
-            break
+        case UISwipeGestureRecognizerDirection.Up where highHand != "player1": assignPoints()
+        case UISwipeGestureRecognizerDirection.Right where highHand != "player1": assignPoints()
+        case UISwipeGestureRecognizerDirection.Down where highHand != "player2": assignPoints()
+        case UISwipeGestureRecognizerDirection.Left where highHand != "player2": assignPoints()
+        default: break
         }
-        
-        
         
     }
     
@@ -59,7 +50,6 @@ extension ViewController {
         
         let swipeDirection = sender.direction
         let cardPorts = getCardPorts
-        
         
         func moveHorizontal(distance: CGFloat) {
             for port in cardPorts {
@@ -73,24 +63,21 @@ extension ViewController {
             }
         }
         
-        
         func animation(direction: (CGFloat)->(), distanceAway: CGFloat, distanceBack: CGFloat) {
             
-            UIView.animateWithDuration(0.8, animations: {
-                direction(distanceAway)
-                
-                
-                }, completion: { finished in
+            UIView.animateWithDuration(0.8,
+                animations: {
+                    direction(distanceAway)
+                },
+                completion: {
+                    finished in
                     
-                    self.game.imageClean()
-                    
+                    self.game.flipDown()
                     self.setupCards()
-                    
                     direction(distanceBack)
-                    
-            })
+                }
+            )
         }
-        
         
         switch swipeDirection {
         case UISwipeGestureRecognizerDirection.Up:
@@ -105,17 +92,10 @@ extension ViewController {
             break
         }
     }
-    
-    
-    //Calls appropriate functions when swip occurs
+
+    //Calls appropriate functions when swipe occurs
     @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
-        print(sender.direction)
-        
         points(sender)
         move(sender)
-        
-        //Debugging
-        print("Player1: \(game.player1.points)")
-        print("Player2: \(game.player2.points)")
     }
 }
