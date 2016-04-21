@@ -414,13 +414,67 @@
                         <outlet property="p2Score" destination="tcr-0i-l57" id="i0r-EV-Vqh"/>
                         <outlet property="p2WarButton" destination="Pbx-3q-jFZ" id="NtL-0v-psq"/>
                         <outlet property="p2WarButtonView" destination="Cie-I4-Cc0" id="sIg-lX-d2h"/>
-                        <segue destination="Awd-Wa-X1P" kind="unwind" identifier="unwindToMenu" unwindAction="unwindToMenu:" id="NmK-DK-Nwj"/>
+                        <segue destination="Wbo-aQ-YIt" kind="presentation" identifier="goToPause" animates="NO" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="hDd-I3-jom"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kRj-OI-vvp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Awd-Wa-X1P" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1297" y="1529"/>
+            <point key="canvasLocation" x="1375" y="1529"/>
+        </scene>
+        <!--Pause View Controller-->
+        <scene sceneID="EU3-nw-6dF">
+            <objects>
+                <viewController id="Wbo-aQ-YIt" customClass="PauseViewController" customModule="FractionsWar" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="r82-D7-wCL"/>
+                        <viewControllerLayoutGuide type="bottom" id="vkN-wm-tjv"/>
+                    </layoutGuides>
+                    <view key="view" alpha="0.84999999999999998" contentMode="scaleToFill" id="uUq-f4-WhT">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCO-wF-0k4">
+                                <rect key="frame" x="458" y="499" width="108" height="30"/>
+                                <state key="normal" title="Return to Game"/>
+                                <connections>
+                                    <action selector="pressReturnToGameButton:" destination="Wbo-aQ-YIt" eventType="touchUpInside" id="ZSa-NZ-1WY"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7sb-MK-Bp3">
+                                <rect key="frame" x="0.0" y="269" width="1024" height="230"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uv-13-T8I">
+                                <rect key="frame" x="468" y="239" width="89" height="30"/>
+                                <state key="normal" title="Forfeit Game"/>
+                                <connections>
+                                    <action selector="pressForfeitButton:" destination="Wbo-aQ-YIt" eventType="touchUpInside" id="sqb-pJ-lGv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UCO-wF-0k4" firstAttribute="centerX" secondItem="uUq-f4-WhT" secondAttribute="centerX" id="2UQ-UU-A1B"/>
+                            <constraint firstItem="7sb-MK-Bp3" firstAttribute="centerY" secondItem="uUq-f4-WhT" secondAttribute="centerY" id="Abl-pD-sFP"/>
+                            <constraint firstItem="7sb-MK-Bp3" firstAttribute="top" secondItem="6uv-13-T8I" secondAttribute="bottom" id="HDd-xt-bBI"/>
+                            <constraint firstItem="7sb-MK-Bp3" firstAttribute="width" secondItem="uUq-f4-WhT" secondAttribute="width" id="add-Xs-GUX"/>
+                            <constraint firstItem="7sb-MK-Bp3" firstAttribute="height" secondItem="uUq-f4-WhT" secondAttribute="height" multiplier="0.3" id="dBj-jt-xEC"/>
+                            <constraint firstItem="7sb-MK-Bp3" firstAttribute="centerX" secondItem="uUq-f4-WhT" secondAttribute="centerX" id="eLL-iR-bkQ"/>
+                            <constraint firstItem="UCO-wF-0k4" firstAttribute="top" secondItem="7sb-MK-Bp3" secondAttribute="bottom" id="tHo-KN-ubI"/>
+                            <constraint firstItem="6uv-13-T8I" firstAttribute="centerX" secondItem="uUq-f4-WhT" secondAttribute="centerX" id="tfa-pD-Wfv"/>
+                        </constraints>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="forfeitButton" destination="6uv-13-T8I" id="bhp-cF-RrB"/>
+                        <outlet property="returnButton" destination="UCO-wF-0k4" id="lqX-sf-PRa"/>
+                        <segue destination="8pN-Nx-Ht1" kind="unwind" identifier="unwindToMenu" unwindAction="unwindToMenu:" id="il6-FP-iRY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W9t-bE-sp8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8pN-Nx-Ht1" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2623" y="1529"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="fSC-8C-RdC">
@@ -435,8 +489,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0j-Ct-Z0S">
-                                <rect key="frame" x="614.5" y="461" width="307" height="61.5"/>
-                                <color key="backgroundColor" red="0.56862745100000001" green="0.01176470588" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="615" y="461" width="307" height="61.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="R0j-Ct-Z0S" secondAttribute="height" multiplier="5:1" id="9Yt-pV-Wej"/>
                                 </constraints>
@@ -470,14 +523,14 @@
                                 <state key="normal" title="How To Play"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3m-41-beU">
-                                <rect key="frame" x="614.5" y="583.5" width="307" height="61"/>
+                                <rect key="frame" x="615" y="583" width="307" height="61"/>
                                 <state key="normal" title="Settings"/>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veA-UG-2ht">
-                                <rect key="frame" x="409.5" y="461" width="205" height="307"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SG5-dM-0PQ">
                                 <rect key="frame" x="614.5" y="522.5" width="307" height="61"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="veA-UG-2ht">
+                                <rect key="frame" x="410" y="461" width="205" height="307"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -520,6 +573,12 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="howToPlayButton" destination="dOq-5c-KlO" id="gSJ-Qd-7Ew"/>
+                        <outlet property="onePlayerButton" destination="5o2-qj-cph" id="qJL-kA-udA"/>
+                        <outlet property="settingsButton" destination="H3m-41-beU" id="OCZ-qK-Qlb"/>
+                        <outlet property="twoPlayerButton" destination="R0j-Ct-Z0S" id="bGQ-jf-553"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLL-Dk-cBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -11,10 +11,22 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
+    @IBOutlet weak var onePlayerButton: UIButton!
+    @IBOutlet weak var twoPlayerButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var howToPlayButton: UIButton!
+    
+    // Custom game fonts
+    var gameFont: UIFont {
+        return UIFont(name: "DINCond-Bold", size: 32)!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         prepareMenu()
+        
+        UILabel.appearance().font = gameFont
     }
     
     override func didReceiveMemoryWarning() {
@@ -27,6 +39,22 @@ class MenuViewController: UIViewController {
     internal func prepareMenu() {
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
+        
+        onePlayerButton.titleLabel?.font = gameFont
+        onePlayerButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        onePlayerButton.sizeToFit()
+        
+        twoPlayerButton.titleLabel?.font = gameFont
+        twoPlayerButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        twoPlayerButton.sizeToFit()
+        
+        settingsButton.titleLabel?.font = gameFont
+        settingsButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        settingsButton.sizeToFit()
+        
+        howToPlayButton.titleLabel?.font = gameFont
+        howToPlayButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        howToPlayButton.sizeToFit()
     }
     
     // MARK: - Navigation

@@ -105,13 +105,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func pressPauseP1Button(sender: AnyObject) {
         dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("unwindToMenu", sender: self)
+            self.performSegueWithIdentifier("goToPause", sender: self)
         })
     }
     
     @IBAction func pressPauseP2Button(sender: AnyObject) {
         dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("unwindToMenu", sender: self)
+            self.performSegueWithIdentifier("goToPause", sender: self)
         })
     }
     
@@ -138,8 +138,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     internal func setFonts() {
-        
-        UILabel.appearance().font = gameFont
         
         p1PauseButton.titleLabel!.font = gameFont
         p1WarButton.titleLabel!.font = gameFont
