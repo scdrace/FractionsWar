@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class Card: CustomStringConvertible {
+    
     var rank: Double
     var suit: String
     var imageName: String
@@ -17,6 +18,8 @@ class Card: CustomStringConvertible {
     var cardView: UIView
     var back: UIImageView
     var front: UIImageView
+    
+    let sH = SettingsHelper()
     
     var cardSize: CGRect {
         return CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100))
@@ -27,11 +30,15 @@ class Card: CustomStringConvertible {
     }
  
     init(rank: Double, suit: String) {
+        
+        sH.formPlistPath()
+        let cardType = sH.retrieveFromSettings(sH.cardTypeDictionaryKey) as! String
+        
         self.rank = rank
         self.suit = suit
         
         let shortSuit = Card.shortenSuitName(suit)
-        self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-n.png"
+        self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-"+cardType+".png"
         print("testing image name: "+imageName)
         
         self.cardView = UIView(frame: CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100)))

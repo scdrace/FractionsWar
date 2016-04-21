@@ -34,7 +34,7 @@ class PauseViewController: UIViewController {
     
     @IBAction func pressForfeitButton(sender: AnyObject) {
         dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("unwindToMenu", sender: self)
+            self.performSegueWithIdentifier("unwindToMenuFromPause", sender: self)
         })
     }
     

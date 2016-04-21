@@ -199,28 +199,6 @@
                                     <constraint firstItem="yfk-h9-IMJ" firstAttribute="leading" secondItem="9vx-9B-eIM" secondAttribute="trailing" constant="-20" id="gHl-WB-g9B"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcX-MI-0Pn">
-                                <rect key="frame" x="256" y="384" width="256" height="307"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Rc-Pf-4ba">
-                                        <rect key="frame" x="39" y="61.5" width="177" height="245.5"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="6Rc-Pf-4ba" secondAttribute="height" multiplier="18:25" id="EGx-3t-vb8"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="6Rc-Pf-4ba" secondAttribute="bottom" id="C9s-fY-X2X"/>
-                                    <constraint firstItem="6Rc-Pf-4ba" firstAttribute="height" secondItem="dcX-MI-0Pn" secondAttribute="height" multiplier="0.8" id="TyT-hL-wNF"/>
-                                    <constraint firstItem="6Rc-Pf-4ba" firstAttribute="centerX" secondItem="dcX-MI-0Pn" secondAttribute="centerX" id="xlG-gG-kRa"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PYX-et-Cli">
                                 <rect key="frame" x="512" y="384" width="256" height="307"/>
                                 <subviews>
@@ -316,6 +294,28 @@
                                     <constraint firstItem="Pbx-3q-jFZ" firstAttribute="top" secondItem="Cie-I4-Cc0" secondAttribute="top" id="cKv-6S-Ouq"/>
                                     <constraint firstItem="Pbx-3q-jFZ" firstAttribute="height" secondItem="Cie-I4-Cc0" secondAttribute="height" multiplier="0.7" id="eYv-et-fWR"/>
                                     <constraint firstItem="Pbx-3q-jFZ" firstAttribute="width" secondItem="Cie-I4-Cc0" secondAttribute="width" multiplier="0.7" id="oZi-dT-ihs"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcX-MI-0Pn">
+                                <rect key="frame" x="256" y="384" width="256" height="307"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Rc-Pf-4ba">
+                                        <rect key="frame" x="39" y="61.5" width="177" height="245.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="6Rc-Pf-4ba" secondAttribute="height" multiplier="18:25" id="EGx-3t-vb8"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="6Rc-Pf-4ba" secondAttribute="bottom" id="C9s-fY-X2X"/>
+                                    <constraint firstItem="6Rc-Pf-4ba" firstAttribute="height" secondItem="dcX-MI-0Pn" secondAttribute="height" multiplier="0.8" id="TyT-hL-wNF"/>
+                                    <constraint firstItem="6Rc-Pf-4ba" firstAttribute="centerX" secondItem="dcX-MI-0Pn" secondAttribute="centerX" id="xlG-gG-kRa"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -468,7 +468,7 @@
                     <connections>
                         <outlet property="forfeitButton" destination="6uv-13-T8I" id="bhp-cF-RrB"/>
                         <outlet property="returnButton" destination="UCO-wF-0k4" id="lqX-sf-PRa"/>
-                        <segue destination="8pN-Nx-Ht1" kind="unwind" identifier="unwindToMenu" unwindAction="unwindToMenu:" id="il6-FP-iRY"/>
+                        <segue destination="8pN-Nx-Ht1" kind="unwind" identifier="unwindToMenuFromPause" unwindAction="unwindToMenu:" id="il6-FP-iRY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W9t-bE-sp8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -525,6 +525,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3m-41-beU">
                                 <rect key="frame" x="615" y="583" width="307" height="61"/>
                                 <state key="normal" title="Settings"/>
+                                <connections>
+                                    <segue destination="mSj-tG-fPK" kind="show" animates="NO" id="X7Y-KS-RSO"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SG5-dM-0PQ">
                                 <rect key="frame" x="614.5" y="522.5" width="307" height="61"/>
@@ -584,8 +587,69 @@
             </objects>
             <point key="canvasLocation" x="111" y="1529"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="YPY-Vf-Zxl">
+            <objects>
+                <viewController id="mSj-tG-fPK" customClass="SettingsViewController" customModule="FractionsWar" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CtS-KD-B7e"/>
+                        <viewControllerLayoutGuide type="bottom" id="b5B-xQ-dO9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B0o-K4-HTX">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gz0-p8-VNl">
+                                <rect key="frame" x="447" y="87" width="131" height="30"/>
+                                <state key="normal" title="Back to Main Menu"/>
+                                <connections>
+                                    <action selector="pressBackToMainMenuButton:" destination="mSj-tG-fPK" eventType="touchUpInside" id="dLL-Y8-0JM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9T-Cg-TTo">
+                                <rect key="frame" x="112" y="156" width="180" height="250"/>
+                                <state key="normal" image="7-hr-n"/>
+                                <connections>
+                                    <action selector="pressNumberCardButton:" destination="mSj-tG-fPK" eventType="touchUpInside" id="9U8-HI-ahL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6M-2U-jFF">
+                                <rect key="frame" x="376" y="156" width="180" height="250"/>
+                                <state key="normal" image="7-dm-r"/>
+                                <connections>
+                                    <action selector="pressRegularCardButton:" destination="mSj-tG-fPK" eventType="touchUpInside" id="t0F-So-YRA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXC-ku-SxN">
+                                <rect key="frame" x="636" y="156" width="180" height="250"/>
+                                <state key="normal" image="7-dm-s"/>
+                                <connections>
+                                    <action selector="pressSymbolCardButton:" destination="mSj-tG-fPK" eventType="touchUpInside" id="Bue-Jm-fo7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="backToMainMenuButton" destination="gz0-p8-VNl" id="gjN-EQ-dTQ"/>
+                        <outlet property="numberCardButton" destination="p9T-Cg-TTo" id="ZXM-lY-Hy1"/>
+                        <outlet property="regularCardButton" destination="g6M-2U-jFF" id="qpe-jU-O1l"/>
+                        <outlet property="symbolCardButton" destination="dXC-ku-SxN" id="9R6-b5-sRs"/>
+                        <segue destination="NoA-pT-WEw" kind="unwind" identifier="unwindToMenuFromSettings" unwindAction="unwindToMenu:" id="ahw-7b-KDD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Axa-1c-Mfr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="NoA-pT-WEw" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="111" y="2505"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="7-dm-r" width="180" height="250"/>
+        <image name="7-dm-s" width="180" height="250"/>
+        <image name="7-hr-n" width="180" height="250"/>
         <image name="button" width="175" height="55"/>
         <image name="logo" width="512" height="512"/>
         <image name="pause" width="78" height="79"/>
