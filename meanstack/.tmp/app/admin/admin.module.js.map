@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../client/app/admin/admin.module.js"],"names":[],"mappings":"AAAA;;AAEA,QAAQ,MAAR,CAAe,oBAAf,EAAqC,CACnC,mBADmC,EAEnC,WAFmC,CAArC","file":"admin.module.js","sourcesContent":["'use strict';\n\nangular.module('meanstackApp.admin', [\n  'meanstackApp.auth',\n  'ui.router'\n]);\n"]}
