@@ -24,6 +24,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var p1WarButton: UIButton!
     @IBOutlet weak var p2PauseButton: UIButton!
     @IBOutlet weak var p2WarButton: UIButton!
+    @IBOutlet weak var p1DeckButton: UIButton!
+    @IBOutlet weak var p2DeckButton: UIButton!
     
     // Custom game fonts
     var gameFont: UIFont {
@@ -48,16 +50,22 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var p1PauseButtonView: UIView!
     @IBOutlet weak var p2WarButtonView: UIView!
     @IBOutlet weak var p2PauseButtonView: UIView!
+    @IBOutlet weak var p1DeckView: UIView!
+    @IBOutlet weak var p2DeckView: UIView!
     
     // These view sit on top of everything, so that they can detect a touch
     var p1AreaX: UIView!
     var p2AreaX: UIView!
     var p1AreaH: UIView!
     var p2AreaH: UIView!
-    
+        
     // Game animation parameters
     var game = Game() 
     let moveDistance: CGFloat = 900
+    
+    var p1ready = false
+    var p2ready = false
+    var cardsAreUp = false
     
     // Used to resize Card to port size
     var cardFrame: CGRect {
@@ -84,6 +92,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.bringSubviewToFront(p2WarButtonView)
         self.view.bringSubviewToFront(p1PauseButtonView)
         self.view.bringSubviewToFront(p2PauseButtonView)
+        self.view.bringSubviewToFront(p1DeckView)
+        self.view.bringSubviewToFront(p2DeckView)
         
         setupCards()
     }
@@ -96,11 +106,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - On Screen Button Presses
     
     @IBAction func pressDeclareWarP1Button(sender: AnyObject) {
-        flipCards()
     }
     
     @IBAction func pressDeclareWarP2Button(sender: AnyObject) {
-        flipCards()
     }
     
     @IBAction func pressPauseP1Button(sender: AnyObject) {
@@ -113,6 +121,22 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         dispatch_async(dispatch_get_main_queue(), {
             self.performSegueWithIdentifier("goToPause", sender: self)
         })
+    }
+    
+    @IBAction func pressP1DeckButton(sender: AnyObject) {
+        p1ready = true
+        p1DeckButton.hidden = true
+        if (p1ready && p2ready) {
+            flipCards()
+        }
+    }
+    
+    @IBAction func pressP2DeckButton(sender: AnyObject) {
+        p2ready = true
+        p2DeckButton.hidden = true
+        if (p1ready && p2ready) {
+            flipCards()
+        }
     }
     
     // MARK: - Game Display Setup
@@ -219,6 +243,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         // Debugging
         print("Player2: \(game.player2.hand!)")
         print("Player1: \(game.player1.hand!)")
+        
+        p1ready = false
+        p2ready = false
+        p1DeckButton.hidden = false
+        p2DeckButton.hidden = false
     }
     
     internal func updateCardCounters() {
@@ -248,6 +277,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         p2Denominator.backgroundColor = self.view.backgroundColor
         p1Numerator.backgroundColor = self.view.backgroundColor
         p1Denominator.backgroundColor = self.view.backgroundColor
+        
+        cardsAreUp = true
         
         game.flipCards()
     }

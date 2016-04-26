@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class Game: CustomStringConvertible {
+    
     var deck = Deck()
     var round: Round
     var player1 = Player()

@@ -24,8 +24,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="256" height="77"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQe-Lz-pMi">
-                                        <rect key="frame" x="38.5" y="23" width="179" height="54"/>
-                                        <state key="normal" title="  Menu" image="pause">
+                                        <rect key="frame" x="38" y="23" width="179" height="54"/>
+                                        <state key="normal" image="pause">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -51,8 +51,8 @@
                                 <rect key="frame" x="768" y="0.0" width="256" height="77"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWa-ON-GL4">
-                                        <rect key="frame" x="39" y="23" width="179" height="54"/>
-                                        <state key="normal" title="  Menu" image="pause">
+                                        <rect key="frame" x="38" y="23" width="179" height="54"/>
+                                        <state key="normal" image="pause">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -72,14 +72,14 @@
                                 <rect key="frame" x="0.0" y="77" width="256" height="307"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player One" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKK-xC-aze">
-                                        <rect key="frame" x="25.5" y="31" width="205" height="61.5"/>
+                                        <rect key="frame" x="25" y="31" width="205" height="61.5"/>
                                         <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pke-ze-CvF">
-                                        <rect key="frame" x="51.5" y="92.5" width="154" height="122.5"/>
+                                        <rect key="frame" x="51" y="92" width="154" height="122.5"/>
                                         <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -101,7 +101,7 @@
                                 <rect key="frame" x="256" y="77" width="256" height="307"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ja-Fj-3oC">
-                                        <rect key="frame" x="40" y="61.5" width="177" height="245.5"/>
+                                        <rect key="frame" x="40" y="61" width="177" height="245.5"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="0ja-Fj-3oC" secondAttribute="height" multiplier="18:25" id="eGf-gy-Gwh"/>
@@ -152,7 +152,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcr-0i-l57">
-                                        <rect key="frame" x="51" y="92.5" width="154" height="122.5"/>
+                                        <rect key="frame" x="51" y="92" width="154" height="122.5"/>
                                         <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -175,13 +175,26 @@
                                 <subviews>
                                     <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9vx-9B-eIM">
                                         <rect key="frame" x="40" y="30" width="177" height="245.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gv-18-No2">
+                                                <rect key="frame" x="0.0" y="0.0" width="177" height="245.5"/>
+                                                <state key="normal" image="ready"/>
+                                                <connections>
+                                                    <action selector="pressP1DeckButton:" destination="gv7-ec-xeN" eventType="touchUpInside" id="Kxl-If-5GF"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" red="1" green="0.71398464930000005" blue="0.45122358839999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="0gv-18-No2" firstAttribute="centerY" secondItem="9vx-9B-eIM" secondAttribute="centerY" id="2hv-Wv-PMQ"/>
+                                            <constraint firstItem="0gv-18-No2" firstAttribute="width" secondItem="9vx-9B-eIM" secondAttribute="width" id="Das-p8-bQe"/>
+                                            <constraint firstItem="0gv-18-No2" firstAttribute="centerX" secondItem="9vx-9B-eIM" secondAttribute="centerX" id="ION-gy-Met"/>
                                             <constraint firstAttribute="width" secondItem="9vx-9B-eIM" secondAttribute="height" multiplier="18:25" id="Q4P-vy-YRI"/>
+                                            <constraint firstItem="0gv-18-No2" firstAttribute="height" secondItem="9vx-9B-eIM" secondAttribute="height" id="hOF-hY-8Pk"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yfk-h9-IMJ">
-                                        <rect key="frame" x="197" y="14.5" width="35.5" height="35.5"/>
+                                        <rect key="frame" x="197" y="14" width="35.5" height="35.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="yfk-h9-IMJ" secondAttribute="height" multiplier="1:1" id="UMO-8n-Ixb"/>
                                         </constraints>
@@ -225,14 +238,27 @@
                                 <rect key="frame" x="768" y="384" width="256" height="307"/>
                                 <subviews>
                                     <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tfo-ou-rEw">
-                                        <rect key="frame" x="39.5" y="30" width="177" height="245.5"/>
+                                        <rect key="frame" x="39" y="30" width="177" height="245.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mE2-kM-qpc">
+                                                <rect key="frame" x="0.0" y="0.0" width="177" height="245.5"/>
+                                                <state key="normal" image="ready"/>
+                                                <connections>
+                                                    <action selector="pressP2DeckButton:" destination="gv7-ec-xeN" eventType="touchUpInside" id="ato-Wu-5fI"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" red="1" green="0.71398464930000005" blue="0.45122358839999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="mE2-kM-qpc" firstAttribute="centerY" secondItem="Tfo-ou-rEw" secondAttribute="centerY" id="6ey-Mw-6Ib"/>
                                             <constraint firstAttribute="width" secondItem="Tfo-ou-rEw" secondAttribute="height" multiplier="18:25" id="Plt-LY-ny7"/>
+                                            <constraint firstItem="mE2-kM-qpc" firstAttribute="centerX" secondItem="Tfo-ou-rEw" secondAttribute="centerX" id="ayq-eK-wVj"/>
+                                            <constraint firstItem="mE2-kM-qpc" firstAttribute="width" secondItem="Tfo-ou-rEw" secondAttribute="width" id="pYv-ZE-Awl"/>
+                                            <constraint firstItem="mE2-kM-qpc" firstAttribute="height" secondItem="Tfo-ou-rEw" secondAttribute="height" id="un4-QU-PmX"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5a0-kA-ffb">
-                                        <rect key="frame" x="24" y="14.5" width="35.5" height="35.5"/>
+                                        <rect key="frame" x="24" y="14" width="35.5" height="35.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5a0-kA-ffb" secondAttribute="height" multiplier="1:1" id="SeB-3f-f8p"/>
                                         </constraints>
@@ -254,7 +280,7 @@
                                 <rect key="frame" x="0.0" y="691" width="256" height="77"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHZ-XK-eig">
-                                        <rect key="frame" x="38.5" y="0.0" width="179" height="54"/>
+                                        <rect key="frame" x="38" y="0.0" width="179" height="54"/>
                                         <state key="normal" title="Declare War" backgroundImage="button">
                                             <color key="titleColor" red="0.56862745100000001" green="0.01176470588" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -300,7 +326,7 @@
                                 <rect key="frame" x="256" y="384" width="256" height="307"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Rc-Pf-4ba">
-                                        <rect key="frame" x="39" y="61.5" width="177" height="245.5"/>
+                                        <rect key="frame" x="39" y="61" width="177" height="245.5"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6Rc-Pf-4ba" secondAttribute="height" multiplier="18:25" id="EGx-3t-vb8"/>
@@ -397,6 +423,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="p1Cards" destination="yfk-h9-IMJ" id="EwD-78-jfv"/>
+                        <outlet property="p1DeckButton" destination="0gv-18-No2" id="2db-Om-GfU"/>
+                        <outlet property="p1DeckView" destination="ske-5N-MSr" id="IKb-vl-jyc"/>
                         <outlet property="p1Denominator" destination="6Rc-Pf-4ba" id="cgP-9L-idX"/>
                         <outlet property="p1Name" destination="PKK-xC-aze" id="cix-rB-7aJ"/>
                         <outlet property="p1Numerator" destination="0ja-Fj-3oC" id="KND-ml-Gdu"/>
@@ -406,6 +434,8 @@
                         <outlet property="p1WarButton" destination="YHZ-XK-eig" id="WMo-zZ-bCx"/>
                         <outlet property="p1WarButtonView" destination="Ght-91-x2j" id="Em1-ey-YHu"/>
                         <outlet property="p2Cards" destination="5a0-kA-ffb" id="Lko-9f-J04"/>
+                        <outlet property="p2DeckButton" destination="mE2-kM-qpc" id="Hwe-n6-LsF"/>
+                        <outlet property="p2DeckView" destination="mHS-3l-FaM" id="Hlt-MX-1NM"/>
                         <outlet property="p2Denominator" destination="rvT-IZ-oTX" id="WpX-Ha-uB3"/>
                         <outlet property="p2Name" destination="zk6-DG-MXN" id="4X2-Nd-FBV"/>
                         <outlet property="p2Numerator" destination="XMU-1H-3Fg" id="0o6-c7-2fV"/>
@@ -823,6 +853,7 @@
         <image name="7-hr-n" width="180" height="250"/>
         <image name="button" width="175" height="55"/>
         <image name="logo" width="512" height="512"/>
-        <image name="pause" width="78" height="79"/>
+        <image name="pause" width="160" height="67"/>
+        <image name="ready" width="180" height="250"/>
     </resources>
 </document>

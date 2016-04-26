@@ -17,7 +17,7 @@ extension GameViewController {
         let highHand = game.getRound().highHand
         let swipeDirection = sender.direction
         
-        func assignPoints() {
+        func assignCorrectPoints() {
             
             let touchedView = sender.view
             
@@ -35,11 +35,31 @@ extension GameViewController {
             }
         }
         
+        func assignIncorrectPoints() {
+            
+            let touchedView = sender.view
+            
+            switch touchedView {
+            case _ where touchedView == self.p1AreaX:
+                game.getPlayer2().addPoints(1)
+            case _ where touchedView == self.p1AreaH:
+                game.getPlayer2().addPoints(1)
+            case _ where touchedView == self.p2AreaX:
+                game.getPlayer1().addPoints(1)
+            case _ where touchedView == self.p2AreaH:
+                game.getPlayer1().addPoints(1)
+            default:
+                break
+            }
+        }
+        
         switch swipeDirection {
-        case UISwipeGestureRecognizerDirection.Up where highHand != "player1": assignPoints()
-        case UISwipeGestureRecognizerDirection.Right where highHand != "player1": assignPoints()
-        case UISwipeGestureRecognizerDirection.Down where highHand != "player2": assignPoints()
-        case UISwipeGestureRecognizerDirection.Left where highHand != "player2": assignPoints()
+        // Correct Swipes
+        case UISwipeGestureRecognizerDirection.Right where highHand != "player1": assignCorrectPoints()
+        case UISwipeGestureRecognizerDirection.Left where highHand != "player2": assignCorrectPoints()
+        // Incorrect Swipes
+        case UISwipeGestureRecognizerDirection.Right where highHand != "player2": assignIncorrectPoints()
+        case UISwipeGestureRecognizerDirection.Left where highHand != "player1": assignIncorrectPoints()
         default: break
         }
         
@@ -74,6 +94,7 @@ extension GameViewController {
                     
                     self.game.flipDown()
                     self.setupCards()
+                    self.cardsAreUp = false;
                     direction(distanceBack)
                 }
             )
@@ -95,6 +116,9 @@ extension GameViewController {
 
     //Calls appropriate functions when swipe occurs
     @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
+        if (!cardsAreUp) {
+            return
+        }
         points(sender)
         move(sender)
     }
