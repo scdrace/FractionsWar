@@ -23,15 +23,29 @@ class Deck {
     var deckOrdered = [Card]()
     var deckRandom = [Card]()
     
+    let sH = SettingsHelper.shared
+    
     init() {
         makeDeck()
         makeDeckRandom()
     }
     
     func makeDeck() {
+        
+        let cardType = sH.retrieveFromSettings(sH.cardTypeDictionaryKey) as! String
+        let deckSize = sH.retrieveFromSettings(sH.deckSizeDictionaryKey) as! String
+                
         for number in rank {
             for name in suit {
-                deckOrdered.append(Card(rank: Double(number), suit: name))
+                deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType))
+            }
+        }
+        
+        if (deckSize == "l") {
+            for number in rank {
+                for name in suit {
+                    deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType))
+                }
             }
         }
     }

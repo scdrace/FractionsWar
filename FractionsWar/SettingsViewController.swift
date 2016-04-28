@@ -13,22 +13,31 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var backToMainMenuButton: UIButton!
     
+    // Card style buttons
     @IBOutlet weak var numberCardButton: UIButton!
     @IBOutlet weak var regularCardButton: UIButton!
     @IBOutlet weak var symbolCardButton: UIButton!
+    
+    // Deck size buttons
+    @IBOutlet weak var normalDeckButton: UIButton!
+    @IBOutlet weak var largeDeckButton: UIButton!
+    
+    // Computer speed buttons
+    @IBOutlet weak var slowComputerButton: UIButton!
+    @IBOutlet weak var mediumComputerButton: UIButton!
+    @IBOutlet weak var fastComputerButton: UIButton!
     
     // Custom game fonts
     var gameFont: UIFont {
         return UIFont(name: "DINCond-Bold", size: 32)!
     }
     
-    let sH = SettingsHelper()
+    let sH = SettingsHelper.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sH.formPlistPath()
-        prepareSettingsMenu()        
+        prepareSettingsMenu()
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,6 +53,8 @@ class SettingsViewController: UIViewController {
         })
     }
     
+    // MARK: - Card Style Buttons
+    
     @IBAction func pressNumberCardButton(sender: AnyObject) {
         sH.saveToSettings("n", settingsKey: sH.cardTypeDictionaryKey)
     }
@@ -56,6 +67,30 @@ class SettingsViewController: UIViewController {
         sH.saveToSettings("s", settingsKey: sH.cardTypeDictionaryKey)
     }
     
+    // MARK: - Deck Size Buttons
+    
+    @IBAction func pressNormalDeckButton(sender: AnyObject) {
+        sH.saveToSettings("n", settingsKey: sH.deckSizeDictionaryKey)
+    }
+    
+    @IBAction func pressLargeDeckButton(sender: AnyObject) {
+        sH.saveToSettings("l", settingsKey: sH.deckSizeDictionaryKey)
+    }
+    
+    // MARK: - Computer Speed Buttons
+    
+    @IBAction func pressSlowComputerButton(sender: AnyObject) {
+        sH.saveToSettings("s", settingsKey: sH.computerSpeedDictionaryKey)
+    }
+    
+    @IBAction func pressMediumComputerButton(sender: AnyObject) {
+        sH.saveToSettings("m", settingsKey: sH.computerSpeedDictionaryKey)
+    }
+    
+    @IBAction func pressFastComputerButton(sender: AnyObject) {
+        sH.saveToSettings("f", settingsKey: sH.computerSpeedDictionaryKey)
+    }
+    
     // MARK: - Menu Display Setup
     
     internal func prepareSettingsMenu() {
@@ -63,6 +98,26 @@ class SettingsViewController: UIViewController {
         backToMainMenuButton.titleLabel?.font = gameFont
         backToMainMenuButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         backToMainMenuButton.sizeToFit()
+        
+        normalDeckButton.titleLabel?.font = gameFont
+        normalDeckButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        normalDeckButton.sizeToFit()
+        
+        largeDeckButton.titleLabel?.font = gameFont
+        largeDeckButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        largeDeckButton.sizeToFit()
+        
+        slowComputerButton.titleLabel?.font = gameFont
+        slowComputerButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        slowComputerButton.sizeToFit()
+        
+        mediumComputerButton.titleLabel?.font = gameFont
+        mediumComputerButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        mediumComputerButton.sizeToFit()
+        
+        fastComputerButton.titleLabel?.font = gameFont
+        fastComputerButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        fastComputerButton.sizeToFit()
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
     }

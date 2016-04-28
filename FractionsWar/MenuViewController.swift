@@ -15,7 +15,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var twoPlayerButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var howToPlayButton: UIButton!
-    
+        
     // Custom game fonts
     var gameFont: UIFont {
         return UIFont(name: "DINCond-Bold", size: 32)!
@@ -61,11 +61,44 @@ class MenuViewController: UIViewController {
     
     @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
     
-    /*
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    @IBAction func press1PlayerModeButton(sender: AnyObject) {
+        
+        performSegueWithIdentifier("GameControllerSegue", sender: sender)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        playerMode(segue, sender: sender)
+    }
+    
+    func playerMode(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        func getPlayerNum() -> Int? {
+            if let button = sender as? UIButton {
+                let text = button.titleLabel!.text!
+                let players = Int(String(text[text.startIndex]))
+                
+                return players
+            }
+            
+            return nil
+        }
+        
+        func passData(players: Int) {
+            let controller = segue.destinationViewController as! GameViewController
+            
+            if players == 1 {
+                controller.playerMode = 1
+            }
+            else if players == 2 {
+                controller.playerMode = 2
+                //print("Hello Man: \(players)")
+            }
+        }
+        
+        let players = getPlayerNum()
+        if let playerNum = players {
+            passData(playerNum)
+        }
+    }
 }

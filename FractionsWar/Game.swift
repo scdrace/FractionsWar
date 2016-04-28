@@ -10,10 +10,12 @@ import Foundation
 import UIKit
 
 class Game: CustomStringConvertible {
+    
     var deck = Deck()
     var round: Round
-    var player1 = Player()
-    var player2 = Player()
+    var data: Data
+    var player1 = Player(name: "player1")
+    var player2 = Player(name: "player2")
     
     struct Cards {
         var p1Numerator: Card
@@ -28,6 +30,8 @@ class Game: CustomStringConvertible {
     
     init() {
         self.round = Round(player1: player1, player2: player2)
+        self.data = Data(player1: player1, player2: player2)
+        
         while (!deck.deckRandom.isEmpty) {
             player1.cards.append(self.deck.deckRandom.removeLast())
             player2.cards.append(self.deck.deckRandom.removeLast())
@@ -38,8 +42,8 @@ class Game: CustomStringConvertible {
         
         if (player1.cards.count > 1 && player2.cards.count > 1) {
             
-            print("Player one deck: "+player1.cards.debugDescription)
-            print("Player two deck: "+player2.cards.debugDescription)
+            //print("Player one deck: "+player1.cards.debugDescription)
+            //print("Player two deck: "+player2.cards.debugDescription)
             
             let p1n = self.player1.cards.removeLast()
             let p1d = self.player1.cards.removeLast()
@@ -48,7 +52,7 @@ class Game: CustomStringConvertible {
             
             let h = [p1n, p1d, p2n, p2d]
             
-            print("NEW HAND: "+h.debugDescription)
+            //print("NEW HAND: "+h.debugDescription)
 
             self.round.makeHand(h)
         }
@@ -113,5 +117,9 @@ class Game: CustomStringConvertible {
     
     func highHand() -> String {
         return round.highHand
+    }
+    
+    func addRoundData(swipeTime: Double) {
+        self.data.addRoundData(self.round.getRound(), swipeTime: swipeTime, highHand: self.round.highHand)
     }
 }

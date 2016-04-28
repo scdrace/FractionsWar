@@ -13,14 +13,13 @@ class Card: CustomStringConvertible {
     
     var rank: Double
     var suit: String
+    var cardType: String
     var imageName: String
     
     var cardView: UIView
     var back: UIImageView
     var front: UIImageView
-    
-    let sH = SettingsHelper()
-    
+        
     var cardSize: CGRect {
         return CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100))
     }
@@ -29,13 +28,11 @@ class Card: CustomStringConvertible {
         return "\(self.rank) of \(self.suit)"
     }
  
-    init(rank: Double, suit: String) {
-        
-        sH.formPlistPath()
-        let cardType = sH.retrieveFromSettings(sH.cardTypeDictionaryKey) as! String
+    init(rank: Double, suit: String, cardType: String) {
         
         self.rank = rank
         self.suit = suit
+        self.cardType = cardType
         
         let shortSuit = Card.shortenSuitName(suit)
         self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-"+cardType+".png"
@@ -100,5 +97,12 @@ class Card: CustomStringConvertible {
     func imageClean() {
         self.front.removeFromSuperview()
         self.back.removeFromSuperview()
+    }
+    
+    func data() -> [String] {
+        let rank = String(self.rank)
+        
+        //TODO: Include cardType
+        return [rank, suit, cardType]
     }
 }
