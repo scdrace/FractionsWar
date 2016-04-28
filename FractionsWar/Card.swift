@@ -13,6 +13,7 @@ class Card: CustomStringConvertible {
     
     var rank: Double
     var suit: String
+    var cardType: String
     var imageName: String
     
     var cardView: UIView
@@ -31,6 +32,7 @@ class Card: CustomStringConvertible {
         
         self.rank = rank
         self.suit = suit
+        self.cardType = cardType
         
         let shortSuit = Card.shortenSuitName(suit)
         self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-"+cardType+".png"
@@ -95,5 +97,12 @@ class Card: CustomStringConvertible {
     func imageClean() {
         self.front.removeFromSuperview()
         self.back.removeFromSuperview()
+    }
+    
+    func data() -> [String] {
+        let rank = String(self.rank)
+        
+        //TODO: Include cardType
+        return [rank, suit, cardType]
     }
 }

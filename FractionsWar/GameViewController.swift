@@ -74,6 +74,19 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         )
     }
     
+    let sH = SettingsHelper.shared
+    
+    var difficulty: Double {
+        let code = sH.retrieveFromSettings(sH.computerSpeedDictionaryKey) as! String
+        return getDifficultyValue(code)
+    }
+    
+    var roundStartTime = 0.0
+    var swipeTime = 0.0
+    var computerTimer =  NSTimer()
+    
+    var playerMode = 0
+    
     // MARK: - View Lifecycle Management
     
     override func viewDidLoad() {
@@ -157,8 +170,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         p2AreaH.backgroundColor = UIColor.clearColor()
         self.view.addSubview(p1AreaH)
         self.view.bringSubviewToFront(p1AreaH)
-        self.view.addSubview(p2AreaH)
-        self.view.bringSubviewToFront(p2AreaH)
+        
+        if playerMode == 2 {
+            self.view.addSubview(p2AreaH)
+            self.view.bringSubviewToFront(p2AreaH)
+        }
     }
     
     internal func setFonts() {
@@ -261,13 +277,15 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         
         swipeArea.userInteractionEnabled = true
         
-        let direction = [UISwipeGestureRecognizerDirection.Up, UISwipeGestureRecognizerDirection.Down,
-                         UISwipeGestureRecognizerDirection.Left, UISwipeGestureRecognizerDirection.Right]
+        let direction = [UISwipeGestureRecognizerDirection.Left, UISwipeGestureRecognizerDirection.Right]
         
-        for i in 0...3 {
+        var i = 0;
+        
+        for _ in direction {
             let swipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeGesture(_:)))
             swipe.direction = direction[i]
             swipeArea.addGestureRecognizer(swipe)
+            i += 1
         }
     }
     
@@ -281,6 +299,16 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         cardsAreUp = true
         
         game.flipCards()
+        
+        roundStartTime = CACurrentMediaTime()
+        
+        if playerMode == 1 {
+            computerTimer = NSTimer.scheduledTimerWithTimeInterval(difficulty, target:self, selector: #selector(self.computerSwipe), userInfo: nil, repeats: false)
+        }
+    }
+    
+    internal func printMessage() {
+        print("Times up")
     }
     
     // MARK: - Navigation

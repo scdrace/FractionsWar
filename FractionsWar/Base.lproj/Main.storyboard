@@ -525,7 +525,7 @@
                                 </constraints>
                                 <state key="normal" title="2 Player Mode"/>
                                 <connections>
-                                    <segue destination="gv7-ec-xeN" kind="show" animates="NO" id="S2L-8l-gyA"/>
+                                    <segue destination="gv7-ec-xeN" kind="show" identifier="GameControllerSegue" animates="NO" id="S2L-8l-gyA"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="is8-PY-Z4X">
@@ -547,6 +547,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5o2-qj-cph">
                                 <rect key="frame" x="102.5" y="461" width="307" height="61.5"/>
                                 <state key="normal" title="1 Player Mode"/>
+                                <connections>
+                                    <action selector="press1PlayerModeButton:" destination="Zsr-hK-NA6" eventType="touchUpInside" id="cQj-mq-nSd"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOq-5c-KlO">
                                 <rect key="frame" x="102.5" y="583.5" width="307" height="61"/>

@@ -52,4 +52,8 @@ class Round {
         player1.getHand().imageClean()
         player2.getHand().imageClean()
     }
+    
+    func getRound() -> Int {
+        return round
+    }
 }

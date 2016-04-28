@@ -11,6 +11,36 @@ import UIKit
 
 extension GameViewController {
     
+    func computerSwipe() {
+        let highHand = game.getRound().highHand
+        
+        //Create Array of gesture recognizers for the Computer (player2 area)
+        let gestArray = p2AreaH.gestureRecognizers!
+        
+        
+        //Get the UISwipeGestureRecognizer that represents a correct swipe
+        switch highHand {
+        case "player1":
+            for item in gestArray {
+                let gesture = item as! UISwipeGestureRecognizer
+                if gesture.direction == UISwipeGestureRecognizerDirection.Left {
+                    swipeGesture(gesture)
+                }
+            }
+            break
+        case "player2":
+            for item in gestArray {
+                let gesture = item as! UISwipeGestureRecognizer
+                if gesture.direction == UISwipeGestureRecognizerDirection.Right {
+                    swipeGesture(gesture)
+                }
+            }
+            break
+        default:
+            break
+        }
+    }
+    
     //Add point for swipe
     func points(sender: UISwipeGestureRecognizer) {
         
@@ -116,10 +146,33 @@ extension GameViewController {
 
     //Calls appropriate functions when swipe occurs
     @IBAction func swipeGesture(sender: UISwipeGestureRecognizer) {
+        
         if (!cardsAreUp) {
             return
         }
+        
+        // Stop the computer timer
+        // Maybe make the timer optional, so that it does not exist for one player mode
+        computerTimer.invalidate()
+        
+        // Calculate the time it takes to swipe the cards
+        let swipeTime = CACurrentMediaTime() - roundStartTime
+        print("SwipeTime: \(swipeTime)")
+        
+        // Calculate points
         points(sender)
+        
+        // TODO: Collect data from round
+        game.addRoundData(swipeTime)
+        
+        //var u = gameData.GameRound(player1Numerator: game.getP1Numerator())
+        
+        //var data = ["player1Numerator": game.getP1Numerator()]
+        
+        //var u = gameData.getGameRound()
+        //u.player1Numerator = game.getP1Numerator()
+        
+        //Animate the cards
         move(sender)
     }
 }
