@@ -445,46 +445,12 @@
                         <outlet property="p2WarButton" destination="Pbx-3q-jFZ" id="NtL-0v-psq"/>
                         <outlet property="p2WarButtonView" destination="Cie-I4-Cc0" id="sIg-lX-d2h"/>
                         <segue destination="Wbo-aQ-YIt" kind="presentation" identifier="goToPause" animates="NO" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="hDd-I3-jom"/>
+                        <segue destination="Yx0-fn-OQi" kind="presentation" identifier="goToGameOver" animates="NO" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="FUv-MX-M63"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kRj-OI-vvp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1375" y="1529"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="27a-ct-NsQ">
-            <objects>
-                <viewController id="V5v-eN-F2M" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oEt-uO-scQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="UKO-04-MQD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="CsN-YT-u5V">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N0j-Vh-x69">
-                                <rect key="frame" x="392" y="204" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="GamePlay Hello">
-                                        <attributes>
-                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wkY-ZT-hgt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1643" y="2496"/>
         </scene>
         <!--Pause View Controller-->
         <scene sceneID="EU3-nw-6dF">
@@ -494,13 +460,15 @@
                         <viewControllerLayoutGuide type="top" id="r82-D7-wCL"/>
                         <viewControllerLayoutGuide type="bottom" id="vkN-wm-tjv"/>
                     </layoutGuides>
-                    <view key="view" alpha="0.84999999999999998" contentMode="scaleToFill" id="uUq-f4-WhT">
+                    <view key="view" contentMode="scaleToFill" id="uUq-f4-WhT">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCO-wF-0k4">
                                 <rect key="frame" x="458" y="499" width="108" height="30"/>
-                                <state key="normal" title="Return to Game"/>
+                                <state key="normal" title="Return to Game">
+                                    <color key="titleColor" red="0.88235294119999996" green="0.81960784310000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="pressReturnToGameButton:" destination="Wbo-aQ-YIt" eventType="touchUpInside" id="ZSa-NZ-1WY"/>
                                 </connections>
@@ -510,13 +478,15 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uv-13-T8I">
                                 <rect key="frame" x="468" y="239" width="89" height="30"/>
-                                <state key="normal" title="Forfeit Game"/>
+                                <state key="normal" title="Forfeit Game">
+                                    <color key="titleColor" red="0.88235294119999996" green="0.81960784310000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="pressForfeitButton:" destination="Wbo-aQ-YIt" eventType="touchUpInside" id="sqb-pJ-lGv"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="UCO-wF-0k4" firstAttribute="centerX" secondItem="uUq-f4-WhT" secondAttribute="centerX" id="2UQ-UU-A1B"/>
                             <constraint firstItem="7sb-MK-Bp3" firstAttribute="centerY" secondItem="uUq-f4-WhT" secondAttribute="centerY" id="Abl-pD-sFP"/>
@@ -540,6 +510,77 @@
                 <exit id="8pN-Nx-Ht1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2623" y="1529"/>
+        </scene>
+        <!--Game Over View Controller-->
+        <scene sceneID="7Vb-5F-krd">
+            <objects>
+                <viewController id="Yx0-fn-OQi" customClass="GameOverViewController" customModule="FractionsWar" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="B5N-py-ODL"/>
+                        <viewControllerLayoutGuide type="bottom" id="kTy-ms-c0L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5pY-G4-z2k">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUn-Kw-rQy">
+                                <rect key="frame" x="85" y="153" width="854" height="461"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player One Wins!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAX-wo-HbE">
+                                        <rect key="frame" x="0.0" y="0.0" width="854" height="276.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.88235294117647056" green="0.81960784313725488" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ev3-zu-7O5">
+                                        <rect key="frame" x="0.0" y="276.5" width="854" height="92"/>
+                                        <state key="normal" title="Go To Main Menu">
+                                            <color key="titleColor" red="0.88235294119999996" green="0.81960784310000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressReturnToMainMenuButton:" destination="Yx0-fn-OQi" eventType="touchUpInside" id="U9o-ny-CI2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Ev3-zu-7O5" firstAttribute="width" secondItem="hUn-Kw-rQy" secondAttribute="width" id="6vt-Dh-XcI"/>
+                                    <constraint firstItem="sAX-wo-HbE" firstAttribute="width" secondItem="hUn-Kw-rQy" secondAttribute="width" id="8em-zn-qut"/>
+                                    <constraint firstItem="Ev3-zu-7O5" firstAttribute="centerX" secondItem="hUn-Kw-rQy" secondAttribute="centerX" id="Gjh-SB-MHV"/>
+                                    <constraint firstItem="sAX-wo-HbE" firstAttribute="centerX" secondItem="hUn-Kw-rQy" secondAttribute="centerX" id="IAW-yg-u0S"/>
+                                    <constraint firstItem="sAX-wo-HbE" firstAttribute="height" secondItem="hUn-Kw-rQy" secondAttribute="height" multiplier="0.6" id="ZDx-Fd-YaH"/>
+                                    <constraint firstItem="Ev3-zu-7O5" firstAttribute="height" secondItem="hUn-Kw-rQy" secondAttribute="height" multiplier="0.2" id="avf-vs-GC5"/>
+                                    <constraint firstItem="Ev3-zu-7O5" firstAttribute="top" secondItem="sAX-wo-HbE" secondAttribute="bottom" id="crw-mQ-Uwd"/>
+                                    <constraint firstItem="sAX-wo-HbE" firstAttribute="top" secondItem="hUn-Kw-rQy" secondAttribute="top" id="o7a-Bq-kTa"/>
+                                    <constraint firstAttribute="width" secondItem="hUn-Kw-rQy" secondAttribute="height" multiplier="695:375" id="oVv-0G-qfB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="hUn-Kw-rQy" firstAttribute="height" secondItem="5pY-G4-z2k" secondAttribute="height" multiplier="0.6" id="Kvv-9u-fVN"/>
+                            <constraint firstItem="hUn-Kw-rQy" firstAttribute="width" relation="lessThanOrEqual" secondItem="5pY-G4-z2k" secondAttribute="width" multiplier="0.9" id="ZkM-p9-Yib"/>
+                            <constraint firstItem="hUn-Kw-rQy" firstAttribute="centerY" secondItem="5pY-G4-z2k" secondAttribute="centerY" id="hp4-2e-Egq"/>
+                            <constraint firstItem="hUn-Kw-rQy" firstAttribute="centerX" secondItem="5pY-G4-z2k" secondAttribute="centerX" id="kti-HJ-HJT"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ZkM-p9-Yib"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="modalView" destination="hUn-Kw-rQy" id="Fj1-jQ-bsK"/>
+                        <outlet property="returnToMainMenuButton" destination="Ev3-zu-7O5" id="6Mz-5h-JXm"/>
+                        <outlet property="winnerLabel" destination="sAX-wo-HbE" id="7QO-hW-3HG"/>
+                        <segue destination="PFX-SZ-r4n" kind="unwind" identifier="unwindToMenuFromGameOver" animates="NO" unwindAction="unwindToMenu:" id="Mmx-jn-GBr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TH1-kf-12Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="PFX-SZ-r4n" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2623" y="2478"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="fSC-8C-RdC">

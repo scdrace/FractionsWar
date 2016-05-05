@@ -10,10 +10,10 @@ import Foundation
 
 class Player: CustomStringConvertible {
     
-    var name: String        //Player name
-    var points = 0          //Current total points
-    var hand = [Hand?]()         //
-    var cards = [Card]()    //Deck that is subset of the Main-Deck; Player selects from this deck
+    var name: String        // Player name
+    var points = 0          // Current total points
+    var hand = [Hand?]()    //
+    var cards = [Card]()    // Deck that is subset of the Main-Deck; Player selects from this deck
     
     var warHands = 2
     
@@ -21,11 +21,9 @@ class Player: CustomStringConvertible {
         self.name = name
     }
     
-    
     var description: String {
         return "\(self.points) points & \(self.hand[0]!.description) hand & \(self.cards.debugDescription) all cards"
     }
-    
     
     func getName() -> String {
         return name
@@ -51,7 +49,6 @@ class Player: CustomStringConvertible {
         return points
     }
     
-    
     func makeHand(war: Bool = false) {
         self.hand.removeAll()
         var maxHands = 1
@@ -59,18 +56,13 @@ class Player: CustomStringConvertible {
         if war == true {
             maxHands = warHands
         }
-        
         var cardsX = [Card]()
-        
-        print("\(name) deck length (a): \(cards.count)")
         
         for _ in 0..<maxHands {
             for _ in 0..<2 {
                 cardsX.append(cards.removeLast())
             }
             self.hand.append(Hand(card1: cardsX[0], card2: cardsX[1]))
-            print("\(name) deck length (b): \(cards.count)")
-            print("\(name) \(cardsX[0]), \(cardsX[1])")
             cardsX = [Card]()
         }
     }
@@ -84,7 +76,6 @@ class Player: CustomStringConvertible {
             cards.insert(hand.denominator, atIndex: 0)
         }
     }
-    
     
     func getWarHands() -> [Hand]? {
         
@@ -102,7 +93,6 @@ class Player: CustomStringConvertible {
         
         return nil
     }
-    
     
     func data() -> [String] {
         let numerator = hand[0]!.numerator.data()

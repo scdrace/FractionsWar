@@ -125,7 +125,15 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func pressDeclareWarP1Button(sender: AnyObject) {
         
-        //print("Player1 declares war")
+        if (p1ready && p2ready) {
+            swipeGesture(sender)
+            
+            //True runs the same function as normal, but with the "war" parameter set to "true"
+            game.nextRound(true)
+        }
+    }
+    
+    @IBAction func pressDeclareWarP2Button(sender: AnyObject) {
         
         if (p1ready && p2ready) {
             swipeGesture(sender)
@@ -133,22 +141,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             //True runs the same function as normal, but with the "war" parameter set to "true"
             game.nextRound(true)
         }
-        
-    }
-    
-    
-    @IBAction func pressDeclareWarP2Button(sender: AnyObject) {
-        
-        if (p1ready && p2ready) {
-            swipeGesture(sender)
-            game.nextRound(true)
-        }
     }
     
     
     @IBAction func pressPauseP1Button(sender: AnyObject) {
         dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("goToPause", sender: self)
+            self.performSegueWithIdentifier("goToGameOver", sender: self)
         })
     }
     
@@ -160,7 +158,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func pressP1DeckButton(sender: AnyObject) {
        
-        //Set Player2 to "ready"
+        //Set Player1 to "ready"
         p1ready = true
         p1DeckButton.hidden = true
         
@@ -169,35 +167,22 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             flipCards()
         }
         
-        //If 1-Player-Mode == true, set Player2 to "ready"
-        pressP2DeckButton("P1Mode")
+        //Set Player2 to ready if we are in one player mode
+        if (playerMode == 1) {
+            pressP2DeckButton(sender)
+        }
     }
     
     @IBAction func pressP2DeckButton(sender: AnyObject) {
         
         //Set Player2 to "ready"
-        func ready() {
-            p2ready = true
-            p2DeckButton.hidden = true
+        p2ready = true
+        p2DeckButton.hidden = true
             
-            //Flip cards if both players are "ready"
-            if (p1ready && p2ready) {
-                flipCards()
-            }
+        //Flip cards if both players are "ready"
+        if (p1ready && p2ready) {
+            flipCards()
         }
-        
-        
-        //Set Player2 to "ready", when in 1-Player-Mode
-        if let mode = sender as? String {
-            if mode == "P1Mode" {
-                ready()
-            }
-        }
-        //Set Player2 to "ready", when in 2-Player-Mode
-        else if playerMode == 2 {
-           ready()
-        }
-        
     }
     
     // MARK: - Game Display Setup
@@ -306,10 +291,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         
         updateCardCounters()
         
-        // Debugging
-        print("Player2: \(game.player2.hand[0]!)")
-        print("Player1: \(game.player1.hand[0]!)")
-        
         p1ready = false
         p2ready = false
         p1DeckButton.hidden = false
@@ -317,8 +298,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    internal func setupCardsWar() {
-    }
+    internal func setupCardsWar() { }
     
     
     internal func updateCardCounters() {
@@ -365,14 +345,4 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     internal func printMessage() {
         print("Times up")
     }
-    
-    // MARK: - Navigation
-
-    /*
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

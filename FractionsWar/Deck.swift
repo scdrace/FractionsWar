@@ -8,14 +8,6 @@
 
 import UIKit
 
-/* A Deck holds Cards. 
-
-    Possible Methods
-    - shuffle()
-    - drawCards()
-    - etc.
-*/
-
 class Deck {
     let rank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     let suit = ["clubs", "diamonds", "hearts", "spades"]

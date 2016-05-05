@@ -41,24 +41,9 @@ class Game: CustomStringConvertible {
     func nextRound(war: Bool = false) {
         
         if (player1.cards.count > 1 && player2.cards.count > 1) {
+            
             player1.makeHand(war)
             player2.makeHand(war)
-            
-            //print("Player one deck: "+player1.cards.debugDescription)
-            //print("Player two deck: "+player2.cards.debugDescription)
-            
-            /*
-            let p1n = self.player1.cards.removeLast()
-            let p1d = self.player1.cards.removeLast()
-            let p2n = self.player2.cards.removeLast()
-            let p2d = self.player2.cards.removeLast()
-            
-            let h = [p1n, p1d, p2n, p2d]
-            */
-            
-            //print("NEW HAND: "+h.debugDescription)
-
-            //self.round.makeHand(h)
         }
             
         else {
@@ -95,22 +80,19 @@ class Game: CustomStringConvertible {
         return player1.getDenominator()
     }
     
-    
     func warHands() -> [Hand]? {
         
         if player1.getWarHands() != nil {
             let result = player1.getWarHands()
             return result
         }
-        
         return nil
     }
-    
     
     func getCards() -> Cards {
         
         let cards = Cards(p1Numerator: player1.getNumerator(), p1Denominator: player1.getDenominator(),
-        p2Numerator: player2.getNumerator(), p2Denominator: player2.getDenominator())
+                          p2Numerator: player2.getNumerator(), p2Denominator: player2.getDenominator())
         
         return cards
     }

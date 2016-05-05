@@ -11,172 +11,17 @@ import UIKit
 
 extension GameViewController {
     
-    /*
-    func manualSwipe(sender: AnyObject?) {
-        
-        //Get highHand for round
-        let highHand = game.getRound().highHand
-        
-        //Get appropriate UIGestureRecognizer and call swipeGesture()
-        func foo(gestArray: [UIGestureRecognizer], direction: UISwipeGestureRecognizerDirection) {
-            for item in gestArray {
-                let gesture = item as! UISwipeGestureRecognizer
-                if gesture.direction == direction {
-                    swipeGesture(gesture)
-                }
-            }
-        }
-        
-        switch highHand {
-            case "even":
-                if sender === p1WarButton {
-                    foo(p1AreaH.gestureRecognizers!, direction: UISwipeGestureRecognizerDirection.Left)
-                }
-                else if sender === 2 {
-                    foo(p2AreaH.gestureRecognizers!, direction: UISwipeGestureRecognizerDirection.Right)
-            }
-            break
-        default:
-            if sender === p1WarButton {
-                foo(p2AreaH.gestureRecognizers!, direction: UISwipeGestureRecognizerDirection.Right)
-            }
-            else if sender === p1WarButton {
-                foo(p1AreaH.gestureRecognizers!, direction: UISwipeGestureRecognizerDirection.Left)
-            }
-        
-            break
-            
-        }
-
-    }
-    */
-    
-    
-    /*
-     //Add point for swipe
-     func points(sender: UISwipeGestureRecognizer) {
-     
-     let highHand = game.getRound().highHand
-     let swipeDirection = sender.direction
-     
-     func assignCorrectPoints() {
-     
-     let touchedView = sender.view
-     
-     switch touchedView {
-     case _ where touchedView == self.p1AreaX:
-     game.getPlayer1().addPoints(1)
-     break
-     case _ where touchedView == self.p1AreaH:
-     game.getPlayer1().addPoints(1)
-     break
-     case _ where touchedView == self.p2AreaX:
-     game.getPlayer2().addPoints(1)
-     break
-     case _ where touchedView == self.p2AreaH:
-     game.getPlayer2().addPoints(1)
-     break
-     default:
-     break
-     }
-     }
-     
-     func assignIncorrectPoints() {
-     
-     let touchedView = sender.view
-     
-     switch touchedView {
-     case _ where touchedView == self.p1AreaX:
-     game.getPlayer2().addPoints(1)
-     break
-     case _ where touchedView == self.p1AreaH:
-     game.getPlayer2().addPoints(1)
-     break
-     case _ where touchedView == self.p2AreaX:
-     game.getPlayer1().addPoints(1)
-     break
-     case _ where touchedView == self.p2AreaH:
-     game.getPlayer1().addPoints(1)
-     break
-     default:
-     break
-     }
-     }
-     
-     switch swipeDirection {
-     // Correct Swipes
-     case UISwipeGestureRecognizerDirection.Right where highHand == "player2": assignCorrectPoints()
-     case UISwipeGestureRecognizerDirection.Left where highHand == "player1": assignCorrectPoints()
-     // Incorrect Swipes
-     case UISwipeGestureRecognizerDirection.Right where highHand == "player1": assignIncorrectPoints()
-     case UISwipeGestureRecognizerDirection.Left where highHand == "player2": assignIncorrectPoints()
-     
-     case UISwipeGestureRecognizerDirection.Right where highHand == "tie": assignIncorrectPoints()
-     case UISwipeGestureRecognizerDirection.Left where highHand == "tie": assignIncorrectPoints()
-     default: break
-     }
-     
-     }
+    /**
+     Sends computer swipe
      */
-    
-    
-    /*
-     //The logic that moves the cards
-     func move(sender: UISwipeGestureRecognizer) {
-     
-     let swipeDirection = sender.direction
-     let cardPorts = getCardPorts
-     
-     func moveHorizontal(distance: CGFloat) {
-     for port in cardPorts {
-     port.center.x += distance
-     }
-     }
-     
-     func moveVertical(distance: CGFloat) {
-     for port in cardPorts {
-     port.center.y += distance
-     }
-     }
-     
-     func animation(direction: (CGFloat)->(), distanceAway: CGFloat, distanceBack: CGFloat) {
-     
-     UIView.animateWithDuration(0.8,
-     animations: {
-     direction(distanceAway)
-     },
-     completion: {
-     finished in
-     
-     self.game.flipDown()
-     self.setupCards()
-     self.cardsAreUp = false;
-     direction(distanceBack)
-     }
-     )
-     }
-     
-     switch swipeDirection {
-     case UISwipeGestureRecognizerDirection.Up:
-     animation(moveVertical, distanceAway: -moveDistance, distanceBack: moveDistance)
-     case UISwipeGestureRecognizerDirection.Down:
-     animation(moveVertical, distanceAway: moveDistance, distanceBack: -moveDistance)
-     case UISwipeGestureRecognizerDirection.Left:
-     animation(moveHorizontal, distanceAway: -moveDistance, distanceBack: moveDistance)
-     case UISwipeGestureRecognizerDirection.Right:
-     animation(moveHorizontal, distanceAway: moveDistance, distanceBack: -moveDistance)
-     default:
-     break
-     }
-     }
-     */
-    
-    
     func computerSwipe() {
         
         let highHand = game.getRound().highHand
 
-
+        /**
+         Initiates swipe depending on the gesture
+         - Parameter direction: the swipe direction
+         */
         func foo(direction: UISwipeGestureRecognizerDirection) {
             for item in p2AreaH.gestureRecognizers! {
                 let gesture = item as! UISwipeGestureRecognizer
@@ -198,10 +43,12 @@ extension GameViewController {
             break
         }
     }
-    
 
-    
-    
+    /**
+     Returns String representation of player who responded
+     - Parameter sender: AnyObject that sent response
+     - Returns: String
+     */
     func playerToAnswer(sender: AnyObject) -> String {
         
         if sender is UISwipeGestureRecognizer {
@@ -216,8 +63,11 @@ extension GameViewController {
         return "error"
     }
     
-    
-    
+    /**
+     Returns String representation of player's response
+     - Parameter sender: AnyObject that sent response
+     - Returns: String
+     */
     func playerResponse(sender: AnyObject) -> String {
         
         if sender is UISwipeGestureRecognizer {
@@ -229,122 +79,147 @@ extension GameViewController {
         else if sender === p2WarButton {return "p2WarButton"}
         
         return "error"
-        
     }
     
-    
-    //Return a Bool indicating whether the answer (swipe/tap) was correct
+    /**
+     Return a Bool indicating whether the answer (swipe/tap) was correct
+     - Parameter sender: AnyObject that sent response
+     - Returns: Bool
+     */
     func answerAnalysis(sender: AnyObject) -> Bool {
-        
-        
         
         let highHand = game.getRound().highHand
         
-        
-        //Analysis if gesture was a swipe
+        /**
+         Return a Bool indicating whether the swipe was correct
+         - Parameter sender: swipe that sent response
+         - Returns: Bool
+         */
         func swipe(sender: UISwipeGestureRecognizer) -> Bool {
+            
             let swipeDirection = sender.direction
-            print("Swipe!: \(highHand), \(sender.direction)")
+            
             switch swipeDirection {
             // Correct Swipes
             case UISwipeGestureRecognizerDirection.Right where highHand == "player2":
-                print("A")
                 return true
             case UISwipeGestureRecognizerDirection.Left where highHand == "player1":
-                print("B")
                 return true
             // Incorrect Swipes
             case UISwipeGestureRecognizerDirection.Right where highHand == "player1":
-                print("C")
                 return false
             case UISwipeGestureRecognizerDirection.Left where highHand == "player2":
-                print("D")
                 return false
-                
-            case UISwipeGestureRecognizerDirection.Right where highHand == "tie": return false
-            case UISwipeGestureRecognizerDirection.Left where highHand == "tie": return false
-            default: break
+            // Incorrect Swipes On Tie
+            case UISwipeGestureRecognizerDirection.Right where highHand == "tie":
+                return false
+            case UISwipeGestureRecognizerDirection.Left where highHand == "tie":
+                return false
+            default:
+                return false
             }
-            return false
         }
         
-        //Analysis if gesture was a tap (Declare-War Buttons)
+        /**
+         Return a Bool indicating whether the button tap was correct
+         - Parameter sender: button that sent response
+         - Returns: Bool
+         */
         func tap(sender: UIButton) -> Bool {
             
             switch highHand {
             case "tie":
-                if sender === p1WarButton {return true}
-                else if sender === p1WarButton {return true}
+                if sender === p1WarButton { return true }
+                else if sender === p2WarButton { return true }
             default:
-                if sender == p1WarButton {return false}
-                else if sender == p1WarButton {return false}
+                if sender == p1WarButton { return false }
+                else if sender == p2WarButton { return false }
             }
             return false
         }
         
         //Determine whether gesture was a swipe or tap (Declare-War Buttons)
+        
         if sender is UISwipeGestureRecognizer {
             let x = sender as! UISwipeGestureRecognizer
-             return swipe(x)
+            return swipe(x)
         }
         else if sender is UIButton {
             let x = sender as! UIButton
-             return tap(x)
+            return tap(x)
         }
-        
         return false
     }
 
-    
+    /**
+     Adds points to player's or opponent's score depending on player's response
+     - Parameter player: String representation of player who responded
+     - Parameter correctAnswer: true if response was correct, otherwise false
+     */
     func assignPoints(player: String, correctAnswer: Bool) {
-        print("XPAC0: \(player), \(correctAnswer)")
+
         switch player {
         case "player1":
-            if correctAnswer == true {
-                print("XPAC1")
-                game.getPlayer1().addPoints(1)}
-            else if correctAnswer == false {game.getPlayer2().addPoints(1)}
+            if correctAnswer == true { game.getPlayer1().addPoints(1) }
+            else if correctAnswer == false { game.getPlayer2().addPoints(1) }
             break
         case "player2":
-            if correctAnswer == true {game.getPlayer2().addPoints(1)}
-            else if correctAnswer == false {game.getPlayer1().addPoints(1)}
+            if correctAnswer == true { game.getPlayer2().addPoints(1) }
+            else if correctAnswer == false { game.getPlayer1().addPoints(1) }
         default:
             break
         }
-        
     }
     
-    
-    
+    /**
+     Moves cards depending on player's response
+     - Parameter player: String representation of player who responded
+     - Parameter playerResponse: String representation of player's response
+     - Parameter correctAnswer: true if response was correct, otherwise false
+     */
     func move(player: String, playerResponse: String, correctAnswer: Bool) {
-        //let swipeDirection = sender.direction
+
         let cardPorts = getCardPorts
         
+        /**
+         Moves cards horizontally across screen
+         - Parameter distance: distance to move cards
+         */
         func moveHorizontal(distance: CGFloat) {
             for port in cardPorts {
                 port.center.x += distance
             }
         }
         
+        /**
+         Moves cards vertically across screen
+         - Parameter distance: distance to move cards
+         */
         func moveVertical(distance: CGFloat) {
             for port in cardPorts {
                 port.center.y += distance
             }
         }
         
+        /**
+         Animates cards
+         - Parameter direction: moveVertical or moveHorizontal
+         - Parameter distanceAway: distance away to move
+         - Parameter distanceBack: distance back to move
+         */
         func animation(direction: (CGFloat)->(), distanceAway: CGFloat, distanceBack: CGFloat) {
             
             UIView.animateWithDuration(0.8,
-                                       animations: {
-                                        direction(distanceAway)
+                animations: {
+                    direction(distanceAway)
                 },
-                                       completion: {
-                                        finished in
+                completion: {
+                    finished in
                                         
-                                        self.game.flipDown()
-                                        self.setupCards()
-                                        self.cardsAreUp = false;
-                                        direction(distanceBack)
+                    self.game.flipDown()
+                    self.setupCards()
+                    self.cardsAreUp = false;
+                    direction(distanceBack)
                 }
             )
         }
@@ -373,11 +248,10 @@ extension GameViewController {
         }
     }
 
-    
-    
-    
-    
-    //Calls appropriate functions when swipe occurs
+    /**
+     Calls appropriate functions when swipe occurs
+     - Parameter sender: AnyObject that sent action
+     */
     @IBAction func swipeGesture(sender: AnyObject) {
         
         if (!cardsAreUp) {
@@ -390,8 +264,6 @@ extension GameViewController {
         
         // Calculate the time it takes to swipe the cards
         let swipeTime = CACurrentMediaTime() - roundStartTime
-        print("SwipeTime: \(swipeTime)")
-        
         
         //Who answered
         let player = playerToAnswer(sender)
@@ -401,26 +273,15 @@ extension GameViewController {
         
         //Is the swipe/tap correct
         let correctAnswer: Bool = answerAnalysis(sender)
-        print("CorrectAnswer: \(correctAnswer)")
-        //Assign Points
+
+        //Assign Points and Set Cards
         assignPoints(player, correctAnswer: correctAnswer)
-        
-        
-        // Calculate points
-        //points(sender)
+        game.getRound().addToPlayerCards(game.getRound().highHand)
         
         // TODO: Collect data from round
         game.addRoundData(swipeTime)
         
-        //var u = gameData.GameRound(player1Numerator: game.getP1Numerator())
-        
-        //var data = ["player1Numerator": game.getP1Numerator()]
-        
-        //var u = gameData.getGameRound()
-        //u.player1Numerator = game.getP1Numerator()
-        
         //Animate the cards
-        //move(sender)
         move(player, playerResponse: answer, correctAnswer: correctAnswer)
     }
 }

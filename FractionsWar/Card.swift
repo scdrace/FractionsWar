@@ -36,7 +36,6 @@ class Card: CustomStringConvertible {
         
         let shortSuit = Card.shortenSuitName(suit)
         self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-"+cardType+".png"
-        print("testing image name: "+imageName)
         
         self.cardView = UIView(frame: CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100)))
         

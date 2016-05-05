@@ -92,7 +92,6 @@ class MenuViewController: UIViewController {
             }
             else if players == 2 {
                 controller.playerMode = 2
-                //print("Hello Man: \(players)")
             }
         }
         

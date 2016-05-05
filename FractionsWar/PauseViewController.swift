@@ -49,18 +49,14 @@ class PauseViewController: UIViewController {
     internal func prepareScreen() {
         
         forfeitButton.titleLabel?.font = gameFont
-        forfeitButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         forfeitButton.sizeToFit()
         
         returnButton.titleLabel?.font = gameFont
-        returnButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        forfeitButton.sizeToFit()
+        returnButton.sizeToFit()
     }
     
     // MARK: - Navigation
-    
-    @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
-    
+        
     /*
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
