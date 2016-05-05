@@ -199,7 +199,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
         
         setFonts()
-        decorateDeckCounters()
         decorateButtons()
         
         // Add swipe views
@@ -240,31 +239,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         p2PauseButton.setTitleColor(UIColor.lightGrayColor().colorWithAlphaComponent(0.4), forState: UIControlState.Normal)
         p2PauseButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         p2PauseButton.titleEdgeInsets.left = -(p2PauseButton.frame.size.width/3)
-    }
-    
-    internal func decorateDeckCounters() {
-        
-        let dot: UIImage = UIImage(named: "dot")!
-        let size: CGSize = p1Cards.frame.size
-        UIGraphicsBeginImageContext(size)
-        dot.drawInRect(CGRectMake(0, 0, size.width, size.height))
-        let dotBack: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-        
-        p2Cards.backgroundColor = UIColor(patternImage: dotBack)
-        
-        
-        
-        // prepare counter background
-        let width = p1Cards.bounds.size.width
-        let height = p1Cards.bounds.size.height
-        
-        let dotBg = UIImageView(frame: CGRectMake(0, 0, width, height))
-        dotBg.image = UIImage(named: "dot")
-        dotBg.contentMode = UIViewContentMode.ScaleAspectFit
-        
-        p1Cards.addSubview(dotBg)
-        p1Cards.sendSubviewToBack(dotBg)
     }
     
     internal func addCardImage() {
