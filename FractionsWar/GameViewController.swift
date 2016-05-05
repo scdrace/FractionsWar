@@ -136,7 +136,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    
     @IBAction func pressPauseP1Button(sender: AnyObject) {
         dispatch_async(dispatch_get_main_queue(), {
             self.performSegueWithIdentifier("goToPause", sender: self)
@@ -272,7 +271,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         
         game.nextRound(warMode)
         
-        //Resize card_image to fit Card-Ports in IB
+        // Resize card_image to fit Card-Ports in IB
         game.resizeCards(cardFrame)
         
         // Add Card.view to corresponding card-port
@@ -288,6 +287,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         p2ready = false
         p1DeckButton.hidden = false
         p2DeckButton.hidden = false
+        
+        // End the game if there is a winner
+        if (game.player1.cards.count < 2 || game.player1.cards.count < 2) {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.performSegueWithIdentifier("goToGameOver", sender: self)
+            })
+        }
     }
     
     
@@ -337,5 +343,31 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     internal func printMessage() {
         print("Times up")
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        // Send along the winner message to the game over screen
+        if segue.identifier == "goToGameOver" {
+            
+            var winner: String?
+            
+            if (game.player1.points > game.player2.points) {
+                winner = "Player One Wins!"
+            } else if (game.player1.points < game.player2.points) {
+                if (playerMode == 1) {
+                    winner = "The Computer Wins!"
+                } else {
+                    winner = "Player Two Wins!"
+                }
+            } else {
+                winner = "It's a Tie!"
+            }
+            
+            let vc = segue.destinationViewController as! GameOverViewController
+            vc.winner = winner
+        }
     }
 }

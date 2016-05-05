@@ -15,6 +15,8 @@ class GameOverViewController: UIViewController {
     @IBOutlet weak var winnerLabel: UILabel!
     @IBOutlet weak var returnToMainMenuButton: UIButton!
     
+    var winner: String?
+    
     // Custom game fonts
     var gameButtonFont: UIFont {
         return UIFont(name: "DINCond-Bold", size: 41)!
@@ -58,6 +60,7 @@ class GameOverViewController: UIViewController {
         modalView.sendSubviewToBack(imageViewBackground)
         
         // adjust label style
+        winnerLabel.text = winner
         winnerLabel.font = gameLabelFont
         
         // adjust button style
