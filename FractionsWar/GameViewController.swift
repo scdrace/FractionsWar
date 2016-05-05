@@ -31,6 +31,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var gameFont: UIFont {
         return UIFont(name: "DINCond-Bold", size: 22)!
     }
+    var gameCounterFont: UIFont {
+        return UIFont(name: "DINCond-Bold", size: 32)!
+    }
     
     // Ports in which Card.view is placed
     // Ports are used so that we can set up constraints in IB
@@ -301,8 +304,40 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     internal func updateCardCounters() {
+        
+        // Get differnce in current vs updated values
+        let p1Diff = Int(p1Cards.text!)! - game.player1.cards.count
+        let p2Diff = Int(p2Cards.text!)! - game.player2.cards.count
+        
+        // Set new counter values
         p1Cards.text = String(game.player1.cards.count)
         p2Cards.text = String(game.player2.cards.count)
+        
+        // Prepare update counter for player one
+        let p1: CGPoint = (p1Cards.superview?.convertPoint(p1Cards.center, toView: self.view))!
+        let p1DiffCounter = UILabel(frame: p1Cards.frame)
+        p1DiffCounter.center = CGPointMake(p1.x + 40, p1.y)
+        p1DiffCounter.textAlignment = NSTextAlignment.Center
+        p1DiffCounter.text = String(p1Diff)
+        p1DiffCounter.font = gameCounterFont
+        p1DiffCounter.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.6)
+        p1DiffCounter.alpha = 0.0
+        self.view.addSubview(p1DiffCounter)
+        
+        // Prepare update counter for player two
+        let p2: CGPoint = (p2Cards.superview?.convertPoint(p2Cards.center, toView: self.view))!
+        let p2DiffCounter = UILabel(frame: p2Cards.frame)
+        p2DiffCounter.center = CGPointMake(p2.x - 40, p2.y)
+        p2DiffCounter.textAlignment = NSTextAlignment.Center
+        p2DiffCounter.text = String(p2Diff)
+        p2DiffCounter.font = gameCounterFont
+        p2DiffCounter.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.6)
+        p2DiffCounter.alpha = 0.0
+        self.view.addSubview(p2DiffCounter)
+        
+        // Display counters then remove them
+        popLabel(p1DiffCounter)
+        popLabel(p2DiffCounter)
     }
 
     // MARK: - Game Interaction
@@ -343,6 +378,37 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     internal func printMessage() {
         print("Times up")
+    }
+    
+    // MARK: - UI Display Utility Functions
+    
+    internal func delay(delay: Double, closure: ()->()) {
+        
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+    
+    internal func popLabel(label: UILabel) {
+        
+        UIView.animateWithDuration(0.6, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { label.alpha = 1.0 },
+            completion: {
+                (finished: Bool) -> Void in
+                //Once the label is completely visible, fade it back out
+                self.delay(1.4) {
+                    UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: { label.alpha = 0.0 },
+                        completion: {
+                            (finished: Bool) -> Void in
+                            //Once the label is completely invisible, remove it from the superview
+                            label.removeFromSuperview()
+                        }
+                    )
+                }
+            }
+        )
     }
     
     // MARK: - Navigation
