@@ -19,10 +19,20 @@ class GameOverViewController: UIViewController {
     
     // Custom game fonts
     var gameButtonFont: UIFont {
-        return UIFont(name: "DINCond-Bold", size: 41)!
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            return UIFont(name: "DINCond-Bold", size: 32)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 42)!
+        }
     }
     var gameLabelFont: UIFont {
-        return UIFont(name: "DINCond-Bold", size: 62)!
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            return UIFont(name: "DINCond-Bold", size: 38)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 62)!
+        }
     }
     
     override func viewDidLoad() {

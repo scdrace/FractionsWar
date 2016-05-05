@@ -16,7 +16,12 @@ class PauseViewController: UIViewController {
     
     // Custom game fonts
     var gameFont: UIFont {
-        return UIFont(name: "DINCond-Bold", size: 41)!
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            return UIFont(name: "DINCond-Bold", size: 32)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 42)!
+        }
     }
     
     override func viewDidLoad() {

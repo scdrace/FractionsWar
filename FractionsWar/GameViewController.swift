@@ -29,10 +29,20 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // Custom game fonts
     var gameFont: UIFont {
-        return UIFont(name: "DINCond-Bold", size: 22)!
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            return UIFont(name: "DINCond-Bold", size: 18)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 32)!
+        }
     }
     var gameCounterFont: UIFont {
-        return UIFont(name: "DINCond-Bold", size: 32)!
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            return UIFont(name: "DINCond-Bold", size: 22)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 32)!
+        }
     }
     
     // Ports in which Card.view is placed
@@ -172,7 +182,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         
         //Set Player2 to "ready"
         p2ready = true
-        p2DeckButton.hidden = true
+        if (playerMode == 2) {
+            p2DeckButton.hidden = true
+        }
             
         //Flip cards if both players are "ready"
         if (p1ready && p2ready) {
@@ -187,7 +199,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
         
         setFonts()
-        decoratePlayerInfo()
         decorateDeckCounters()
         decorateButtons()
         
@@ -202,6 +213,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         if playerMode == 2 {
             self.view.addSubview(p2AreaH)
             self.view.bringSubviewToFront(p2AreaH)
+        } else {
+            p2DeckButton.removeFromSuperview()
+            p2WarButton.removeFromSuperview()
+            p2PauseButton.removeFromSuperview()
         }
     }
     
@@ -215,6 +230,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     internal func decorateButtons() {
         
+        p1WarButton.titleLabel?.font = gameFont
+        p2WarButton.titleLabel?.font = gameFont
+        
         p1PauseButton.setTitleColor(UIColor.lightGrayColor().colorWithAlphaComponent(0.4), forState: UIControlState.Normal)
         p1PauseButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         p1PauseButton.titleEdgeInsets.left = -(p1PauseButton.frame.size.width/3)
@@ -222,25 +240,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         p2PauseButton.setTitleColor(UIColor.lightGrayColor().colorWithAlphaComponent(0.4), forState: UIControlState.Normal)
         p2PauseButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         p2PauseButton.titleEdgeInsets.left = -(p2PauseButton.frame.size.width/3)
-    }
-    
-    internal func decoratePlayerInfo() {
-        
-        let p1back: UIImage = UIImage(named: "p1back")!
-        let p1NameSize: CGSize = p1Name.frame.size
-        UIGraphicsBeginImageContext(p1NameSize)
-        p1back.drawInRect(CGRectMake(0, 0, p1NameSize.width, p1NameSize.height))
-        let newP1back: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-        p1Name.backgroundColor = UIColor(patternImage: newP1back)
-        
-        let p2back: UIImage = UIImage(named: "p2back")!
-        let p2NameSize: CGSize = p2Name.frame.size
-        UIGraphicsBeginImageContext(p2NameSize)
-        p2back.drawInRect(CGRectMake(0, 0, p2NameSize.width, p2NameSize.height))
-        let newP2back: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-        p2Name.backgroundColor = UIColor(patternImage: newP2back)
     }
     
     internal func decorateDeckCounters() {
@@ -252,8 +251,20 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         let dotBack: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext();
         
-        p1Cards.backgroundColor = UIColor(patternImage: dotBack)
         p2Cards.backgroundColor = UIColor(patternImage: dotBack)
+        
+        
+        
+        // prepare counter background
+        let width = p1Cards.bounds.size.width
+        let height = p1Cards.bounds.size.height
+        
+        let dotBg = UIImageView(frame: CGRectMake(0, 0, width, height))
+        dotBg.image = UIImage(named: "dot")
+        dotBg.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        p1Cards.addSubview(dotBg)
+        p1Cards.sendSubviewToBack(dotBg)
     }
     
     internal func addCardImage() {
@@ -280,16 +291,16 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         // Add Card.view to corresponding card-port
         addCardImage()
         
-        // Update scores
-        p1Score.text = String(game.getPlayer1().points) + " Points"
-        p2Score.text = String(game.getPlayer2().points) + " Points"
-        
+        // Update card counts and player scores
+        updateScores()
         updateCardCounters()
         
         p1ready = false
         p2ready = false
         p1DeckButton.hidden = false
-        p2DeckButton.hidden = false
+        if (playerMode == 2) {
+            p2DeckButton.hidden = false
+        }
         
         // End the game if there is a winner
         if (game.player1.cards.count < 2 || game.player1.cards.count < 2) {
@@ -302,12 +313,72 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     internal func setupCardsWar() { }
     
-    
-    internal func updateCardCounters() {
+    /**
+     Updates values of score labels and displays popup label with difference
+     */
+    internal func updateScores() {
+        
+        // Get before point value
+        let p1DiffIdx = p1Score.text!.endIndex.advancedBy(-7)
+        let p1DiffStr = p1Score.text!.substringToIndex(p1DiffIdx)
+        let p2DiffIdx = p2Score.text!.endIndex.advancedBy(-7)
+        let p2DiffStr = p2Score.text!.substringToIndex(p2DiffIdx)
         
         // Get differnce in current vs updated values
-        let p1Diff = Int(p1Cards.text!)! - game.player1.cards.count
-        let p2Diff = Int(p2Cards.text!)! - game.player2.cards.count
+        let p1Diff =  game.player1.points - Int(p1DiffStr)!
+        let p2Diff =  game.player2.points - Int(p2DiffStr)!
+        
+        // Update player one score if applicable
+        if (p1Diff > 0) {
+
+            // Set new counter values
+            p1Score.text = String(game.player1.points) + " Points"
+            
+            // Prepare update counter for player one
+            let p1: CGPoint = (p1Score.superview?.convertPoint(p1Score.center, toView: self.view))!
+            let p1DiffCounter = UILabel(frame: p1Score.frame)
+            p1DiffCounter.center = CGPointMake(p1.x + 100, p1.y)
+            p1DiffCounter.textAlignment = NSTextAlignment.Center
+            p1DiffCounter.text = String(p1Diff)
+            p1DiffCounter.font = gameCounterFont
+            p1DiffCounter.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.6)
+            p1DiffCounter.alpha = 0.0
+            self.view.addSubview(p1DiffCounter)
+            
+            // Display counter then remove it
+            popLabel(p1DiffCounter)
+            
+        }
+        // Update player two score if applicable
+        else if (p2Diff > 0) {
+            
+            // Set new counter values
+            p2Score.text = String(game.player2.points) + " Points"
+            
+            // Prepare update counter for player two
+            let p2: CGPoint = (p2Score.superview?.convertPoint(p2Score.center, toView: self.view))!
+            let p2DiffCounter = UILabel(frame: p2Score.frame)
+            p2DiffCounter.center = CGPointMake(p2.x - 100, p2.y)
+            p2DiffCounter.textAlignment = NSTextAlignment.Center
+            p2DiffCounter.text = String(p2Diff)
+            p2DiffCounter.font = gameCounterFont
+            p2DiffCounter.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.6)
+            p2DiffCounter.alpha = 0.0
+            self.view.addSubview(p2DiffCounter)
+            
+            // Display counter then remove it
+            popLabel(p2DiffCounter)
+        }
+    }
+    
+    /**
+     Updates values of card counters and displays popup label with difference
+     */
+    internal func updateCardCounters() {
+        
+        // Get difference in current vs updated values
+        let p1Diff = game.player1.cards.count - Int(p1Cards.text!)!
+        let p2Diff = game.player2.cards.count - Int(p2Cards.text!)!
         
         // Set new counter values
         p1Cards.text = String(game.player1.cards.count)
@@ -382,6 +453,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - UI Display Utility Functions
     
+    /**
+     Delays thread for specified amount of seconds, then executes action in separate thread
+     - Parameter delaye: delay amount in seconds
+     */
     internal func delay(delay: Double, closure: ()->()) {
         
         dispatch_after(
@@ -392,6 +467,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             dispatch_get_main_queue(), closure)
     }
     
+    /**
+     Displays UILabel with 0.6 second fade in, 1.4 second delay, 0.5 second fade out.
+     Removes label from superview upon completing fade out.
+     - Parameter label: UILabel to fade in and out
+     */
     internal func popLabel(label: UILabel) {
         
         UIView.animateWithDuration(0.6, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { label.alpha = 1.0 },

@@ -29,7 +29,12 @@ class SettingsViewController: UIViewController {
     
     // Custom game fonts
     var gameFont: UIFont {
-        return UIFont(name: "DINCond-Bold", size: 32)!
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            return UIFont(name: "DINCond-Bold", size: 22)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 32)!
+        }
     }
     
     let sH = SettingsHelper.shared
