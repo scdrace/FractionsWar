@@ -14,19 +14,15 @@ class Round {
     var round = 0
     
     var highHand: String {
-        
-        let hands = [player1.getHand(), player2.getHand()]
-        
+                
         if player1.getHand().decimalValue - player2.getHand().decimalValue > 0 {
-            player1.addToCards(hands)
             return "player1"
         }
         else if player1.getHand().decimalValue - player2.getHand().decimalValue < 0 {
-            player2.addToCards(hands)
-           return "player2"
+            return "player2"
         }
         else {
-            return "even"
+            return "tie"
         }
     }
     
@@ -44,8 +40,23 @@ class Round {
 
         self.round += 1
         
-        player1.hand = Hand(card1: deck[0], card2: deck[1])
-        player2.hand = Hand(card1: deck[2], card2: deck[3])
+        player1.hand.append(Hand(card1: deck[0], card2: deck[1]))
+        player2.hand.append(Hand(card1: deck[2], card2: deck[3]))
+    }
+    
+    func addToPlayerCards(player: String) {
+        
+        let hands = [player1.getHand(), player2.getHand()]
+        
+        switch player {
+        case "player1":
+            player1.addToCards(hands)
+            break
+        case "player2":
+            player2.addToCards(hands)
+            break
+        default: break
+        }
     }
     
     func imageClean() {

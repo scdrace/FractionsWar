@@ -28,19 +28,18 @@ class Card: CustomStringConvertible {
         return "\(self.rank) of \(self.suit)"
     }
  
-    init(rank: Double, suit: String, cardType: String) {
+    init(rank: Double, suit: String, cardType: String, deck: String) {
         
         self.rank = rank
         self.suit = suit
         self.cardType = cardType
         
         let shortSuit = Card.shortenSuitName(suit)
-        self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-"+cardType+".png"
-        print("testing image name: "+imageName)
+        self.imageName =  String(Int(self.rank)) + "-" + shortSuit + "-"+cardType
         
         self.cardView = UIView(frame: CGRect(origin: CGPointMake(0, 0), size: CGSizeMake(100, 100)))
         
-        self.back = UIImageView(image: UIImage(named: "back2.png"))
+        self.back = UIImageView(image: UIImage(named: "back"+deck))
         self.front = UIImageView(image: UIImage(named: imageName))
         cardView.addSubview(back)
     }

@@ -8,14 +8,6 @@
 
 import UIKit
 
-/* A Deck holds Cards. 
-
-    Possible Methods
-    - shuffle()
-    - drawCards()
-    - etc.
-*/
-
 class Deck {
     let rank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     let suit = ["clubs", "diamonds", "hearts", "spades"]
@@ -37,14 +29,22 @@ class Deck {
                 
         for number in rank {
             for name in suit {
-                deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType))
+                if (name == "clubs" || name == "diamonds") {
+                    deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType, deck: "1"))
+                } else {
+                    deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType, deck: "2"))
+                }
             }
         }
         
         if (deckSize == "l") {
             for number in rank {
                 for name in suit {
-                    deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType))
+                    if (name == "clubs" || name == "diamonds") {
+                        deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType, deck: "2"))
+                    } else {
+                        deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType, deck: "1"))
+                    }
                 }
             }
         }

@@ -16,7 +16,12 @@ class PauseViewController: UIViewController {
     
     // Custom game fonts
     var gameFont: UIFont {
-        return UIFont(name: "DINCond-Bold", size: 41)!
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            return UIFont(name: "DINCond-Bold", size: 32)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 42)!
+        }
     }
     
     override func viewDidLoad() {
@@ -49,18 +54,14 @@ class PauseViewController: UIViewController {
     internal func prepareScreen() {
         
         forfeitButton.titleLabel?.font = gameFont
-        forfeitButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         forfeitButton.sizeToFit()
         
         returnButton.titleLabel?.font = gameFont
-        returnButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        forfeitButton.sizeToFit()
+        returnButton.sizeToFit()
     }
     
     // MARK: - Navigation
-    
-    @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
-    
+        
     /*
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

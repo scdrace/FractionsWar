@@ -17,16 +17,29 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var howToPlayButton: UIButton!
         
     // Custom game fonts
+    var gameGlobalFont: UIFont {
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            return UIFont(name: "DINCond-Bold", size: 17)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 32)!
+        }
+    }
     var gameFont: UIFont {
-        return UIFont(name: "DINCond-Bold", size: 32)!
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            return UIFont(name: "DINCond-Bold", size: 25)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 38)!
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prepareMenu()
+        UILabel.appearance().font = gameGlobalFont
         
-        UILabel.appearance().font = gameFont
+        prepareMenu()
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,7 +105,6 @@ class MenuViewController: UIViewController {
             }
             else if players == 2 {
                 controller.playerMode = 2
-                //print("Hello Man: \(players)")
             }
         }
         

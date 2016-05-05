@@ -33,28 +33,20 @@ class Game: CustomStringConvertible {
         self.data = Data(player1: player1, player2: player2)
         
         while (!deck.deckRandom.isEmpty) {
-            player1.cards.append(self.deck.deckRandom.removeLast())
-            player2.cards.append(self.deck.deckRandom.removeLast())
+            let p1c = self.deck.deckRandom.removeLast()
+            player1.cards.append(p1c)
+            
+            let p2c = self.deck.deckRandom.removeLast()
+            player2.cards.append(p2c)
         }
     }
     
-    func nextRound() {
+    func nextRound(war: Bool) {
         
         if (player1.cards.count > 1 && player2.cards.count > 1) {
             
-            //print("Player one deck: "+player1.cards.debugDescription)
-            //print("Player two deck: "+player2.cards.debugDescription)
-            
-            let p1n = self.player1.cards.removeLast()
-            let p1d = self.player1.cards.removeLast()
-            let p2n = self.player2.cards.removeLast()
-            let p2d = self.player2.cards.removeLast()
-            
-            let h = [p1n, p1d, p2n, p2d]
-            
-            //print("NEW HAND: "+h.debugDescription)
-
-            self.round.makeHand(h)
+            player1.makeHand(war)
+            player2.makeHand(war)
         }
             
         else {
@@ -69,18 +61,18 @@ class Game: CustomStringConvertible {
     }
     
     func flipCards() {
-        player1.hand!.flipCards()
-        player2.hand!.flipCards()
+        player1.hand[0]!.flipCards()
+        player2.hand[0]!.flipCards()
     }
     
     func flipDown() {
-        player1.hand!.flipDown()
-        player2.hand!.flipDown()
+        player1.hand[0]!.flipDown()
+        player2.hand[0]!.flipDown()
     }
     
     func resizeCards(cardFrame: CGRect) {
-        player1.hand!.resizeCards(cardFrame)
-        player2.hand!.resizeCards(cardFrame)
+        player1.hand[0]!.resizeCards(cardFrame)
+        player2.hand[0]!.resizeCards(cardFrame)
     }
     
     func getP1Numerator() -> Card {
@@ -91,10 +83,19 @@ class Game: CustomStringConvertible {
         return player1.getDenominator()
     }
     
+    func warHands() -> [Hand]? {
+        
+        if player1.getWarHands() != nil {
+            let result = player1.getWarHands()
+            return result
+        }
+        return nil
+    }
+    
     func getCards() -> Cards {
         
         let cards = Cards(p1Numerator: player1.getNumerator(), p1Denominator: player1.getDenominator(),
-        p2Numerator: player2.getNumerator(), p2Denominator: player2.getDenominator())
+                          p2Numerator: player2.getNumerator(), p2Denominator: player2.getDenominator())
         
         return cards
     }
