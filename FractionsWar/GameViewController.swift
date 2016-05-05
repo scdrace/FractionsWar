@@ -287,8 +287,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             p2DeckButton.hidden = false
         }
         
-        // End the game if there is a winner
-        if (game.player1.cards.count < 2 || game.player1.cards.count < 2) {
+        // End the game if someone's deck is too small to continue
+        if (!warMode && (game.player1.cards.count < 2 || game.player1.cards.count < 2)) {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.performSegueWithIdentifier("goToGameOver", sender: self)
+            })
+        } else if (warMode && (game.player1.cards.count < 4 || game.player1.cards.count < 4)) {
             dispatch_async(dispatch_get_main_queue(), {
                 self.performSegueWithIdentifier("goToGameOver", sender: self)
             })
@@ -413,6 +417,37 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         popLabel(p1DiffCounter)
         popLabel(p2DiffCounter)
     }
+    
+    /**
+     Places notification message at top of screen
+     */
+    internal func notify(message: String) {
+        
+        // Get appropriate distance depending on device
+        var dst: CGFloat?
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            dst = 20.0
+        default:
+            dst = 44.0
+        }
+        
+        // Prepare update counter for player one
+        let p = self.view.center
+        let t = self.view.topAnchor.accessibilityActivationPoint
+        let notification = UILabel()
+        notification.textAlignment = NSTextAlignment.Center
+        notification.text = message
+        notification.font = gameCounterFont
+        notification.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.6)
+        notification.alpha = 0.0
+        notification.sizeToFit()
+        notification.center = CGPointMake(p.x, t.y + dst!)
+        self.view.addSubview(notification)
+        
+        // Display message then remove it
+        popLabel(notification)
+    }
 
     // MARK: - Game Interaction
     
@@ -448,10 +483,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         if playerMode == 1 {
             computerTimer = NSTimer.scheduledTimerWithTimeInterval(difficulty, target:self, selector: #selector(self.computerSwipe), userInfo: nil, repeats: false)
         }
-    }
-    
-    internal func printMessage() {
-        print("Times up")
     }
     
     // MARK: - UI Display Utility Functions

@@ -11,7 +11,7 @@ import Foundation
 enum Difficulty: Double {
     case Easy = 10.0
     case Normal = 5.0
-    case Hard = 3.0
+    case Hard = 2.0
 }
 
 internal func getDifficultyValue(difficultyCode: String) -> Double {

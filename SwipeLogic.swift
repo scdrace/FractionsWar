@@ -288,11 +288,21 @@ extension GameViewController {
         // Animate the cards
         move(player, playerResponse: answer, correctAnswer: correctAnswer)
         
-        // Sound effect!
+        // Prepare player name
+        var name: String?
+        if (player == "player1") {
+            name = p1Name.text!
+        } else {
+            name = p2Name.text!
+        }
+        
+        // Sound effect and notification
         if (correctAnswer) {
             s.playMove()
+            notify("Correct swipe by \(name!)")
         } else {
             s.playError()
+            notify("Incorrect swipe, \(name!)")
         }
     }
 }
