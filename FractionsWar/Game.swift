@@ -33,8 +33,11 @@ class Game: CustomStringConvertible {
         self.data = Data(player1: player1, player2: player2)
         
         while (!deck.deckRandom.isEmpty) {
-            player1.cards.append(self.deck.deckRandom.removeLast())
-            player2.cards.append(self.deck.deckRandom.removeLast())
+            let p1c = self.deck.deckRandom.removeLast()
+            player1.cards.append(p1c)
+            
+            let p2c = self.deck.deckRandom.removeLast()
+            player2.cards.append(p2c)
         }
     }
     

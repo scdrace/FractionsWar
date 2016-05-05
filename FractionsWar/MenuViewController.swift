@@ -17,21 +17,29 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var howToPlayButton: UIButton!
         
     // Custom game fonts
+    var gameGlobalFont: UIFont {
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            return UIFont(name: "DINCond-Bold", size: 17)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 32)!
+        }
+    }
     var gameFont: UIFont {
         switch UIDevice.currentDevice().userInterfaceIdiom {
         case .Phone:
-            return UIFont(name: "DINCond-Bold", size: 22)!
+            return UIFont(name: "DINCond-Bold", size: 25)!
         default:
-            return UIFont(name: "DINCond-Bold", size: 32)!
+            return UIFont(name: "DINCond-Bold", size: 38)!
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prepareMenu()
+        UILabel.appearance().font = gameGlobalFont
         
-        UILabel.appearance().font = gameFont
+        prepareMenu()
     }
     
     override func didReceiveMemoryWarning() {

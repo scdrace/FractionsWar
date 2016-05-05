@@ -31,7 +31,7 @@ class SettingsViewController: UIViewController {
     var gameFont: UIFont {
         switch UIDevice.currentDevice().userInterfaceIdiom {
         case .Phone:
-            return UIFont(name: "DINCond-Bold", size: 22)!
+            return UIFont(name: "DINCond-Bold", size: 17)!
         default:
             return UIFont(name: "DINCond-Bold", size: 32)!
         }
@@ -43,6 +43,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         
         prepareSettingsMenu()
+        setSelectedOptions()
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,38 +63,60 @@ class SettingsViewController: UIViewController {
     
     @IBAction func pressNumberCardButton(sender: AnyObject) {
         sH.saveToSettings("n", settingsKey: sH.cardTypeDictionaryKey)
+        numberCardButton.selected = true
+        regularCardButton.selected = false
+        symbolCardButton.selected = false
     }
     
     @IBAction func pressRegularCardButton(sender: AnyObject) {
         sH.saveToSettings("r", settingsKey: sH.cardTypeDictionaryKey)
+        numberCardButton.selected = false
+        regularCardButton.selected = true
+        symbolCardButton.selected = false
     }
     
     @IBAction func pressSymbolCardButton(sender: AnyObject) {
         sH.saveToSettings("s", settingsKey: sH.cardTypeDictionaryKey)
+        numberCardButton.selected = false
+        regularCardButton.selected = false
+        symbolCardButton.selected = true
     }
     
     // MARK: - Deck Size Buttons
     
     @IBAction func pressNormalDeckButton(sender: AnyObject) {
         sH.saveToSettings("n", settingsKey: sH.deckSizeDictionaryKey)
+        normalDeckButton.selected = true
+        largeDeckButton.selected = false
     }
     
     @IBAction func pressLargeDeckButton(sender: AnyObject) {
         sH.saveToSettings("l", settingsKey: sH.deckSizeDictionaryKey)
+        normalDeckButton.selected = false
+        largeDeckButton.selected = true
     }
     
     // MARK: - Computer Speed Buttons
     
     @IBAction func pressSlowComputerButton(sender: AnyObject) {
         sH.saveToSettings("s", settingsKey: sH.computerSpeedDictionaryKey)
+        slowComputerButton.selected = true
+        mediumComputerButton.selected = false
+        fastComputerButton.selected = false
     }
     
     @IBAction func pressMediumComputerButton(sender: AnyObject) {
         sH.saveToSettings("m", settingsKey: sH.computerSpeedDictionaryKey)
+        slowComputerButton.selected = false
+        mediumComputerButton.selected = true
+        fastComputerButton.selected = false
     }
     
     @IBAction func pressFastComputerButton(sender: AnyObject) {
         sH.saveToSettings("f", settingsKey: sH.computerSpeedDictionaryKey)
+        slowComputerButton.selected = false
+        mediumComputerButton.selected = false
+        fastComputerButton.selected = true
     }
     
     // MARK: - Menu Display Setup
@@ -101,30 +124,69 @@ class SettingsViewController: UIViewController {
     internal func prepareSettingsMenu() {
         
         backToMainMenuButton.titleLabel?.font = gameFont
-        backToMainMenuButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        backToMainMenuButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
         backToMainMenuButton.sizeToFit()
         
         normalDeckButton.titleLabel?.font = gameFont
-        normalDeckButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         normalDeckButton.sizeToFit()
         
         largeDeckButton.titleLabel?.font = gameFont
-        largeDeckButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         largeDeckButton.sizeToFit()
         
         slowComputerButton.titleLabel?.font = gameFont
-        slowComputerButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         slowComputerButton.sizeToFit()
         
         mediumComputerButton.titleLabel?.font = gameFont
-        mediumComputerButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         mediumComputerButton.sizeToFit()
         
         fastComputerButton.titleLabel?.font = gameFont
-        fastComputerButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         fastComputerButton.sizeToFit()
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
+    }
+    
+    internal func setSelectedOptions() {
+        
+        let cardType = sH.retrieveFromSettings(sH.cardTypeDictionaryKey) as! String
+        let deckSize = sH.retrieveFromSettings(sH.deckSizeDictionaryKey) as! String
+        let computerSpeed = sH.retrieveFromSettings(sH.computerSpeedDictionaryKey) as! String
+        
+        switch (cardType) {
+        case "n":
+            numberCardButton.selected = true
+            break
+        case "r":
+            regularCardButton.selected = true
+            break
+        case "s":
+            symbolCardButton.selected = true
+            break
+        default: break
+        }
+        
+        switch (deckSize) {
+        case "n":
+            normalDeckButton.selected = true
+            break
+        case "l":
+            largeDeckButton.selected = true
+            break
+        default: break
+        }
+        
+        switch (computerSpeed) {
+        case "s":
+            slowComputerButton.selected = true
+            break
+        case "m":
+            mediumComputerButton.selected = true
+            break
+        case "f":
+            fastComputerButton.selected = true
+            break
+        default: break
+        }
+        
     }
     
     // MARK: - Navigation

@@ -29,14 +29,22 @@ class Deck {
                 
         for number in rank {
             for name in suit {
-                deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType))
+                if (name == "clubs" || name == "diamonds") {
+                    deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType, deck: "1"))
+                } else {
+                    deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType, deck: "2"))
+                }
             }
         }
         
         if (deckSize == "l") {
             for number in rank {
                 for name in suit {
-                    deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType))
+                    if (name == "clubs" || name == "diamonds") {
+                        deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType, deck: "2"))
+                    } else {
+                        deckOrdered.append(Card(rank: Double(number), suit: name, cardType: cardType, deck: "1"))
+                    }
                 }
             }
         }

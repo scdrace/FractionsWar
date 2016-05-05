@@ -218,7 +218,8 @@ extension GameViewController {
                                         
                     self.game.flipDown()
                     self.setupCards()
-                    self.cardsAreUp = false;
+                    self.cardsAreUp = false
+                    self.inAction = false
                     direction(distanceBack)
                 }
             )
@@ -254,9 +255,12 @@ extension GameViewController {
      */
     @IBAction func swipeGesture(sender: AnyObject) {
                 
-        if (!cardsAreUp) {
+        if (!cardsAreUp || inAction) {
             return
         }
+        
+        // Sets flag so that no other player can act until current move finished
+        inAction = true
         
         // Stop the computer timer
         // Maybe make the timer optional, so that it does not exist for one player mode
@@ -265,23 +269,23 @@ extension GameViewController {
         // Calculate the time it takes to swipe the cards
         let swipeTime = CACurrentMediaTime() - roundStartTime
         
-        //Who answered
+        // Who answered
         let player = playerToAnswer(sender)
         
-        //What was their answer
+        // What was their answer
         let answer = playerResponse(sender)
         
-        //Is the swipe/tap correct
+        // Is the swipe/tap correct
         let correctAnswer: Bool = answerAnalysis(sender)
 
-        //Assign Points and Set Cards
+        // Assign Points and Set Cards
         assignPoints(player, correctAnswer: correctAnswer)
         game.getRound().addToPlayerCards(game.getRound().highHand)
         
         // TODO: Collect data from round
         game.addRoundData(swipeTime)
         
-        //Animate the cards
+        // Animate the cards
         move(player, playerResponse: answer, correctAnswer: correctAnswer)
     }
 }

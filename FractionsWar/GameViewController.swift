@@ -31,7 +31,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var gameFont: UIFont {
         switch UIDevice.currentDevice().userInterfaceIdiom {
         case .Phone:
-            return UIFont(name: "DINCond-Bold", size: 18)!
+            return UIFont(name: "DINCond-Bold", size: 17)!
         default:
             return UIFont(name: "DINCond-Bold", size: 32)!
         }
@@ -39,7 +39,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var gameCounterFont: UIFont {
         switch UIDevice.currentDevice().userInterfaceIdiom {
         case .Phone:
-            return UIFont(name: "DINCond-Bold", size: 22)!
+            return UIFont(name: "DINCond-Bold", size: 17)!
         default:
             return UIFont(name: "DINCond-Bold", size: 32)!
         }
@@ -82,6 +82,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var p1ready = false
     var p2ready = false
     var cardsAreUp = false
+    var inAction = false
     
     // Used to resize Card to port size
     var cardFrame: CGRect {
@@ -302,6 +303,15 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         let p1Diff =  game.player1.points - Int(p1DiffStr)!
         let p2Diff =  game.player2.points - Int(p2DiffStr)!
         
+        // Get appropriate distance depending on device
+        var dst: CGFloat?
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            dst = 58.0
+        default:
+            dst = 100.0
+        }
+        
         // Update player one score if applicable
         if (p1Diff > 0) {
 
@@ -311,7 +321,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             // Prepare update counter for player one
             let p1: CGPoint = (p1Score.superview?.convertPoint(p1Score.center, toView: self.view))!
             let p1DiffCounter = UILabel(frame: p1Score.frame)
-            p1DiffCounter.center = CGPointMake(p1.x + 100, p1.y)
+            p1DiffCounter.center = CGPointMake(p1.x + dst!, p1.y)
             p1DiffCounter.textAlignment = NSTextAlignment.Center
             p1DiffCounter.text = String(p1Diff)
             p1DiffCounter.font = gameCounterFont
@@ -332,7 +342,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             // Prepare update counter for player two
             let p2: CGPoint = (p2Score.superview?.convertPoint(p2Score.center, toView: self.view))!
             let p2DiffCounter = UILabel(frame: p2Score.frame)
-            p2DiffCounter.center = CGPointMake(p2.x - 100, p2.y)
+            p2DiffCounter.center = CGPointMake(p2.x - dst!, p2.y)
             p2DiffCounter.textAlignment = NSTextAlignment.Center
             p2DiffCounter.text = String(p2Diff)
             p2DiffCounter.font = gameCounterFont
@@ -354,6 +364,15 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         let p1Diff = game.player1.cards.count - Int(p1Cards.text!)!
         let p2Diff = game.player2.cards.count - Int(p2Cards.text!)!
         
+        // Get appropriate distance depending on device
+        var dst: CGFloat?
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            dst = 26.0
+        default:
+            dst = 40.0
+        }
+        
         // Set new counter values
         p1Cards.text = String(game.player1.cards.count)
         p2Cards.text = String(game.player2.cards.count)
@@ -361,7 +380,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         // Prepare update counter for player one
         let p1: CGPoint = (p1Cards.superview?.convertPoint(p1Cards.center, toView: self.view))!
         let p1DiffCounter = UILabel(frame: p1Cards.frame)
-        p1DiffCounter.center = CGPointMake(p1.x + 40, p1.y)
+        p1DiffCounter.center = CGPointMake(p1.x + dst!, p1.y)
         p1DiffCounter.textAlignment = NSTextAlignment.Center
         p1DiffCounter.text = String(p1Diff)
         p1DiffCounter.font = gameCounterFont
@@ -372,7 +391,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         // Prepare update counter for player two
         let p2: CGPoint = (p2Cards.superview?.convertPoint(p2Cards.center, toView: self.view))!
         let p2DiffCounter = UILabel(frame: p2Cards.frame)
-        p2DiffCounter.center = CGPointMake(p2.x - 40, p2.y)
+        p2DiffCounter.center = CGPointMake(p2.x - dst!, p2.y)
         p2DiffCounter.textAlignment = NSTextAlignment.Center
         p2DiffCounter.text = String(p2Diff)
         p2DiffCounter.font = gameCounterFont
