@@ -39,6 +39,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var p2Numerator: UIView!
     @IBOutlet weak var p2Denominator: UIView!
     
+    @IBOutlet weak var p1NumeratorFD: UIView!
+    
+    
     // Return the cardPorts, used for swiping
     var getCardPorts: [UIView] {
         return [p1Numerator, p1Denominator, p2Numerator, p2Denominator]
@@ -87,6 +90,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var playerMode = 0
     
+    
     // MARK: - View Lifecycle Management
     
     override func viewDidLoad() {
@@ -109,6 +113,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.bringSubviewToFront(p2DeckView)
         
         setupCards()
+        setupCardsWar()
     }
     
     override func didReceiveMemoryWarning() {
@@ -119,10 +124,27 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - On Screen Button Presses
     
     @IBAction func pressDeclareWarP1Button(sender: AnyObject) {
+        
+        //print("Player1 declares war")
+        
+        if (p1ready && p2ready) {
+            swipeGesture(sender)
+            
+            //True runs the same function as normal, but with the "war" parameter set to "true"
+            game.nextRound(true)
+        }
+        
     }
     
+    
     @IBAction func pressDeclareWarP2Button(sender: AnyObject) {
+        
+        if (p1ready && p2ready) {
+            swipeGesture(sender)
+            game.nextRound(true)
+        }
     }
+    
     
     @IBAction func pressPauseP1Button(sender: AnyObject) {
         dispatch_async(dispatch_get_main_queue(), {
@@ -137,19 +159,45 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func pressP1DeckButton(sender: AnyObject) {
+       
+        //Set Player2 to "ready"
         p1ready = true
         p1DeckButton.hidden = true
+        
+        //Flip cards if both players are "ready"
         if (p1ready && p2ready) {
             flipCards()
         }
+        
+        //If 1-Player-Mode == true, set Player2 to "ready"
+        pressP2DeckButton("P1Mode")
     }
     
     @IBAction func pressP2DeckButton(sender: AnyObject) {
-        p2ready = true
-        p2DeckButton.hidden = true
-        if (p1ready && p2ready) {
-            flipCards()
+        
+        //Set Player2 to "ready"
+        func ready() {
+            p2ready = true
+            p2DeckButton.hidden = true
+            
+            //Flip cards if both players are "ready"
+            if (p1ready && p2ready) {
+                flipCards()
+            }
         }
+        
+        
+        //Set Player2 to "ready", when in 1-Player-Mode
+        if let mode = sender as? String {
+            if mode == "P1Mode" {
+                ready()
+            }
+        }
+        //Set Player2 to "ready", when in 2-Player-Mode
+        else if playerMode == 2 {
+           ready()
+        }
+        
     }
     
     // MARK: - Game Display Setup
@@ -245,6 +293,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     internal func setupCards() {
         
         game.nextRound()
+        
+        //Resize card_image to fit Card-Ports in IB
         game.resizeCards(cardFrame)
         
         // Add Card.view to corresponding card-port
@@ -257,14 +307,19 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         updateCardCounters()
         
         // Debugging
-        print("Player2: \(game.player2.hand!)")
-        print("Player1: \(game.player1.hand!)")
+        print("Player2: \(game.player2.hand[0]!)")
+        print("Player1: \(game.player1.hand[0]!)")
         
         p1ready = false
         p2ready = false
         p1DeckButton.hidden = false
         p2DeckButton.hidden = false
     }
+    
+    
+    internal func setupCardsWar() {
+    }
+    
     
     internal func updateCardCounters() {
         p1Cards.text = String(game.player1.cards.count)

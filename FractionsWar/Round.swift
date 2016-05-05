@@ -18,15 +18,17 @@ class Round {
         let hands = [player1.getHand(), player2.getHand()]
         
         if player1.getHand().decimalValue - player2.getHand().decimalValue > 0 {
+            
+            //Add 
             player1.addToCards(hands)
             return "player1"
         }
         else if player1.getHand().decimalValue - player2.getHand().decimalValue < 0 {
-            player2.addToCards(hands)
+            //player2.addToCards(hands)
            return "player2"
         }
         else {
-            return "even"
+            return "tie"
         }
     }
     
@@ -37,6 +39,7 @@ class Round {
     
     func makeHand(deck: [Card]) {
         
+        /*
         if deck.isEmpty {
             print("Winner")
             return
@@ -46,6 +49,7 @@ class Round {
         
         player1.hand = Hand(card1: deck[0], card2: deck[1])
         player2.hand = Hand(card1: deck[2], card2: deck[3])
+ */
     }
     
     func imageClean() {
