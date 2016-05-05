@@ -58,17 +58,6 @@ class GameOverViewController: UIViewController {
     
     internal func prepareScreen() {
         
-        // prepare modal background
-        let width = modalView.bounds.size.width
-        let height = modalView.bounds.size.height
-        
-        let imageViewBackground = UIImageView(frame: CGRectMake(0, 0, width, height))
-        imageViewBackground.image = UIImage(named: "overlay")
-        imageViewBackground.contentMode = UIViewContentMode.ScaleAspectFill
-        
-        modalView.addSubview(imageViewBackground)
-        modalView.sendSubviewToBack(imageViewBackground)
-        
         // adjust label style
         winnerLabel.text = winner
         winnerLabel.font = gameLabelFont

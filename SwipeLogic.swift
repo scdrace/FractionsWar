@@ -287,5 +287,12 @@ extension GameViewController {
         
         // Animate the cards
         move(player, playerResponse: answer, correctAnswer: correctAnswer)
+        
+        // Sound effect!
+        if (correctAnswer) {
+            s.playMove()
+        } else {
+            s.playError()
+        }
     }
 }

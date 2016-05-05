@@ -79,11 +79,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var game = Game() 
     let moveDistance: CGFloat = 900
     
+    // Game state variables
     var p1ready = false
     var p2ready = false
     var cardsAreUp = false
     var inAction = false
-    
+        
     // Used to resize Card to port size
     var cardFrame: CGRect {
         return CGRect(origin: CGPointMake(0, 0), size:
@@ -91,7 +92,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         )
     }
     
+    // Used to store/load settings
     let sH = SettingsHelper.shared
+    
+    // Used to play sound effects
+    let s = Sounds.shared
     
     var difficulty: Double {
         let code = sH.retrieveFromSettings(sH.computerSpeedDictionaryKey) as! String
@@ -111,6 +116,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
 
         prepareBoard()
+        s.playBegin()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -154,42 +160,45 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         dispatch_async(dispatch_get_main_queue(), {
             self.performSegueWithIdentifier("goToPause", sender: self)
         })
+        s.playPause()
     }
     
     @IBAction func pressPauseP2Button(sender: AnyObject) {
         dispatch_async(dispatch_get_main_queue(), {
             self.performSegueWithIdentifier("goToPause", sender: self)
         })
+        s.playPause()
     }
     
     @IBAction func pressP1DeckButton(sender: AnyObject) {
        
-        //Set Player1 to "ready"
+        // Set Player1 to "ready"
         p1ready = true
         p1DeckButton.hidden = true
         
-        //Flip cards if both players are "ready"
+        // Flip cards if both players are "ready"
         if (p1ready && p2ready) {
             flipCards()
+            s.playPlace()
         }
-        
-        //Set Player2 to ready if we are in one player mode
-        if (playerMode == 1) {
+        // Set Player2 to ready if we are in one player mode
+        else if (playerMode == 1) {
             pressP2DeckButton(sender)
         }
     }
     
     @IBAction func pressP2DeckButton(sender: AnyObject) {
         
-        //Set Player2 to "ready"
+        // Set Player2 to "ready"
         p2ready = true
         if (playerMode == 2) {
             p2DeckButton.hidden = true
         }
             
-        //Flip cards if both players are "ready"
+        // Flip cards if both players are "ready"
         if (p1ready && p2ready) {
             flipCards()
+            s.playPlace()
         }
     }
     
@@ -214,6 +223,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             self.view.addSubview(p2AreaH)
             self.view.bringSubviewToFront(p2AreaH)
         } else {
+            p2Name.text = "Computer"
             p2DeckButton.removeFromSuperview()
             p2WarButton.removeFromSuperview()
             p2PauseButton.removeFromSuperview()
@@ -494,13 +504,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             var winner: String?
             
             if (game.player1.points > game.player2.points) {
-                winner = "Player One Wins!"
+                winner = p1Name.text!+" Wins!"
             } else if (game.player1.points < game.player2.points) {
-                if (playerMode == 1) {
-                    winner = "The Computer Wins!"
-                } else {
-                    winner = "Player Two Wins!"
-                }
+                winner = p2Name.text!+" Wins!"
             } else {
                 winner = "It's a Tie!"
             }
