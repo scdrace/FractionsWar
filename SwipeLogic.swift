@@ -254,6 +254,8 @@ extension GameViewController {
      */
     @IBAction func swipeGesture(sender: AnyObject) {
         
+        print("SWIPE! by: "+sender.debugDescription)
+        
         if (!cardsAreUp) {
             return
         }

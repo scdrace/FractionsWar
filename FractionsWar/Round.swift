@@ -48,6 +48,10 @@ class Round {
         
         let hands = [player1.getHand(), player2.getHand()]
         
+        print()
+        print("Content of hands: "+hands.debugDescription)
+        print()
+        
         switch player {
         case "player1":
             player1.addToCards(hands)

@@ -49,7 +49,8 @@ class Player: CustomStringConvertible {
         return points
     }
     
-    func makeHand(war: Bool = false) {
+    func makeHand(war: Bool) {
+        
         self.hand.removeAll()
         var maxHands = 1
         

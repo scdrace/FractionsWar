@@ -38,7 +38,7 @@ class Game: CustomStringConvertible {
         }
     }
     
-    func nextRound(war: Bool = false) {
+    func nextRound(war: Bool) {
         
         if (player1.cards.count > 1 && player2.cards.count > 1) {
             

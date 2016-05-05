@@ -89,7 +89,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var computerTimer =  NSTimer()
     
     var playerMode = 0
-    
+    var warMode = false
     
     // MARK: - View Lifecycle Management
     
@@ -113,7 +113,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.bringSubviewToFront(p2DeckView)
         
         setupCards()
-        setupCardsWar()
     }
     
     override func didReceiveMemoryWarning() {
@@ -127,9 +126,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if (p1ready && p2ready) {
             swipeGesture(sender)
-            
-            //True runs the same function as normal, but with the "war" parameter set to "true"
-            game.nextRound(true)
         }
     }
     
@@ -137,16 +133,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if (p1ready && p2ready) {
             swipeGesture(sender)
-            
-            //True runs the same function as normal, but with the "war" parameter set to "true"
-            game.nextRound(true)
         }
     }
     
     
     @IBAction func pressPauseP1Button(sender: AnyObject) {
         dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("goToGameOver", sender: self)
+            self.performSegueWithIdentifier("goToPause", sender: self)
         })
     }
     
@@ -277,7 +270,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     internal func setupCards() {
         
-        game.nextRound()
+        game.nextRound(warMode)
         
         //Resize card_image to fit Card-Ports in IB
         game.resizeCards(cardFrame)
