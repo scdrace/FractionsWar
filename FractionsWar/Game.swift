@@ -48,15 +48,8 @@ class Game: CustomStringConvertible {
             player1.makeHand(war)
             player2.makeHand(war)
         }
-            
         else {
-            if (player1.points > player2.points) {
-                print("Player one wins")
-                self.imageClean()
-            } else {
-                print("Player two wins")
-                self.imageClean()
-            }
+            self.imageClean()
         }
     }
     

@@ -118,58 +118,14 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="RPT-GV-8Mq"/>
-                                        <exclude reference="Yd7-zK-wRh"/>
                                         <exclude reference="Jcj-MC-fGl"/>
                                         <exclude reference="SLz-9o-vQj"/>
                                         <exclude reference="eeC-2i-jQk"/>
+                                        <exclude reference="RPT-GV-8Mq"/>
+                                        <exclude reference="Yd7-zK-wRh"/>
                                         <exclude reference="719-ve-zyY"/>
                                     </mask>
                                 </variation>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MsR-iL-mMf">
-                                <rect key="frame" x="256" y="77" width="256" height="307"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ja-Fj-3oC">
-                                        <rect key="frame" x="40" y="61" width="177" height="245.5"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="0ja-Fj-3oC" secondAttribute="height" multiplier="18:25" id="eGf-gy-Gwh"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="0ja-Fj-3oC" secondAttribute="bottom" id="HxK-Zw-Js4"/>
-                                    <constraint firstItem="0ja-Fj-3oC" firstAttribute="height" secondItem="MsR-iL-mMf" secondAttribute="height" multiplier="0.8" id="Jdf-H7-5lZ"/>
-                                    <constraint firstItem="0ja-Fj-3oC" firstAttribute="centerX" secondItem="MsR-iL-mMf" secondAttribute="centerX" id="bqy-01-9gv"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdW-yi-iGp">
-                                <rect key="frame" x="512" y="77" width="256" height="307"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMU-1H-3Fg">
-                                        <rect key="frame" x="40" y="61" width="177" height="245.5"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="XMU-1H-3Fg" secondAttribute="height" multiplier="18:25" id="hU8-Qj-eA1"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="XMU-1H-3Fg" secondAttribute="bottom" id="L4b-gw-DDn"/>
-                                    <constraint firstItem="XMU-1H-3Fg" firstAttribute="centerX" secondItem="vdW-yi-iGp" secondAttribute="centerX" id="c7x-bM-mev"/>
-                                    <constraint firstItem="XMU-1H-3Fg" firstAttribute="height" secondItem="vdW-yi-iGp" secondAttribute="height" multiplier="0.8" id="kfE-eq-r3x"/>
-                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GSr-Mh-Z0a">
                                 <rect key="frame" x="768" y="77" width="256" height="307"/>
@@ -232,7 +188,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9vx-9B-eIM">
                                         <rect key="frame" x="40" y="30" width="177" height="245.5"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back1" translatesAutoresizingMaskIntoConstraints="NO" id="ZDJ-tP-jWf">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back2" translatesAutoresizingMaskIntoConstraints="NO" id="ZDJ-tP-jWf">
                                                 <rect key="frame" x="0.0" y="0.0" width="177" height="245.5"/>
                                             </imageView>
                                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gv-18-No2">
@@ -279,48 +235,6 @@
                                     <constraint firstItem="yfk-h9-IMJ" firstAttribute="leading" secondItem="9vx-9B-eIM" secondAttribute="trailing" constant="-17" id="gHl-WB-g9B"/>
                                     <constraint firstItem="5Bb-Gi-eVq" firstAttribute="centerY" secondItem="yfk-h9-IMJ" secondAttribute="centerY" id="k9Z-V1-NWB"/>
                                     <constraint firstItem="5Bb-Gi-eVq" firstAttribute="centerX" secondItem="yfk-h9-IMJ" secondAttribute="centerX" id="w1k-ta-9f8"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PYX-et-Cli">
-                                <rect key="frame" x="512" y="384" width="256" height="307"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAw-6D-rvp">
-                                        <rect key="frame" x="39" y="0.0" width="177" height="27.5"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rvT-IZ-oTX">
-                                        <rect key="frame" x="40" y="61" width="177" height="245.5"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="rvT-IZ-oTX" secondAttribute="height" multiplier="18:25" id="A6D-a5-88W"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tx0-22-CaV">
-                                        <rect key="frame" x="40" y="27" width="177" height="6"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="rvT-IZ-oTX" firstAttribute="height" secondItem="PYX-et-Cli" secondAttribute="height" multiplier="0.8" id="2cj-W2-Agf"/>
-                                    <constraint firstItem="WAw-6D-rvp" firstAttribute="centerX" secondItem="PYX-et-Cli" secondAttribute="centerX" id="ASq-aY-i6I"/>
-                                    <constraint firstItem="rvT-IZ-oTX" firstAttribute="centerX" secondItem="PYX-et-Cli" secondAttribute="centerX" id="BJ7-QQ-q44"/>
-                                    <constraint firstItem="Tx0-22-CaV" firstAttribute="top" secondItem="WAw-6D-rvp" secondAttribute="bottom" id="KkW-Aa-hNh"/>
-                                    <constraint firstItem="WAw-6D-rvp" firstAttribute="height" secondItem="PYX-et-Cli" secondAttribute="height" multiplier="0.09" id="LzR-B3-sAa"/>
-                                    <constraint firstItem="WAw-6D-rvp" firstAttribute="top" secondItem="PYX-et-Cli" secondAttribute="top" id="NLt-QL-RMo"/>
-                                    <constraint firstAttribute="bottom" secondItem="rvT-IZ-oTX" secondAttribute="bottom" id="c9V-vZ-FaV"/>
-                                    <constraint firstItem="Tx0-22-CaV" firstAttribute="centerX" secondItem="rvT-IZ-oTX" secondAttribute="centerX" id="dVa-K0-uar"/>
-                                    <constraint firstItem="Tx0-22-CaV" firstAttribute="height" secondItem="PYX-et-Cli" secondAttribute="height" multiplier="0.02" id="ikg-K1-Xfy"/>
-                                    <constraint firstItem="Tx0-22-CaV" firstAttribute="width" secondItem="rvT-IZ-oTX" secondAttribute="width" id="npr-bq-NZL"/>
-                                    <constraint firstItem="WAw-6D-rvp" firstAttribute="width" secondItem="rvT-IZ-oTX" secondAttribute="width" id="zL9-ji-8Hv"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHS-3l-FaM">
@@ -464,6 +378,92 @@
                                     <constraint firstItem="xrw-9x-tkr" firstAttribute="width" secondItem="6Rc-Pf-4ba" secondAttribute="width" id="lV5-Pc-kf6"/>
                                     <constraint firstItem="18C-e3-tcR" firstAttribute="top" secondItem="xrw-9x-tkr" secondAttribute="bottom" id="mP6-Mb-aZb"/>
                                     <constraint firstItem="6Rc-Pf-4ba" firstAttribute="centerX" secondItem="dcX-MI-0Pn" secondAttribute="centerX" id="xlG-gG-kRa"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MsR-iL-mMf">
+                                <rect key="frame" x="256" y="77" width="256" height="307"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ja-Fj-3oC">
+                                        <rect key="frame" x="40" y="61" width="177" height="245.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="0ja-Fj-3oC" secondAttribute="height" multiplier="18:25" id="eGf-gy-Gwh"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="0ja-Fj-3oC" secondAttribute="bottom" id="HxK-Zw-Js4"/>
+                                    <constraint firstItem="0ja-Fj-3oC" firstAttribute="height" secondItem="MsR-iL-mMf" secondAttribute="height" multiplier="0.8" id="Jdf-H7-5lZ"/>
+                                    <constraint firstItem="0ja-Fj-3oC" firstAttribute="centerX" secondItem="MsR-iL-mMf" secondAttribute="centerX" id="bqy-01-9gv"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdW-yi-iGp">
+                                <rect key="frame" x="512" y="77" width="256" height="307"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMU-1H-3Fg">
+                                        <rect key="frame" x="40" y="61" width="177" height="245.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="XMU-1H-3Fg" secondAttribute="height" multiplier="18:25" id="hU8-Qj-eA1"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="XMU-1H-3Fg" secondAttribute="bottom" id="L4b-gw-DDn"/>
+                                    <constraint firstItem="XMU-1H-3Fg" firstAttribute="centerX" secondItem="vdW-yi-iGp" secondAttribute="centerX" id="c7x-bM-mev"/>
+                                    <constraint firstItem="XMU-1H-3Fg" firstAttribute="height" secondItem="vdW-yi-iGp" secondAttribute="height" multiplier="0.8" id="kfE-eq-r3x"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PYX-et-Cli">
+                                <rect key="frame" x="512" y="384" width="256" height="307"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAw-6D-rvp">
+                                        <rect key="frame" x="39" y="0.0" width="177" height="27.5"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rvT-IZ-oTX">
+                                        <rect key="frame" x="40" y="61" width="177" height="245.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="rvT-IZ-oTX" secondAttribute="height" multiplier="18:25" id="A6D-a5-88W"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tx0-22-CaV">
+                                        <rect key="frame" x="40" y="27" width="177" height="6"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="rvT-IZ-oTX" firstAttribute="height" secondItem="PYX-et-Cli" secondAttribute="height" multiplier="0.8" id="2cj-W2-Agf"/>
+                                    <constraint firstItem="WAw-6D-rvp" firstAttribute="centerX" secondItem="PYX-et-Cli" secondAttribute="centerX" id="ASq-aY-i6I"/>
+                                    <constraint firstItem="rvT-IZ-oTX" firstAttribute="centerX" secondItem="PYX-et-Cli" secondAttribute="centerX" id="BJ7-QQ-q44"/>
+                                    <constraint firstItem="Tx0-22-CaV" firstAttribute="top" secondItem="WAw-6D-rvp" secondAttribute="bottom" id="KkW-Aa-hNh"/>
+                                    <constraint firstItem="WAw-6D-rvp" firstAttribute="height" secondItem="PYX-et-Cli" secondAttribute="height" multiplier="0.09" id="LzR-B3-sAa"/>
+                                    <constraint firstItem="WAw-6D-rvp" firstAttribute="top" secondItem="PYX-et-Cli" secondAttribute="top" id="NLt-QL-RMo"/>
+                                    <constraint firstAttribute="bottom" secondItem="rvT-IZ-oTX" secondAttribute="bottom" id="c9V-vZ-FaV"/>
+                                    <constraint firstItem="Tx0-22-CaV" firstAttribute="centerX" secondItem="rvT-IZ-oTX" secondAttribute="centerX" id="dVa-K0-uar"/>
+                                    <constraint firstItem="Tx0-22-CaV" firstAttribute="height" secondItem="PYX-et-Cli" secondAttribute="height" multiplier="0.02" id="ikg-K1-Xfy"/>
+                                    <constraint firstItem="Tx0-22-CaV" firstAttribute="width" secondItem="rvT-IZ-oTX" secondAttribute="width" id="npr-bq-NZL"/>
+                                    <constraint firstItem="WAw-6D-rvp" firstAttribute="width" secondItem="rvT-IZ-oTX" secondAttribute="width" id="zL9-ji-8Hv"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1120,7 +1120,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back1" width="180" height="250"/>
         <image name="back2" width="180" height="250"/>
         <image name="button" width="182" height="59"/>
         <image name="button-selected" width="182" height="59"/>

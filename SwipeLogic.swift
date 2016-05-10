@@ -207,45 +207,87 @@ extension GameViewController {
          - Parameter distanceAway: distance away to move
          - Parameter distanceBack: distance back to move
          */
-        func animation(direction: (CGFloat)->(), distanceAway: CGFloat, distanceBack: CGFloat) {
+        func animationCorrect(direction: (CGFloat)->(), distanceAway: CGFloat, distanceBack: CGFloat) {
             
             UIView.animateWithDuration(0.8,
                 animations: {
+                    
+                    // Correct direction
                     direction(distanceAway)
                 },
                 completion: {
                     finished in
-                                        
+                    
+                    // Card maintainence
                     self.game.flipDown()
                     self.setupCards()
                     self.cardsAreUp = false
                     self.inAction = false
+                    
+                    // Place cards in original position
                     direction(distanceBack)
                 }
             )
         }
         
-        switch playerResponse {
-        case "up":
-            animation(moveVertical, distanceAway: -moveDistance, distanceBack: moveDistance)
-            break
-        case "down":
-            animation(moveVertical, distanceAway: moveDistance, distanceBack: -moveDistance)
-            break
-        case "left":
-            animation(moveHorizontal, distanceAway: -moveDistance, distanceBack: moveDistance)
-            break
-        case "right":
-            animation(moveHorizontal, distanceAway: moveDistance, distanceBack: -moveDistance)
-            break
-        case "p1WarButton":
-            animation(moveHorizontal, distanceAway: -moveDistance, distanceBack: moveDistance)
-            break
-        case "p2WarButton":
-            animation(moveHorizontal, distanceAway: moveDistance, distanceBack: -moveDistance)
-            break
-        default:
-            break
+        /**
+         Animates cards for incorrect swipe
+         - Parameter direction: moveVertical or moveHorizontal
+         - Parameter distanceAway: distance to move in wrong direction
+         - Parameter distanceAway: distance away to move
+         - Parameter distanceBack: distance back to move
+         */
+        func animationIncorrect(direction: (CGFloat)->(), distanceWrong: CGFloat, distanceAway: CGFloat, distanceBack: CGFloat) {
+            
+            UIView.animateKeyframesWithDuration(1, delay: 0.0, options: [],
+                animations: {
+                
+                    //add keyframes
+                    //Wrong direction
+                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.25,
+                        animations: { direction(distanceWrong) }
+                    )
+                
+                    //Correct direction
+                    UIView.addKeyframeWithRelativeStartTime(0.25, relativeDuration: 1,
+                        animations: { direction(distanceAway) }
+                    )
+                },
+                completion: {
+                    finished in
+                    
+                    //Card maintainence
+                    self.game.flipDown()
+                    self.setupCards()
+                    self.cardsAreUp = false
+                    self.inAction = false
+                    
+                    //Place Cards in original position
+                    direction(distanceBack)
+                }
+            )
+        }
+        
+        let q = playerResponse
+        if q == "left" || q == "p1WarButton" {
+            if correctAnswer == true {
+                animationCorrect(moveHorizontal, distanceAway: -moveDistance, distanceBack: moveDistance)
+            }
+            else if correctAnswer == false {
+                animationIncorrect(moveHorizontal, distanceWrong: -moveDistanceWrong ,
+                                   distanceAway: moveDistance + moveDistanceWrong,
+                                   distanceBack: -moveDistance)
+            }
+        }
+        else if q == "right" || q == "p2WarButton" {
+            if correctAnswer == true {
+                animationCorrect(moveHorizontal, distanceAway: moveDistance, distanceBack: -moveDistance)
+            }
+            else if correctAnswer == false {
+                animationIncorrect(moveHorizontal, distanceWrong: moveDistanceWrong,
+                                   distanceAway: -(moveDistance + moveDistanceWrong),
+                                   distanceBack: moveDistance)
+            }
         }
     }
 
@@ -254,7 +296,8 @@ extension GameViewController {
      - Parameter sender: AnyObject that sent action
      */
     @IBAction func swipeGesture(sender: AnyObject) {
-                
+        
+        // Prevent swipe action if cards are face down or if there is already a swipe happening
         if (!cardsAreUp || inAction) {
             return
         }
