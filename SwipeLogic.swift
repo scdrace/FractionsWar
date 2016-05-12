@@ -209,7 +209,7 @@ extension GameViewController {
          */
         func animationCorrect(direction: (CGFloat)->(), distanceAway: CGFloat, distanceBack: CGFloat) {
             
-            UIView.animateWithDuration(0.8,
+            UIView.animateWithDuration(1.2,
                 animations: {
                     
                     // Correct direction
@@ -243,13 +243,14 @@ extension GameViewController {
                 animations: {
                 
                     //add keyframes
+                    
                     //Wrong direction
-                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.25,
+                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.35,
                         animations: { direction(distanceWrong) }
                     )
                 
                     //Correct direction
-                    UIView.addKeyframeWithRelativeStartTime(0.25, relativeDuration: 1,
+                    UIView.addKeyframeWithRelativeStartTime(0.35, relativeDuration: 1.5,
                         animations: { direction(distanceAway) }
                     )
                 },
