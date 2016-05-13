@@ -34,7 +34,6 @@ class Round {
     func makeHand(deck: [Card]) {
         
         if deck.isEmpty {
-            print("Winner")
             return
         }
 

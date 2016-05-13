@@ -78,6 +78,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     // Game animation parameters
     var game = Game() 
     let moveDistance: CGFloat = 900
+    let moveDistanceWrong: CGFloat = 200
     
     // Game state variables
     var p1ready = false
@@ -288,11 +289,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         // End the game if someone's deck is too small to continue
-        if (!warMode && (game.player1.cards.count < 2 || game.player1.cards.count < 2)) {
+        if (warMode && (game.player1.cards.count < 4 || game.player2.cards.count < 4)) {
             dispatch_async(dispatch_get_main_queue(), {
                 self.performSegueWithIdentifier("goToGameOver", sender: self)
             })
-        } else if (warMode && (game.player1.cards.count < 4 || game.player1.cards.count < 4)) {
+        } else if (game.player1.cards.count < 2 || game.player2.cards.count < 2) {
             dispatch_async(dispatch_get_main_queue(), {
                 self.performSegueWithIdentifier("goToGameOver", sender: self)
             })
@@ -434,7 +435,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Prepare update counter for player one
         let p = self.view.center
-        let t = self.view.topAnchor.accessibilityActivationPoint
+        let t = self.view.frame.minY
         let notification = UILabel()
         notification.textAlignment = NSTextAlignment.Center
         notification.text = message
@@ -442,7 +443,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         notification.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.6)
         notification.alpha = 0.0
         notification.sizeToFit()
-        notification.center = CGPointMake(p.x, t.y + dst!)
+        notification.center = CGPointMake(p.x, t + dst!)
         self.view.addSubview(notification)
         
         // Display message then remove it

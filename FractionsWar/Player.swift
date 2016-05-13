@@ -71,10 +71,17 @@ class Player: CustomStringConvertible {
     //Add the cards from each hand to the winner's deck
     func addToCards(hands: [Hand]) {
         
-        //Add each card to the index[0]
+        // Place all cards into single stack
+        var randCards = [Card]()
         for hand in hands {
-            cards.insert(hand.numerator, atIndex: 0)
-            cards.insert(hand.denominator, atIndex: 0)
+            randCards.insert(hand.numerator, atIndex: 0)
+            randCards.insert(hand.denominator, atIndex: 0)
+        }
+
+        // Remove cards from stack in random order and place into deck at index 0
+        while !randCards.isEmpty {
+            let random = Int(arc4random_uniform(UInt32(randCards.count)))
+            cards.insert(randCards.removeAtIndex(random), atIndex: 0)
         }
     }
     

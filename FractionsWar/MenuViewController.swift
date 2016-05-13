@@ -15,6 +15,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var twoPlayerButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var howToPlayButton: UIButton!
+    @IBOutlet weak var aboutButton: UIButton!
         
     // Custom game fonts
     var gameGlobalFont: UIFont {
@@ -52,6 +53,10 @@ class MenuViewController: UIViewController {
     internal func prepareMenu() {
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
+        
+        aboutButton.titleLabel?.font = gameGlobalFont
+        aboutButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
+        aboutButton.sizeToFit()
         
         onePlayerButton.titleLabel?.font = gameFont
         onePlayerButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
