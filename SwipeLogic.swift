@@ -270,7 +270,7 @@ extension GameViewController {
         }
         
         let q = playerResponse
-        if q == "left" || q == "p1WarButton" {
+        if q == "left" {
             if correctAnswer == true {
                 animationCorrect(moveHorizontal, distanceAway: -moveDistance, distanceBack: moveDistance)
             }
@@ -280,7 +280,7 @@ extension GameViewController {
                                    distanceBack: -moveDistance)
             }
         }
-        else if q == "right" || q == "p2WarButton" {
+        else if q == "right" {
             if correctAnswer == true {
                 animationCorrect(moveHorizontal, distanceAway: moveDistance, distanceBack: -moveDistance)
             }
@@ -288,6 +288,34 @@ extension GameViewController {
                 animationIncorrect(moveHorizontal, distanceWrong: moveDistanceWrong,
                                    distanceAway: -(moveDistance + moveDistanceWrong),
                                    distanceBack: moveDistance)
+            }
+        }
+        else if q == "p1WarButton" {
+            if correctAnswer == false {
+                animationIncorrect(moveHorizontal, distanceWrong: -moveDistanceWrong ,
+                                   distanceAway: moveDistance + moveDistanceWrong,
+                                   distanceBack: -moveDistance)
+            }
+            else {
+                //Card maintainence
+                self.game.flipDown()
+                self.setupCards()
+                self.cardsAreUp = false
+                self.inAction = false
+            }
+        }
+        else if q == "p2WarButton" {
+            if correctAnswer == false {
+                animationIncorrect(moveHorizontal, distanceWrong: moveDistanceWrong,
+                                   distanceAway: -(moveDistance + moveDistanceWrong),
+                                   distanceBack: moveDistance)
+            }
+            else {
+                //Card maintainence
+                self.game.flipDown()
+                self.setupCards()
+                self.cardsAreUp = false
+                self.inAction = false
             }
         }
     }
