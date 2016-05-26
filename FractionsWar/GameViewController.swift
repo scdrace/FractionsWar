@@ -298,6 +298,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.performSegueWithIdentifier("goToGameOver", sender: self)
             })
         }
+        
+        // Enter war mode if there was a tie, otherwise exit war mode
+        if game.getRound().highHand == "tie" {
+            warMode = true
+        } else {
+            warMode = false
+        }
     }
     
     
