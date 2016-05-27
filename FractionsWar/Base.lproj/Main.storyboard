@@ -1006,6 +1006,188 @@
             </objects>
             <point key="canvasLocation" x="111" y="1529"/>
         </scene>
+        <!--Data Collection View Controller-->
+        <scene sceneID="p8c-6P-eAf">
+            <objects>
+                <viewController id="A6x-qa-Q19" customClass="DataCollectionViewController" customModule="FractionsWar" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KVb-2j-cIw"/>
+                        <viewControllerLayoutGuide type="bottom" id="eHI-fc-Sf4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JgL-jQ-0qs">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5S-F7-C34">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="77"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATi-LK-Xp2">
+                                        <rect key="frame" x="20" y="24" width="113" height="30"/>
+                                        <state key="normal" title="Back to Settings"/>
+                                        <connections>
+                                            <action selector="pressBackToSettingsButton:" destination="A6x-qa-Q19" eventType="touchUpInside" id="BUM-c0-hU3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ATi-LK-Xp2" firstAttribute="leading" secondItem="W5S-F7-C34" secondAttribute="leading" constant="20" id="iI5-su-SKr"/>
+                                    <constraint firstItem="ATi-LK-Xp2" firstAttribute="centerY" secondItem="W5S-F7-C34" secondAttribute="centerY" id="vR1-Nq-WoB"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A5l-KF-NLn">
+                                <rect key="frame" x="0.0" y="77" width="1024" height="461"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYa-0H-Jhr">
+                                        <rect key="frame" x="20" y="0.0" width="984" height="461"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="MYa-0H-Jhr" firstAttribute="leading" secondItem="A5l-KF-NLn" secondAttribute="leading" constant="20" id="Dhn-R2-E0Q"/>
+                                    <constraint firstItem="MYa-0H-Jhr" firstAttribute="centerX" secondItem="A5l-KF-NLn" secondAttribute="centerX" id="IvF-I2-rln"/>
+                                    <constraint firstItem="MYa-0H-Jhr" firstAttribute="centerY" secondItem="A5l-KF-NLn" secondAttribute="centerY" id="c3t-8t-Osi"/>
+                                    <constraint firstItem="MYa-0H-Jhr" firstAttribute="height" secondItem="A5l-KF-NLn" secondAttribute="height" id="fbq-nY-C2g"/>
+                                    <constraint firstAttribute="trailing" secondItem="MYa-0H-Jhr" secondAttribute="trailing" constant="20" id="tGx-73-kfU"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="IvF-I2-rln"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="afd-ZD-84L">
+                                <rect key="frame" x="0.0" y="538" width="1024" height="115"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMe-i7-Go3">
+                                        <rect key="frame" x="401" y="28" width="222" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="kMe-i7-Go3" secondAttribute="height" multiplier="222:59" id="vep-fg-0nI"/>
+                                        </constraints>
+                                        <state key="normal" title="Collect Data" backgroundImage="button">
+                                            <color key="titleColor" red="0.65882354974746704" green="0.0" blue="0.0078431377187371254" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected" title="Stop Collecting" backgroundImage="button-selected"/>
+                                        <connections>
+                                            <action selector="pressBeginCollectingDataButton:" destination="A6x-qa-Q19" eventType="touchUpInside" id="R99-mF-QMN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="kMe-i7-Go3" firstAttribute="centerY" secondItem="afd-ZD-84L" secondAttribute="centerY" id="Cpb-tp-RBq"/>
+                                    <constraint firstItem="kMe-i7-Go3" firstAttribute="height" relation="lessThanOrEqual" secondItem="afd-ZD-84L" secondAttribute="height" multiplier="0.9" id="IU8-9Y-cBY"/>
+                                    <constraint firstItem="kMe-i7-Go3" firstAttribute="centerX" secondItem="afd-ZD-84L" secondAttribute="centerX" id="hJx-Zi-As7"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7a-KZ-TtN">
+                                <rect key="frame" x="0.0" y="653" width="1024" height="115.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5E-f4-OEp">
+                                        <rect key="frame" x="239" y="28" width="222" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="U5E-f4-OEp" secondAttribute="height" multiplier="222:59" id="Hhl-e1-1Nn"/>
+                                        </constraints>
+                                        <state key="normal" title="Clear Data" backgroundImage="button">
+                                            <color key="titleColor" red="0.65882354970000001" green="0.0" blue="0.0078431377190000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected" backgroundImage="button-selected"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Hhl-e1-1Nn"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="pressClearDataButton:" destination="A6x-qa-Q19" eventType="touchUpInside" id="yJC-m5-3nV"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdv-XM-UmO">
+                                        <rect key="frame" x="461" y="28.5" width="102" height="59"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8A-eh-lTZ">
+                                        <rect key="frame" x="563" y="28" width="222" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="c8A-eh-lTZ" secondAttribute="height" multiplier="222:59" id="irR-8R-MW1"/>
+                                        </constraints>
+                                        <state key="normal" title="Export Data" backgroundImage="button">
+                                            <color key="titleColor" red="0.65882354970000001" green="0.0" blue="0.0078431377190000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected" backgroundImage="button-selected"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="irR-8R-MW1"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="pressExportDataButton:" destination="A6x-qa-Q19" eventType="touchUpInside" id="Lmi-Yd-emu"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="c8A-eh-lTZ" firstAttribute="height" secondItem="U5E-f4-OEp" secondAttribute="height" id="1KG-dQ-ACg"/>
+                                    <constraint firstItem="c8A-eh-lTZ" firstAttribute="width" secondItem="c8A-eh-lTZ" secondAttribute="height" multiplier="222:59" id="3Jb-Gd-Kpf"/>
+                                    <constraint firstItem="U5E-f4-OEp" firstAttribute="height" relation="lessThanOrEqual" secondItem="r7a-KZ-TtN" secondAttribute="height" multiplier="0.9" id="4Ce-83-V5c"/>
+                                    <constraint firstItem="hdv-XM-UmO" firstAttribute="height" relation="lessThanOrEqual" secondItem="U5E-f4-OEp" secondAttribute="height" multiplier="0.9" id="5J9-QW-Hoq"/>
+                                    <constraint firstItem="U5E-f4-OEp" firstAttribute="centerY" secondItem="hdv-XM-UmO" secondAttribute="centerY" id="DDW-us-w7A"/>
+                                    <constraint firstItem="c8A-eh-lTZ" firstAttribute="width" secondItem="c8A-eh-lTZ" secondAttribute="height" multiplier="222:59" id="EjH-P0-gVI"/>
+                                    <constraint firstItem="c8A-eh-lTZ" firstAttribute="leading" secondItem="hdv-XM-UmO" secondAttribute="trailing" id="I72-ad-Bdd"/>
+                                    <constraint firstItem="hdv-XM-UmO" firstAttribute="centerY" secondItem="r7a-KZ-TtN" secondAttribute="centerY" id="aiL-lW-0E8"/>
+                                    <constraint firstItem="hdv-XM-UmO" firstAttribute="leading" secondItem="U5E-f4-OEp" secondAttribute="trailing" id="dwG-2S-PyF"/>
+                                    <constraint firstItem="hdv-XM-UmO" firstAttribute="centerX" secondItem="r7a-KZ-TtN" secondAttribute="centerX" id="p4t-pK-GW3"/>
+                                    <constraint firstItem="U5E-f4-OEp" firstAttribute="width" secondItem="U5E-f4-OEp" secondAttribute="height" multiplier="222:59" id="q87-pT-wm1"/>
+                                    <constraint firstItem="c8A-eh-lTZ" firstAttribute="centerY" secondItem="hdv-XM-UmO" secondAttribute="centerY" id="vhL-Ss-1io"/>
+                                    <constraint firstItem="hdv-XM-UmO" firstAttribute="width" secondItem="r7a-KZ-TtN" secondAttribute="width" multiplier="0.1" id="wTF-4b-tyi"/>
+                                    <constraint firstItem="hdv-XM-UmO" firstAttribute="height" secondItem="U5E-f4-OEp" secondAttribute="height" id="yLh-AD-XwM"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5J9-QW-Hoq"/>
+                                        <exclude reference="3Jb-Gd-Kpf"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="A5l-KF-NLn" firstAttribute="top" secondItem="W5S-F7-C34" secondAttribute="bottom" id="034-PJ-9G5"/>
+                            <constraint firstItem="A5l-KF-NLn" firstAttribute="height" secondItem="JgL-jQ-0qs" secondAttribute="height" multiplier="0.6" id="2Rk-HM-0oQ"/>
+                            <constraint firstItem="W5S-F7-C34" firstAttribute="centerY" secondItem="JgL-jQ-0qs" secondAttribute="centerY" id="8JS-PI-bCF"/>
+                            <constraint firstItem="afd-ZD-84L" firstAttribute="centerX" secondItem="JgL-jQ-0qs" secondAttribute="centerX" id="AQs-Vc-8Bf"/>
+                            <constraint firstItem="afd-ZD-84L" firstAttribute="width" secondItem="JgL-jQ-0qs" secondAttribute="width" id="BzA-Vn-7cd"/>
+                            <constraint firstItem="r7a-KZ-TtN" firstAttribute="centerX" secondItem="JgL-jQ-0qs" secondAttribute="centerX" id="FgV-Ml-lew"/>
+                            <constraint firstItem="W5S-F7-C34" firstAttribute="centerX" secondItem="JgL-jQ-0qs" secondAttribute="centerX" id="Lic-8g-JTh"/>
+                            <constraint firstItem="afd-ZD-84L" firstAttribute="top" secondItem="A5l-KF-NLn" secondAttribute="bottom" id="RQT-Ov-8fn"/>
+                            <constraint firstItem="A5l-KF-NLn" firstAttribute="centerX" secondItem="JgL-jQ-0qs" secondAttribute="centerX" id="hMm-SI-vaB"/>
+                            <constraint firstItem="W5S-F7-C34" firstAttribute="top" secondItem="KVb-2j-cIw" secondAttribute="bottom" id="hud-fy-nk6"/>
+                            <constraint firstItem="W5S-F7-C34" firstAttribute="width" secondItem="JgL-jQ-0qs" secondAttribute="width" id="iOu-Nt-nU6"/>
+                            <constraint firstItem="W5S-F7-C34" firstAttribute="height" secondItem="JgL-jQ-0qs" secondAttribute="height" multiplier="0.1" id="jeV-rW-SN3"/>
+                            <constraint firstItem="afd-ZD-84L" firstAttribute="height" secondItem="JgL-jQ-0qs" secondAttribute="height" multiplier="0.15" id="qse-ry-nHI"/>
+                            <constraint firstItem="r7a-KZ-TtN" firstAttribute="height" secondItem="JgL-jQ-0qs" secondAttribute="height" multiplier="0.15" id="rK0-8Q-KJS"/>
+                            <constraint firstItem="r7a-KZ-TtN" firstAttribute="width" secondItem="JgL-jQ-0qs" secondAttribute="width" id="wEL-yz-u0c"/>
+                            <constraint firstItem="r7a-KZ-TtN" firstAttribute="top" secondItem="afd-ZD-84L" secondAttribute="bottom" id="wMb-qU-ZR9"/>
+                            <constraint firstItem="A5l-KF-NLn" firstAttribute="width" secondItem="JgL-jQ-0qs" secondAttribute="width" id="yc1-La-l6O"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="8JS-PI-bCF"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="backToSettingsButton" destination="ATi-LK-Xp2" id="yds-o5-RrK"/>
+                        <outlet property="beginCollectingDataButton" destination="kMe-i7-Go3" id="8qy-IU-Fmr"/>
+                        <outlet property="clearDataButton" destination="U5E-f4-OEp" id="XcN-fO-oQ9"/>
+                        <outlet property="dataCollectionLabel" destination="MYa-0H-Jhr" id="vTO-8A-sgg"/>
+                        <outlet property="exportDataButton" destination="c8A-eh-lTZ" id="8Ti-Ur-ajP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BcC-sO-Wzm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1143" y="2505"/>
+        </scene>
         <!--Settings View Controller-->
         <scene sceneID="YPY-Vf-Zxl">
             <objects>
@@ -1028,10 +1210,19 @@
                                             <action selector="pressBackToMainMenuButton:" destination="mSj-tG-fPK" eventType="touchUpInside" id="dLL-Y8-0JM"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qr6-25-XMa">
+                                        <rect key="frame" x="899" y="24" width="105" height="30"/>
+                                        <state key="normal" title="Data Collection"/>
+                                        <connections>
+                                            <segue destination="A6x-qa-Q19" kind="show" animates="NO" id="ZO6-gD-5EH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="Qr6-25-XMa" firstAttribute="centerY" secondItem="gz0-p8-VNl" secondAttribute="centerY" id="9yY-Bi-Z6Q"/>
                                     <constraint firstItem="gz0-p8-VNl" firstAttribute="leading" secondItem="ypI-Kq-yrh" secondAttribute="leading" constant="20" id="UZj-dD-P9D"/>
                                     <constraint firstItem="gz0-p8-VNl" firstAttribute="centerY" secondItem="ypI-Kq-yrh" secondAttribute="centerY" id="bWo-y4-Io7"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qr6-25-XMa" secondAttribute="trailing" constant="20" id="nOE-TA-jQG"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I31-Fy-mTJ">
@@ -1306,6 +1497,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="backToMainMenuButton" destination="gz0-p8-VNl" id="gjN-EQ-dTQ"/>
+                        <outlet property="dataCollectionButton" destination="Qr6-25-XMa" id="vuS-sF-QkI"/>
                         <outlet property="extremeComputerButton" destination="0AP-8V-uBX" id="SVk-sV-lUB"/>
                         <outlet property="fastComputerButton" destination="WL1-MU-gQZ" id="nt0-qc-UT3"/>
                         <outlet property="largeDeckButton" destination="yi7-Vd-i92" id="qwl-vN-PQS"/>

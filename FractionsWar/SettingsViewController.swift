@@ -12,6 +12,7 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var backToMainMenuButton: UIButton!
+    @IBOutlet weak var dataCollectionButton: UIButton!
     
     // Card style buttons
     @IBOutlet weak var numberCardButton: UIButton!
@@ -139,6 +140,10 @@ class SettingsViewController: UIViewController {
         backToMainMenuButton.titleLabel?.font = gameFont
         backToMainMenuButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
         backToMainMenuButton.sizeToFit()
+        
+        dataCollectionButton.titleLabel?.font = gameFont
+        dataCollectionButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
+        dataCollectionButton.sizeToFit()
         
         normalDeckButton.titleLabel?.font = gameFont
         normalDeckButton.sizeToFit()
