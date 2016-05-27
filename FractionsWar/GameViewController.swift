@@ -212,14 +212,23 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         setFonts()
         decorateButtons()
         
+        // Player one swipe view will be full width for player one mode, otherwise half width
+        var p1width = self.view.frame.size.width
+        if (playerMode == 2) {
+            p1width = p1width/2
+        }
+        
         // Add swipe views
-        p1AreaH = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height))
+        p1AreaH = UIView(frame: CGRectMake(0, 0, p1width, self.view.frame.size.height))
         p1AreaH.backgroundColor = UIColor.clearColor()
-        p2AreaH = UIView(frame: CGRectMake(self.view.center.x, 0, self.view.frame.size.width/2, self.view.frame.size.height))
-        p2AreaH.backgroundColor = UIColor.clearColor()
         self.view.addSubview(p1AreaH)
         self.view.bringSubviewToFront(p1AreaH)
         
+        
+        p2AreaH = UIView(frame: CGRectMake(self.view.center.x, 0, self.view.frame.size.width/2, self.view.frame.size.height))
+        p2AreaH.backgroundColor = UIColor.clearColor()
+        
+        // Only add player 2 swipe view if two player mode
         if playerMode == 2 {
             self.view.addSubview(p2AreaH)
             self.view.bringSubviewToFront(p2AreaH)
