@@ -12,6 +12,7 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var backToMainMenuButton: UIButton!
+    @IBOutlet weak var dataCollectionButton: UIButton!
     
     // Card style buttons
     @IBOutlet weak var numberCardButton: UIButton!
@@ -26,6 +27,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var slowComputerButton: UIButton!
     @IBOutlet weak var mediumComputerButton: UIButton!
     @IBOutlet weak var fastComputerButton: UIButton!
+    @IBOutlet weak var extremeComputerButton: UIButton!
     
     // Custom game fonts
     var gameFont: UIFont {
@@ -103,6 +105,7 @@ class SettingsViewController: UIViewController {
         slowComputerButton.selected = true
         mediumComputerButton.selected = false
         fastComputerButton.selected = false
+        extremeComputerButton.selected = false
     }
     
     @IBAction func pressMediumComputerButton(sender: AnyObject) {
@@ -110,6 +113,7 @@ class SettingsViewController: UIViewController {
         slowComputerButton.selected = false
         mediumComputerButton.selected = true
         fastComputerButton.selected = false
+        extremeComputerButton.selected = false
     }
     
     @IBAction func pressFastComputerButton(sender: AnyObject) {
@@ -117,7 +121,17 @@ class SettingsViewController: UIViewController {
         slowComputerButton.selected = false
         mediumComputerButton.selected = false
         fastComputerButton.selected = true
+        extremeComputerButton.selected = false
     }
+    
+    @IBAction func pressExtremeComputerButton(sender: AnyObject) {
+        sH.saveToSettings("e", settingsKey: sH.computerSpeedDictionaryKey)
+        slowComputerButton.selected = false
+        mediumComputerButton.selected = false
+        fastComputerButton.selected = false
+        extremeComputerButton.selected = true
+    }
+    
     
     // MARK: - Menu Display Setup
     
@@ -126,6 +140,10 @@ class SettingsViewController: UIViewController {
         backToMainMenuButton.titleLabel?.font = gameFont
         backToMainMenuButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
         backToMainMenuButton.sizeToFit()
+        
+        dataCollectionButton.titleLabel?.font = gameFont
+        dataCollectionButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
+        dataCollectionButton.sizeToFit()
         
         normalDeckButton.titleLabel?.font = gameFont
         normalDeckButton.sizeToFit()
@@ -141,6 +159,9 @@ class SettingsViewController: UIViewController {
         
         fastComputerButton.titleLabel?.font = gameFont
         fastComputerButton.sizeToFit()
+        
+        extremeComputerButton.titleLabel?.font = gameFont
+        extremeComputerButton.sizeToFit()
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
     }
@@ -183,6 +204,9 @@ class SettingsViewController: UIViewController {
             break
         case "f":
             fastComputerButton.selected = true
+            break
+        case "e":
+            extremeComputerButton.selected = true
             break
         default: break
         }

@@ -78,3 +78,112 @@ class Data {
         return result
     }
 }
+
+
+struct DataFile {
+    
+    enum PlistError: ErrorType {
+        case FileNotWritten
+        case FileDoesNotExist
+    }
+    
+    let name = "Data"
+    
+    var sourcePath: String? {
+        guard let path = NSBundle.mainBundle().pathForResource(name, ofType: "plist") else { return .None }
+        return path
+    }
+    
+    var destPath: String? {
+        guard sourcePath != .None else { return .None }
+        let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        return (dir as NSString).stringByAppendingPathComponent("\(name).plist")
+    }
+    
+    init?() {
+        
+        let fileManager = NSFileManager.defaultManager()
+        
+        guard let source = sourcePath else { return nil }
+        guard let destination = destPath else { return nil }
+        guard fileManager.fileExistsAtPath(source) else { return nil }
+        
+        if !fileManager.fileExistsAtPath(destination) {
+            
+            do {
+                try fileManager.copyItemAtPath(source, toPath: destination)
+            } catch let error as NSError {
+                print("Unable to copy file. ERROR: \(error.localizedDescription)")
+                return nil
+            }
+        }
+    }
+    
+    func getValuesInPlistFile() -> NSDictionary? {
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(destPath!) {
+            guard let dict = NSDictionary(contentsOfFile: destPath!) else { return .None }
+            return dict
+        } else {
+            return .None
+        }
+    }
+    
+    func getMutablePlistFile() -> NSMutableDictionary? {
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(destPath!) {
+            guard let dict = NSMutableDictionary(contentsOfFile: destPath!) else { return .None }
+            return dict
+        } else {
+            return .None
+        }
+    }
+    
+    func addValuesToPlistFile(dictionary:NSDictionary) throws {
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(destPath!) {
+            if !dictionary.writeToFile(destPath!, atomically: false) {
+                print("File not written successfully")
+                throw PlistError.FileNotWritten
+            }
+        } else {
+            throw PlistError.FileDoesNotExist
+        }
+    }
+}
+
+
+class DataHelper {
+    
+    // Singleton DataHelper
+    static let shared = DataHelper()
+    let dataFile = DataFile()
+    
+    // Variables for interacting with Data plist
+    
+    let dataPlist = "Data.plist"
+    var dataPlistPath: String = ""
+    
+    private init() { }
+    
+    // MARK: - Data Storage Helper Methods
+    
+    internal func saveToData(data: AnyObject, dataKey: String) {
+        
+        let dict = dataFile!.getMutablePlistFile()!
+        dict[dataKey] = data
+        
+        do {
+            try dataFile!.addValuesToPlistFile(dict)
+        } catch {
+            print(error)
+        }
+    }
+    
+    internal func retrieveDataPlistSize() -> NSNumber {
+        
+        let dict = dataFile!.getValuesInPlistFile()!
+        
+        return dict.count
+    }
+}

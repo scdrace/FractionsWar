@@ -93,6 +93,8 @@ class SettingsHelper {
     let settingsPlist = "Settings.plist"
     var settingsPlistPath: String = ""
     
+    // Game settings dictionary keys
+    
     let cardTypeDictionaryKey = "CardType"
     var cardTypeDictionaryData: AnyObject?
     
@@ -102,6 +104,17 @@ class SettingsHelper {
     let computerSpeedDictionaryKey = "ComputerSpeed"
     var computerSpeedDictionaryData: AnyObject?
     
+    // Data collection settings dictionary keys
+    
+    let isCollectingDataDictionaryKey = "IsCollectingData"
+    var isCollectingDataDictionaryData: AnyObject?
+    
+    let dataCollectionEmailDictionaryKey = "DataCollectionEmail"
+    var dataCollectionEmailDictionaryData: AnyObject?
+    
+    let dataCollectionLimitDictionaryKey = "DataCollectionLimit"
+    var dataCollectionLimitDictionaryData: AnyObject?
+    
     private init() { }
     
     // MARK: - Settings Storage Helper Methods
@@ -110,7 +123,7 @@ class SettingsHelper {
         
         let dict = settings!.getMutablePlistFile()!
         dict[settingsKey] = settingsData
-        
+                
         do {
             try settings!.addValuesToPlistFile(dict)
         } catch {
@@ -122,11 +135,15 @@ class SettingsHelper {
         
         let dict = settings!.getValuesInPlistFile()!
         
-        if let myVal = dict[settingsKey] as? String {
-            if (myVal == "") {
+        if let myStringVal = dict[settingsKey] as? String {
+            if (myStringVal == "") {
                 return setDefaultSettingsValue(settingsKey)
             }
-            return myVal
+            return myStringVal
+        } else if let myNumVal = dict[settingsKey] as? NSNumber {
+            return myNumVal
+        } else if let myBoolVal = dict[settingsKey] as? Bool {
+            return myBoolVal
         } else {
             return setDefaultSettingsValue(settingsKey)
         }
@@ -140,9 +157,20 @@ class SettingsHelper {
         } else if (settingsKey == deckSizeDictionaryKey) {
             saveToSettings("n", settingsKey: deckSizeDictionaryKey)
             return "n"
-        } else {
+        } else if (settingsKey == computerSpeedDictionaryKey) {
             saveToSettings("s", settingsKey: computerSpeedDictionaryKey)
             return "s"
+        } else if (settingsKey == isCollectingDataDictionaryKey) {
+            saveToSettings(false, settingsKey: isCollectingDataDictionaryKey)
+            return false
+        } else if (settingsKey == dataCollectionEmailDictionaryKey) {
+            saveToSettings("undefined", settingsKey: dataCollectionEmailDictionaryKey)
+            return "undefined"
+        } else if (settingsKey == dataCollectionLimitDictionaryKey) {
+            saveToSettings(4000, settingsKey: dataCollectionLimitDictionaryKey)
+            return 4000
+        } else {
+            return ""
         }
     }
 }
