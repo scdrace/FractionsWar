@@ -158,14 +158,21 @@ extension GameViewController {
      */
     func assignPoints(player: String, correctAnswer: Bool) {
 
+        var points = 1
+        
+        if warMode {
+            points = 3
+        }
+
+        
         switch player {
         case "player1":
-            if correctAnswer == true { game.getPlayer1().addPoints(1) }
-            else if correctAnswer == false { game.getPlayer2().addPoints(1) }
+            if correctAnswer == true { game.getPlayer1().addPoints(points) }
+            else if correctAnswer == false { game.getPlayer2().addPoints(points) }
             break
         case "player2":
-            if correctAnswer == true { game.getPlayer2().addPoints(1) }
-            else if correctAnswer == false { game.getPlayer1().addPoints(1) }
+            if correctAnswer == true { game.getPlayer2().addPoints(points) }
+            else if correctAnswer == false { game.getPlayer1().addPoints(points) }
         default:
             break
         }
@@ -179,6 +186,8 @@ extension GameViewController {
      */
     func move(player: String, playerResponse: String, correctAnswer: Bool) {
 
+        let highHand = game.getRound().highHand
+        
         let cardPorts = getCardPorts
         
         /**
@@ -237,34 +246,35 @@ extension GameViewController {
          - Parameter distanceAway: distance away to move
          - Parameter distanceBack: distance back to move
          */
-        func animationIncorrect(direction: (CGFloat)->(), distanceWrong: CGFloat, distanceAway: CGFloat, distanceBack: CGFloat) {
+        func animationIncorrect(direction: (CGFloat)->(), distanceWrong: CGFloat, distanceAway: CGFloat,
+                                distanceBack: CGFloat) {
             
             UIView.animateKeyframesWithDuration(1, delay: 0.0, options: [],
-                animations: {
-                
-                    //add keyframes
-                    
-                    //Wrong direction
-                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.35,
-                        animations: { direction(distanceWrong) }
-                    )
-                
-                    //Correct direction
-                    UIView.addKeyframeWithRelativeStartTime(0.35, relativeDuration: 1.5,
-                        animations: { direction(distanceAway) }
-                    )
+                                                animations: {
+                                                    
+                                                    //add keyframes
+                                                    
+                                                    //Wrong direction
+                                                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.35,
+                                                        animations: { direction(distanceWrong) }
+                                                    )
+                                                    
+                                                    //Correct direction
+                                                    UIView.addKeyframeWithRelativeStartTime(0.35, relativeDuration: 1.5,
+                                                        animations: { direction(distanceAway) }
+                                                    )
                 },
-                completion: {
-                    finished in
-                    
-                    //Card maintainence
-                    self.game.flipDown()
-                    self.setupCards()
-                    self.cardsAreUp = false
-                    self.inAction = false
-                    
-                    //Place Cards in original position
-                    direction(distanceBack)
+                                                completion: {
+                                                    finished in
+                                                    
+                                                    //Card maintainence
+                                                    self.game.flipDown()
+                                                    self.setupCards()
+                                                    self.cardsAreUp = false
+                                                    self.inAction = false
+                                                    
+                                                    //Place Cards in original position
+                                                    direction(distanceBack)
                 }
             )
         }
@@ -291,31 +301,41 @@ extension GameViewController {
             }
         }
         else if q == "p1WarButton" {
-            if correctAnswer == false {
-                animationIncorrect(moveHorizontal, distanceWrong: -moveDistanceWrong ,
-                                   distanceAway: moveDistance + moveDistanceWrong,
-                                   distanceBack: -moveDistance)
-            }
-            else {
+            if correctAnswer {
+                //TODO: Add animation for correct answer
+                
                 //Card maintainence
                 self.game.flipDown()
                 self.setupCards()
                 self.cardsAreUp = false
                 self.inAction = false
+            }
+            else {
+                if highHand == "player1" {
+                    animationCorrect(moveHorizontal, distanceAway: -moveDistance, distanceBack: moveDistance)
+                }
+                else {
+                    animationCorrect(moveHorizontal, distanceAway: moveDistance, distanceBack: -moveDistance)
+                }
             }
         }
         else if q == "p2WarButton" {
-            if correctAnswer == false {
-                animationIncorrect(moveHorizontal, distanceWrong: moveDistanceWrong,
-                                   distanceAway: -(moveDistance + moveDistanceWrong),
-                                   distanceBack: moveDistance)
-            }
-            else {
+            if correctAnswer {
+                //TODO: Add animation for correct answer
+                
                 //Card maintainence
                 self.game.flipDown()
                 self.setupCards()
                 self.cardsAreUp = false
                 self.inAction = false
+            }
+            else {
+                if highHand == "player1" {
+                    animationCorrect(moveHorizontal, distanceAway: -moveDistance, distanceBack: moveDistance)
+                }
+                else {
+                    animationCorrect(moveHorizontal, distanceAway: moveDistance, distanceBack: -moveDistance)
+                }
             }
         }
     }

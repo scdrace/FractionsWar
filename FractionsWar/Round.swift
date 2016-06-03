@@ -45,7 +45,7 @@ class Round {
     
     func addToPlayerCards(player: String) {
         
-        let hands = [player1.getHand(), player2.getHand()]
+        let hands = player1.hand + player2.hand
         
         switch player {
         case "player1":

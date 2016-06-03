@@ -12,7 +12,7 @@ class Player: CustomStringConvertible {
     
     var name: String        // Player name
     var points = 0          // Current total points
-    var hand = [Hand?]()    //
+    var hand = [Hand]()    //
     var cards = [Card]()    // Deck that is subset of the Main-Deck; Player selects from this deck
     
     var warHands = 2
@@ -22,7 +22,7 @@ class Player: CustomStringConvertible {
     }
     
     var description: String {
-        return "\(self.points) points & \(self.hand[0]!.description) hand & \(self.cards.debugDescription) all cards"
+        return "\(self.points) points & \(self.hand[0].description) hand & \(self.cards.debugDescription) all cards"
     }
     
     func getName() -> String {
@@ -30,15 +30,15 @@ class Player: CustomStringConvertible {
     }
     
     func getNumerator() -> Card {
-        return self.hand[0]!.getNumerator()
+        return self.hand[0].getNumerator()
     }
     
     func getDenominator() -> Card {
-        return self.hand[0]!.getDenominator()
+        return self.hand[0].getDenominator()
     }
     
     func getHand() -> Hand {
-        return self.hand[0]!
+        return self.hand[0]
     }
     
     func addPoints(points: Int = 1) {
@@ -51,20 +51,34 @@ class Player: CustomStringConvertible {
     
     func makeHand(war: Bool) {
         
-        self.hand.removeAll()
         var maxHands = 1
         
-        if war == true {
-            maxHands = warHands
-        }
-        var cardsX = [Card]()
-        
-        for _ in 0..<maxHands {
-            for _ in 0..<2 {
-                cardsX.append(cards.removeLast())
+        func setMaxHands() {
+            if war {
+                maxHands = warHands
             }
-            self.hand.append(Hand(card1: cardsX[0], card2: cardsX[1]))
-            cardsX = [Card]()
+            else {
+                maxHands = 1
+                self.hand.removeAll()
+            }
+        }
+        
+        func getTwoCards() -> [Card] {
+            var twoCards = [Card]()
+            
+            for _ in 0..<2 {
+                twoCards.append(cards.removeLast())
+            }
+            
+            return twoCards
+        }
+        
+        setMaxHands()
+        for index in 0..<maxHands {
+            
+            var twoCards = getTwoCards()
+            let hand = Hand(card1: twoCards[0], card2: twoCards[1])
+            self.hand.insert(hand, atIndex: index)
         }
     }
     
@@ -77,7 +91,7 @@ class Player: CustomStringConvertible {
             randCards.insert(hand.numerator, atIndex: 0)
             randCards.insert(hand.denominator, atIndex: 0)
         }
-
+        
         // Remove cards from stack in random order and place into deck at index 0
         while !randCards.isEmpty {
             let random = Int(arc4random_uniform(UInt32(randCards.count)))
@@ -91,7 +105,7 @@ class Player: CustomStringConvertible {
         
         for (index, value) in hand.enumerate() {
             if index > 0 {
-                x.append(value!)
+                x.append(value)
             }
         }
         
@@ -103,8 +117,8 @@ class Player: CustomStringConvertible {
     }
     
     func data() -> [String] {
-        let numerator = hand[0]!.numerator.data()
-        let denominator = hand[0]!.denominator.data()
+        let numerator = hand[0].numerator.data()
+        let denominator = hand[0].denominator.data()
         let points = [String(self.points)]
         
         var result = [name] + numerator

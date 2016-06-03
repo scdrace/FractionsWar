@@ -54,18 +54,18 @@ class Game: CustomStringConvertible {
     }
     
     func flipCards() {
-        player1.hand[0]!.flipCards()
-        player2.hand[0]!.flipCards()
+        player1.hand[0].flipCards()
+        player2.hand[0].flipCards()
     }
     
     func flipDown() {
-        player1.hand[0]!.flipDown()
-        player2.hand[0]!.flipDown()
+        player1.hand[0].flipDown()
+        player2.hand[0].flipDown()
     }
     
     func resizeCards(cardFrame: CGRect) {
-        player1.hand[0]!.resizeCards(cardFrame)
-        player2.hand[0]!.resizeCards(cardFrame)
+        player1.hand[0].resizeCards(cardFrame)
+        player2.hand[0].resizeCards(cardFrame)
     }
     
     func getP1Numerator() -> Card {
