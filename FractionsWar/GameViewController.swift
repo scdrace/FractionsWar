@@ -54,6 +54,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var p1NumeratorFD: UIView!
     
+    @IBOutlet weak var warBoomImageView: UIImageView!
+    @IBOutlet weak var p1NumeratorWar: UIImageView!
+    @IBOutlet weak var p1DenominatorWar: UIImageView!
+    @IBOutlet weak var p2NumeratorWar: UIImageView!
+    @IBOutlet weak var p2DenominatorWar: UIImageView!
+    
     
     // Return the cardPorts, used for swiping
     var getCardPorts: [UIView] {
@@ -110,6 +116,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var playerMode = 0
     var warMode = false
+    var warModePts = false
     
     // MARK: - View Lifecycle Management
     
@@ -208,6 +215,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     internal func prepareBoard() {
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
+        
+        warBoomImageView.hidden = true
+        p1NumeratorWar.hidden = true
+        p1DenominatorWar.hidden = true
+        p2NumeratorWar.hidden = true
+        p2DenominatorWar.hidden = true
         
         setFonts()
         decorateButtons()
@@ -309,15 +322,45 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         // Enter war mode if there was a tie, otherwise exit war mode
-        if game.getRound().highHand == "tie" {
+        // If it's the round immediately following a tie, then set
+        // points to increment by 3 instead of 1 (in swipe logic)
+        if ((game.getRound().highHand == "tie") && warMode) {
             warMode = true
+            warModePts = true
+        } else if (game.getRound().highHand == "tie") {
+            warMode = true
+            warModePts = false
+        } else if (warMode) {
+            warMode = false
+            warModePts = true
         } else {
             warMode = false
+            warModePts = false
         }
     }
     
     
-    internal func setupCardsWar() { }
+    internal func setupCardsWar() {
+        
+        if warModePts {
+            s.playWar()
+            warBoomImageView.hidden = false
+            p1NumeratorWar.hidden = false
+            p1DenominatorWar.hidden = false
+            p2NumeratorWar.hidden = false
+            p2DenominatorWar.hidden = false
+            
+            delay(2.0) {
+                self.notify("War mode starts now!")
+            }
+        } else if (!warBoomImageView.hidden) {
+            warBoomImageView.hidden = true
+            p1NumeratorWar.hidden = true
+            p1DenominatorWar.hidden = true
+            p2NumeratorWar.hidden = true
+            p2DenominatorWar.hidden = true
+        }
+    }
     
     /**
      Updates values of score labels and displays popup label with difference
@@ -392,8 +435,16 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     internal func updateCardCounters() {
         
         // Get difference in current vs updated values
-        let p1Diff = game.player1.cards.count - Int(p1Cards.text!)!
-        let p2Diff = game.player2.cards.count - Int(p2Cards.text!)!
+        var p1Diff = game.player1.cards.count - Int(p1Cards.text!)!
+        var p2Diff = game.player2.cards.count - Int(p2Cards.text!)!
+        
+        // Adjust for war mode wonkiness (displays +10 on war win, should be +12)
+        if (p1Diff == 10) {
+            p1Diff = 12
+        }
+        if (p2Diff == 10) {
+            p2Diff = 12
+        }
         
         // Get appropriate distance depending on device
         var dst: CGFloat?
@@ -506,7 +557,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     /**
      Delays thread for specified amount of seconds, then executes action in separate thread
-     - Parameter delaye: delay amount in seconds
+     - Parameter delay: delay amount in seconds
      */
     internal func delay(delay: Double, closure: ()->()) {
         
@@ -550,6 +601,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         if segue.identifier == "goToGameOver" {
             
             var winner: String?
+            var out: String?
+            var p1Pts: String?
+            var p2Pts: String?
             
             if (game.player1.points > game.player2.points) {
                 winner = p1Name.text!+" Wins!"
@@ -559,8 +613,20 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                 winner = "It's a Tie!"
             }
             
+            if (game.player1.cards.count > game.player2.cards.count) {
+                out = p2Name.text!+" Ran Out of Cards"
+            } else {
+                out = p1Name.text!+" Ran Out of Cards"
+            }
+            
+            p1Pts = p1Name.text! + " Points: " + game.player1.points.description + "     "
+            p2Pts = "     " + p2Name.text! + " Points: " + game.player2.points.description
+            
             let vc = segue.destinationViewController as! GameOverViewController
             vc.winner = winner
+            vc.out = out
+            vc.p1Pts = p1Pts
+            vc.p2Pts = p2Pts
         }
     }
 }

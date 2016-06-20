@@ -52,7 +52,7 @@ class AboutViewController: UIViewController {
         backToMainMenuButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
         backToMainMenuButton.sizeToFit()
         
-        aboutLabel.text = "Lorem ipsum bla blah"
+        aboutLabel.text = "Fractions War was designed and developed through a collaboration of educational researchers and software developers at the University of Wisconsin-Madison.  Support was provided by the Educational Neuroscience and MELD Labs and CS 407: Foundations of Mobile Systems and Applications.\n\nThe game was created to help study how children and adults think about numerical quantities when they play card games such as War.\n\nThe game is designed with the goal of providing a fun way for students, teachers, and gamers to play with fractions."
         aboutLabel.textColor = UIColor.whiteColor()
         aboutLabel.sizeToFit()
         

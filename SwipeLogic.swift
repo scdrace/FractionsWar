@@ -160,7 +160,7 @@ extension GameViewController {
 
         var points = 1
         
-        if warMode {
+        if warModePts {
             points = 3
         }
 
@@ -230,6 +230,7 @@ extension GameViewController {
                     // Card maintainence
                     self.game.flipDown()
                     self.setupCards()
+                    self.setupCardsWar()
                     self.cardsAreUp = false
                     self.inAction = false
                     
@@ -270,6 +271,7 @@ extension GameViewController {
                                                     //Card maintainence
                                                     self.game.flipDown()
                                                     self.setupCards()
+                                                    self.setupCardsWar()
                                                     self.cardsAreUp = false
                                                     self.inAction = false
                                                     
@@ -307,6 +309,7 @@ extension GameViewController {
                 //Card maintainence
                 self.game.flipDown()
                 self.setupCards()
+                self.setupCardsWar()
                 self.cardsAreUp = false
                 self.inAction = false
             }
@@ -326,6 +329,7 @@ extension GameViewController {
                 //Card maintainence
                 self.game.flipDown()
                 self.setupCards()
+                self.setupCardsWar()
                 self.cardsAreUp = false
                 self.inAction = false
             }
