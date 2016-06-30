@@ -248,8 +248,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         } else {
             p2Name.text = "Computer"
             p2DeckButton.removeFromSuperview()
-            p2WarButton.removeFromSuperview()
             p2PauseButton.removeFromSuperview()
+            // button is hidden instead of removed so that computer can declare war
+            p2WarButton.hidden = true 
+
         }
     }
     
@@ -351,7 +353,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             p2DenominatorWar.hidden = false
             
             delay(2.0) {
-                self.notify("War mode starts now!")
+                self.notify("You've entered WAR MODE")
             }
         } else if (!warBoomImageView.hidden) {
             warBoomImageView.hidden = true

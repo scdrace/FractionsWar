@@ -39,6 +39,9 @@ extension GameViewController {
         case "player2":
             foo(.Right)
             break
+        case "tie":
+            swipeGesture(p2WarButton)
+            break
         default:
             break
         }
@@ -251,32 +254,32 @@ extension GameViewController {
                                 distanceBack: CGFloat) {
             
             UIView.animateKeyframesWithDuration(1, delay: 0.0, options: [],
-                                                animations: {
+                animations: {
                                                     
-                                                    //add keyframes
-                                                    
-                                                    //Wrong direction
-                                                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.35,
-                                                        animations: { direction(distanceWrong) }
-                                                    )
-                                                    
-                                                    //Correct direction
-                                                    UIView.addKeyframeWithRelativeStartTime(0.35, relativeDuration: 1.5,
-                                                        animations: { direction(distanceAway) }
-                                                    )
+                    //add keyframes
+                    
+                    //Wrong direction
+                    UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.35,
+                        animations: { direction(distanceWrong) }
+                    )
+                    
+                    //Correct direction
+                    UIView.addKeyframeWithRelativeStartTime(0.35, relativeDuration: 1.5,
+                        animations: { direction(distanceAway) }
+                    )
                 },
-                                                completion: {
-                                                    finished in
-                                                    
-                                                    //Card maintainence
-                                                    self.game.flipDown()
-                                                    self.setupCards()
-                                                    self.setupCardsWar()
-                                                    self.cardsAreUp = false
-                                                    self.inAction = false
-                                                    
-                                                    //Place Cards in original position
-                                                    direction(distanceBack)
+                    completion: {
+                        finished in
+                        
+                        //Card maintainence
+                        self.game.flipDown()
+                        self.setupCards()
+                        self.setupCardsWar()
+                        self.cardsAreUp = false
+                        self.inAction = false
+                        
+                        //Place Cards in original position
+                        direction(distanceBack)
                 }
             )
         }
