@@ -8,40 +8,70 @@
 
 import Foundation
 
-class Player: CustomStringConvertible {
+class Player: NSObject, NSCoding {
     
     var name: String        // Player name
+    var id: String?
     var points = 0          // Current total points
-    var hand = [Hand?]()    //
-    var cards = [Card]()    // Deck that is subset of the Main-Deck; Player selects from this deck
+    var hand = [Hand]()    //
+    var subDeck = [Card]()    // Deck that is subset of the Main-Deck; Player selects from this deck
     
     var warHands = 2
     
     init (name: String) {
         self.name = name
+        
+        super.init()
     }
     
-    var description: String {
-        return "\(self.points) points & \(self.hand[0]!.description) hand & \(self.cards.debugDescription) all cards"
+    override var description: String {
+        return "\(self.points) points & \(self.hand[0].description) hand & \(self.subDeck.debugDescription) all cards"
     }
+    
+    // MARK: - Reload (aDecoder) and Save (aCoder) methods
+    
+    required init?(coder aDecoder: NSCoder) {
+        name = aDecoder.decodeObject(forKey: "name") as! String
+        points = aDecoder.decodeInteger(forKey: "points")
+        //hand = aDecoder.decodeObjectForKey("hand") as! [Hand]
+        subDeck = aDecoder.decodeObject(forKey: "subDeck") as! [Card]
+        
+        warHands = aDecoder.decodeInteger(forKey: "warHands")
+        
+        super.init()
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(points, forKey: "points")
+        aCoder.encode(hand, forKey: "hand")
+        aCoder.encode(subDeck, forKey: "subDeck")
+        
+        aCoder.encode(warHands, forKey: "warHands")
+        
+    }
+    
+    
+    // MARK: - Setter & Getter Methods
+    
     
     func getName() -> String {
         return name
     }
     
     func getNumerator() -> Card {
-        return self.hand[0]!.getNumerator()
+        return self.hand[0].getNumerator()
     }
     
     func getDenominator() -> Card {
-        return self.hand[0]!.getDenominator()
+        return self.hand[0].getDenominator()
     }
     
     func getHand() -> Hand {
-        return self.hand[0]!
+        return self.hand[0]
     }
     
-    func addPoints(points: Int = 1) {
+    func addPoints(_ points: Int = 1) {
         self.points += points
     }
     
@@ -49,68 +79,79 @@ class Player: CustomStringConvertible {
         return points
     }
     
-    func makeHand(war: Bool) {
+    
+    /*
+        Make the hand (numerator & denominator Cards)
+        Select Cards from subDeck
+    */
+    func makeHand(_ gameState: GameState) {
         
-        self.hand.removeAll()
         var maxHands = 1
         
-        if war == true {
-            maxHands = warHands
-        }
-        var cardsX = [Card]()
-        
-        for _ in 0..<maxHands {
-            for _ in 0..<2 {
-                cardsX.append(cards.removeLast())
+        func setMaxHands() {
+            if gameState == .war {
+                maxHands = warHands
             }
-            self.hand.append(Hand(card1: cardsX[0], card2: cardsX[1]))
-            cardsX = [Card]()
         }
+        
+        /* 
+        Return [Card] with Cards from subDeck
+        */
+        func getCardsFromSubDeck() -> [Card] {
+            var cardsForHand = [Card]()
+            
+            for x in 0..<(maxHands * 2) {
+                cardsForHand.append(subDeck.removeLast())
+                //print(x, maxHands, (maxHands * 2), cardsforHand.last)
+            }
+            
+            return cardsForHand
+        }
+        
+        
+        /*
+        Append Hand(s) to self.hand
+        In normal mode, only one hand should exist
+        In War-Mode, multiple hands should exist
+        */
+        func addHands(_ cards: [Card]) {
+            
+            var handIndex = 0
+            var cardIndex = 0
+            while handIndex < maxHands {
+                let hand = Hand(card1: cards[cardIndex], card2: cards[cardIndex+1])
+                self.hand.insert(hand, at: handIndex)
+                handIndex += 1
+                cardIndex += 2
+            }
+        }
+        
+        setMaxHands()
+        let localCards = getCardsFromSubDeck()
+        addHands(localCards)
     }
     
-    //Add the cards from each hand to the winner's deck
-    func addToCards(hands: [Hand]) {
+    
+    /*
+        Add the cards from each hand to the winner's deck
+    */
+    func addCardsToPlayerDeck(_ hands: [Hand]) {
+        
         
         // Place all cards into single stack
         var randCards = [Card]()
         for hand in hands {
-            randCards.insert(hand.numerator, atIndex: 0)
-            randCards.insert(hand.denominator, atIndex: 0)
+            randCards.insert(hand.numerator, at: 0)
+            randCards.insert(hand.denominator, at: 0)
         }
-
+        
         // Remove cards from stack in random order and place into deck at index 0
         while !randCards.isEmpty {
+            
+            //TODO: random Int is used in multiple classes; Make this a global function 
             let random = Int(arc4random_uniform(UInt32(randCards.count)))
-            cards.insert(randCards.removeAtIndex(random), atIndex: 0)
-        }
-    }
-    
-    func getWarHands() -> [Hand]? {
-        
-        var x = [Hand]()
-        
-        for (index, value) in hand.enumerate() {
-            if index > 0 {
-                x.append(value!)
-            }
+            subDeck.insert(randCards.remove(at: random), at: 0)
         }
         
-        if !x.isEmpty {
-            return x
-        }
-        
-        return nil
-    }
-    
-    func data() -> [String] {
-        let numerator = hand[0]!.numerator.data()
-        let denominator = hand[0]!.denominator.data()
-        let points = [String(self.points)]
-        
-        var result = [name] + numerator
-        result = result + denominator
-        result = result + points
-        
-        return result
     }
 }

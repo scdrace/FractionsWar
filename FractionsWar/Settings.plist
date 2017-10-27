@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>DataCollectionPassword</key>
+	<string></string>
 	<key>DataCollectionLimit</key>
-	<integer>4000</integer>
+	<real>4000</real>
 	<key>DataCollectionEmail</key>
 	<string></string>
 	<key>IsCollectingData</key>

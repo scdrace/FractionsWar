@@ -29,10 +29,12 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var fastComputerButton: UIButton!
     @IBOutlet weak var extremeComputerButton: UIButton!
     
+    var collectData = true
+    
     // Custom game fonts
     var gameFont: UIFont {
-        switch UIDevice.currentDevice().userInterfaceIdiom {
-        case .Phone:
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
             return UIFont(name: "DINCond-Bold", size: 17)!
         default:
             return UIFont(name: "DINCond-Bold", size: 32)!
@@ -55,81 +57,81 @@ class SettingsViewController: UIViewController {
     
     // MARK: - Settings Screen Interactions
     
-    @IBAction func pressBackToMainMenuButton(sender: AnyObject) {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("unwindToMenuFromSettings", sender: self)
+    @IBAction func pressBackToMainMenuButton(_ sender: AnyObject) {
+        DispatchQueue.main.async(execute: {
+            self.performSegue(withIdentifier: "unwindToMenuFromSettings", sender: self)
         })
     }
     
     // MARK: - Card Style Buttons
     
-    @IBAction func pressNumberCardButton(sender: AnyObject) {
-        sH.saveToSettings("n", settingsKey: sH.cardTypeDictionaryKey)
-        numberCardButton.selected = true
-        regularCardButton.selected = false
-        symbolCardButton.selected = false
+    @IBAction func pressNumberCardButton(_ sender: AnyObject) {
+        sH.saveToSettings("n" as AnyObject, settingsKey: sH.cardTypeDictionaryKey)
+        numberCardButton.isSelected = true
+        regularCardButton.isSelected = false
+        symbolCardButton.isSelected = false
     }
     
-    @IBAction func pressRegularCardButton(sender: AnyObject) {
-        sH.saveToSettings("r", settingsKey: sH.cardTypeDictionaryKey)
-        numberCardButton.selected = false
-        regularCardButton.selected = true
-        symbolCardButton.selected = false
+    @IBAction func pressRegularCardButton(_ sender: AnyObject) {
+        sH.saveToSettings("r" as AnyObject, settingsKey: sH.cardTypeDictionaryKey)
+        numberCardButton.isSelected = false
+        regularCardButton.isSelected = true
+        symbolCardButton.isSelected = false
     }
     
-    @IBAction func pressSymbolCardButton(sender: AnyObject) {
-        sH.saveToSettings("s", settingsKey: sH.cardTypeDictionaryKey)
-        numberCardButton.selected = false
-        regularCardButton.selected = false
-        symbolCardButton.selected = true
+    @IBAction func pressSymbolCardButton(_ sender: AnyObject) {
+        sH.saveToSettings("s" as AnyObject, settingsKey: sH.cardTypeDictionaryKey)
+        numberCardButton.isSelected = false
+        regularCardButton.isSelected = false
+        symbolCardButton.isSelected = true
     }
     
     // MARK: - Deck Size Buttons
     
-    @IBAction func pressNormalDeckButton(sender: AnyObject) {
-        sH.saveToSettings("n", settingsKey: sH.deckSizeDictionaryKey)
-        normalDeckButton.selected = true
-        largeDeckButton.selected = false
+    @IBAction func pressNormalDeckButton(_ sender: AnyObject) {
+        sH.saveToSettings("n" as AnyObject, settingsKey: sH.deckSizeDictionaryKey)
+        normalDeckButton.isSelected = true
+        largeDeckButton.isSelected = false
     }
     
-    @IBAction func pressLargeDeckButton(sender: AnyObject) {
-        sH.saveToSettings("l", settingsKey: sH.deckSizeDictionaryKey)
-        normalDeckButton.selected = false
-        largeDeckButton.selected = true
+    @IBAction func pressLargeDeckButton(_ sender: AnyObject) {
+        sH.saveToSettings("l" as AnyObject, settingsKey: sH.deckSizeDictionaryKey)
+        normalDeckButton.isSelected = false
+        largeDeckButton.isSelected = true
     }
     
     // MARK: - Computer Speed Buttons
     
-    @IBAction func pressSlowComputerButton(sender: AnyObject) {
-        sH.saveToSettings("s", settingsKey: sH.computerSpeedDictionaryKey)
-        slowComputerButton.selected = true
-        mediumComputerButton.selected = false
-        fastComputerButton.selected = false
-        extremeComputerButton.selected = false
+    @IBAction func pressSlowComputerButton(_ sender: AnyObject) {
+        sH.saveToSettings("s" as AnyObject, settingsKey: sH.computerSpeedDictionaryKey)
+        slowComputerButton.isSelected = true
+        mediumComputerButton.isSelected = false
+        fastComputerButton.isSelected = false
+        extremeComputerButton.isSelected = false
     }
     
-    @IBAction func pressMediumComputerButton(sender: AnyObject) {
-        sH.saveToSettings("m", settingsKey: sH.computerSpeedDictionaryKey)
-        slowComputerButton.selected = false
-        mediumComputerButton.selected = true
-        fastComputerButton.selected = false
-        extremeComputerButton.selected = false
+    @IBAction func pressMediumComputerButton(_ sender: AnyObject) {
+        sH.saveToSettings("m" as AnyObject, settingsKey: sH.computerSpeedDictionaryKey)
+        slowComputerButton.isSelected = false
+        mediumComputerButton.isSelected = true
+        fastComputerButton.isSelected = false
+        extremeComputerButton.isSelected = false
     }
     
-    @IBAction func pressFastComputerButton(sender: AnyObject) {
-        sH.saveToSettings("f", settingsKey: sH.computerSpeedDictionaryKey)
-        slowComputerButton.selected = false
-        mediumComputerButton.selected = false
-        fastComputerButton.selected = true
-        extremeComputerButton.selected = false
+    @IBAction func pressFastComputerButton(_ sender: AnyObject) {
+        sH.saveToSettings("f" as AnyObject, settingsKey: sH.computerSpeedDictionaryKey)
+        slowComputerButton.isSelected = false
+        mediumComputerButton.isSelected = false
+        fastComputerButton.isSelected = true
+        extremeComputerButton.isSelected = false
     }
     
-    @IBAction func pressExtremeComputerButton(sender: AnyObject) {
-        sH.saveToSettings("e", settingsKey: sH.computerSpeedDictionaryKey)
-        slowComputerButton.selected = false
-        mediumComputerButton.selected = false
-        fastComputerButton.selected = false
-        extremeComputerButton.selected = true
+    @IBAction func pressExtremeComputerButton(_ sender: AnyObject) {
+        sH.saveToSettings("e" as AnyObject, settingsKey: sH.computerSpeedDictionaryKey)
+        slowComputerButton.isSelected = false
+        mediumComputerButton.isSelected = false
+        fastComputerButton.isSelected = false
+        extremeComputerButton.isSelected = true
     }
     
     
@@ -138,11 +140,11 @@ class SettingsViewController: UIViewController {
     internal func prepareSettingsMenu() {
         
         backToMainMenuButton.titleLabel?.font = gameFont
-        backToMainMenuButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
+        backToMainMenuButton.setTitleColor(UIColor.white.withAlphaComponent(0.7), for: UIControlState())
         backToMainMenuButton.sizeToFit()
         
         dataCollectionButton.titleLabel?.font = gameFont
-        dataCollectionButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
+        dataCollectionButton.setTitleColor(UIColor.white.withAlphaComponent(0.7), for: UIControlState())
         dataCollectionButton.sizeToFit()
         
         normalDeckButton.titleLabel?.font = gameFont
@@ -174,39 +176,39 @@ class SettingsViewController: UIViewController {
         
         switch (cardType) {
         case "n":
-            numberCardButton.selected = true
+            numberCardButton.isSelected = true
             break
         case "r":
-            regularCardButton.selected = true
+            regularCardButton.isSelected = true
             break
         case "s":
-            symbolCardButton.selected = true
+            symbolCardButton.isSelected = true
             break
         default: break
         }
         
         switch (deckSize) {
         case "n":
-            normalDeckButton.selected = true
+            normalDeckButton.isSelected = true
             break
         case "l":
-            largeDeckButton.selected = true
+            largeDeckButton.isSelected = true
             break
         default: break
         }
         
         switch (computerSpeed) {
         case "s":
-            slowComputerButton.selected = true
+            slowComputerButton.isSelected = true
             break
         case "m":
-            mediumComputerButton.selected = true
+            mediumComputerButton.isSelected = true
             break
         case "f":
-            fastComputerButton.selected = true
+            fastComputerButton.isSelected = true
             break
         case "e":
-            extremeComputerButton.selected = true
+            extremeComputerButton.isSelected = true
             break
         default: break
         }

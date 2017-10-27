@@ -17,8 +17,8 @@ class AboutViewController: UIViewController {
     
     // Custom game fonts
     var gameFont: UIFont {
-        switch UIDevice.currentDevice().userInterfaceIdiom {
-        case .Phone:
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
             return UIFont(name: "DINCond-Bold", size: 17)!
         default:
             return UIFont(name: "DINCond-Bold", size: 32)!
@@ -38,9 +38,9 @@ class AboutViewController: UIViewController {
     
     // MARK: - Settings Screen Interactions
     
-    @IBAction func pressBackToMainMenuButton(sender: AnyObject) {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("unwindToMenuFromAbout", sender: self)
+    @IBAction func pressBackToMainMenuButton(_ sender: AnyObject) {
+        DispatchQueue.main.async(execute: {
+            self.performSegue(withIdentifier: "unwindToMenuFromAbout", sender: self)
         })
     }
     
@@ -49,11 +49,11 @@ class AboutViewController: UIViewController {
     internal func prepareAboutScreen() {
         
         backToMainMenuButton.titleLabel?.font = gameFont
-        backToMainMenuButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
+        backToMainMenuButton.setTitleColor(UIColor.white.withAlphaComponent(0.7), for: UIControlState())
         backToMainMenuButton.sizeToFit()
         
-        aboutLabel.text = "Lorem ipsum bla blah"
-        aboutLabel.textColor = UIColor.whiteColor()
+        aboutLabel.text = "Fractions War was designed and developed through a collaboration of educational researchers and software developers at the University of Wisconsin-Madison.  Support was provided by the Educational Neuroscience and MELD Labs and CS 407: Foundations of Mobile Systems and Applications.\n\nThe game was created to help study how children and adults think about numerical quantities when they play card games such as War.\n\nThe game is designed with the goal of providing a fun way for students, teachers, and gamers to play with fractions."
+        aboutLabel.textColor = UIColor.white
         aboutLabel.sizeToFit()
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)

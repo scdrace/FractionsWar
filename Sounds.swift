@@ -13,38 +13,38 @@ class Sounds {
     
     static let shared = Sounds()
     
-    private var begin: SystemSoundID?
-    private var error: SystemSoundID?
-    private var move: SystemSoundID?
-    private var pause: SystemSoundID?
-    private var place: SystemSoundID?
-    private var war: SystemSoundID?
+    fileprivate var begin: SystemSoundID?
+    fileprivate var error: SystemSoundID?
+    fileprivate var move: SystemSoundID?
+    fileprivate var pause: SystemSoundID?
+    fileprivate var place: SystemSoundID?
+    fileprivate var war: SystemSoundID?
     
-    private init() {
+    fileprivate init() {
     
-        if let beginURL = NSBundle.mainBundle().URLForResource("begin", withExtension: "wav") {
+        if let beginURL = Bundle.main.url(forResource: "begin", withExtension: "wav") {
             begin = 0
-            AudioServicesCreateSystemSoundID(beginURL, &begin!)
+            AudioServicesCreateSystemSoundID(beginURL as CFURL, &begin!)
         }
-        if let errorURL = NSBundle.mainBundle().URLForResource("error", withExtension: "wav") {
+        if let errorURL = Bundle.main.url(forResource: "error", withExtension: "wav") {
             error = 1
-            AudioServicesCreateSystemSoundID(errorURL, &error!)
+            AudioServicesCreateSystemSoundID(errorURL as CFURL, &error!)
         }
-        if let moveURL = NSBundle.mainBundle().URLForResource("move", withExtension: "wav") {
+        if let moveURL = Bundle.main.url(forResource: "move", withExtension: "wav") {
             move = 2
-            AudioServicesCreateSystemSoundID(moveURL, &move!)
+            AudioServicesCreateSystemSoundID(moveURL as CFURL, &move!)
         }
-        if let pauseURL = NSBundle.mainBundle().URLForResource("pause", withExtension: "wav") {
+        if let pauseURL = Bundle.main.url(forResource: "pause", withExtension: "wav") {
             pause = 3
-            AudioServicesCreateSystemSoundID(pauseURL, &pause!)
+            AudioServicesCreateSystemSoundID(pauseURL as CFURL, &pause!)
         }
-        if let placeURL = NSBundle.mainBundle().URLForResource("place", withExtension: "wav") {
+        if let placeURL = Bundle.main.url(forResource: "place", withExtension: "wav") {
             place = 4
-            AudioServicesCreateSystemSoundID(placeURL, &place!)
+            AudioServicesCreateSystemSoundID(placeURL as CFURL, &place!)
         }
-        if let warURL = NSBundle.mainBundle().URLForResource("war", withExtension: "wav") {
+        if let warURL = Bundle.main.url(forResource: "war", withExtension: "wav") {
             war = 5
-            AudioServicesCreateSystemSoundID(warURL, &war!)
+            AudioServicesCreateSystemSoundID(warURL as CFURL, &war!)
         }
     }
     

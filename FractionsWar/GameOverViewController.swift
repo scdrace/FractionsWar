@@ -13,25 +13,39 @@ class GameOverViewController: UIViewController {
     
     @IBOutlet weak var modalView: UIView!
     @IBOutlet weak var winnerLabel: UILabel!
+    @IBOutlet weak var outOfCardsLabel: UILabel!
+    @IBOutlet weak var p1PtsLabel: UILabel!
+    @IBOutlet weak var p2PtsLabel: UILabel!
     @IBOutlet weak var returnToMainMenuButton: UIButton!
     
     var winner: String?
+    var out: String?
+    var p1Pts: String?
+    var p2Pts: String?
     
     // Custom game fonts
     var gameButtonFont: UIFont {
-        switch UIDevice.currentDevice().userInterfaceIdiom {
-        case .Phone:
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
             return UIFont(name: "DINCond-Bold", size: 32)!
         default:
             return UIFont(name: "DINCond-Bold", size: 42)!
         }
     }
-    var gameLabelFont: UIFont {
-        switch UIDevice.currentDevice().userInterfaceIdiom {
-        case .Phone:
+    var gameBigLabelFont: UIFont {
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
             return UIFont(name: "DINCond-Bold", size: 38)!
         default:
             return UIFont(name: "DINCond-Bold", size: 62)!
+        }
+    }
+    var gameLabelFont: UIFont {
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            return UIFont(name: "DINCond-Bold", size: 18)!
+        default:
+            return UIFont(name: "DINCond-Bold", size: 36)!
         }
     }
     
@@ -48,9 +62,9 @@ class GameOverViewController: UIViewController {
     
     // MARK: - Pause Screen Interactions
     
-    @IBAction func pressReturnToMainMenuButton(sender: AnyObject) {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("unwindToMenuFromGameOver", sender: self)
+    @IBAction func pressReturnToMainMenuButton(_ sender: AnyObject) {
+        DispatchQueue.main.async(execute: {
+            self.performSegue(withIdentifier: "unwindToMenuFromGameOver", sender: self)
         })
     }
     
@@ -58,9 +72,22 @@ class GameOverViewController: UIViewController {
     
     internal func prepareScreen() {
         
-        // adjust label style
+        // adjust label styles
         winnerLabel.text = winner
-        winnerLabel.font = gameLabelFont
+        winnerLabel.font = gameBigLabelFont
+        winnerLabel.sizeToFit()
+        
+        outOfCardsLabel.text = out
+        outOfCardsLabel.font = gameLabelFont
+        outOfCardsLabel.sizeToFit()
+        
+        p1PtsLabel.text = p1Pts
+        p1PtsLabel.font = gameLabelFont
+        p1PtsLabel.sizeToFit()
+        
+        p2PtsLabel.text = p2Pts
+        p2PtsLabel.font = gameLabelFont
+        p2PtsLabel.sizeToFit()
         
         // adjust button style
         returnToMainMenuButton.titleLabel?.font = gameButtonFont

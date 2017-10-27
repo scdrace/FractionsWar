@@ -1,5 +1,5 @@
 //
-//  Game.swift
+//  swift
 //  FractionsWar
 //
 //  Created by David Race on 3/25/16.
@@ -9,81 +9,193 @@
 import Foundation
 import UIKit
 
-class Game: CustomStringConvertible {
+//CustomStringConvertible
+class Game: NSObject, NSCoding {
     
+    var warDeck = false
+    
+    let appBeginTime = CACurrentMediaTime()
+    fileprivate var timeStamp: String?
     var deck = Deck()
-    var round: Round
-    var data: Data
-    var player1 = Player(name: "player1")
-    var player2 = Player(name: "player2")
+    var round: Int = 0
+    var data = Data()
+    fileprivate var player1 = Player(name: "player1")
+    fileprivate var player2 = Player(name: "player2")
+    fileprivate var player1ID: String?
+    fileprivate var player2ID: String?
+    
+    // Game state variables
+    var p1ready = false
+    var p2ready = false
+    var cardsAreUp = false
+    var inAction = false
+    
+    //Misc. variables
+    var roundStartTime = 0.0
+    var swipeTime = 0.0
+    var computerTimer =  Timer()
+    
+    var playerMode = 0
+    fileprivate var gameState = GameState.start
+    
     
     struct Cards {
         var p1Numerator: Card
         var p1Denominator: Card
         var p2Numerator: Card
         var p2Denominator: Card
+        
     }
     
-    var description: String {
+    override var description: String {
         return "x"
     }
     
-    init() {
-        self.round = Round(player1: player1, player2: player2)
-        self.data = Data(player1: player1, player2: player2)
+    
+    let gameArchiveURL: URL = {
         
-        while (!deck.deckRandom.isEmpty) {
-            let p1c = self.deck.deckRandom.removeLast()
-            player1.cards.append(p1c)
-            
-            let p2c = self.deck.deckRandom.removeLast()
-            player2.cards.append(p2c)
-        }
-    }
-    
-    func nextRound(war: Bool) {
         
-        if (player1.cards.count > 1 && player2.cards.count > 1) {
+        //Create path-name for file
+        let documentsDirectories = FileManager.default.urls(for: .documentDirectory,
+                                                                                   in: .userDomainMask)
+        let documentDirectory = documentsDirectories.first!
+        
+        return documentDirectory.appendingPathComponent("gameData.archive")
+    }()
+    
+    override init() {
+        
+        func timeStamp() -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy'_'MM'_'dd'_'a'_'HH'_'mm'_'ss"
             
-            player1.makeHand(war)
-            player2.makeHand(war)
+            let date = Date()
+            let dateX = dateFormatter.string(from: date)
+            
+            return dateX
         }
-        else {
-            self.imageClean()
+        
+        //print("init")
+        //print("FilePath \(pathURL("david"))")
+        
+        self.timeStamp = timeStamp()
+        
+        super.init()
+        
+        self.data.game = self
+        self.round = 1
+        
+        /*
+        do {
+            player1.id = try String(contentsOfURL: player1IDURL(), encoding: NSUTF8StringEncoding)
+            print(player1.id)
         }
+        catch {
+            
+        }
+        */
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.saveChanges),
+                                                         name: NSNotification.Name(rawValue: "ResignActive"), object: nil)
+        
+        
+        let deckRandom = deck.deckRandom
+        //let deckWar = deck.deckWar
+        
+        makePlayerDecks(deckRandom)
+        
     }
     
-    func flipCards() {
-        player1.hand[0]!.flipCards()
-        player2.hand[0]!.flipCards()
+    convenience init(customDeck: [[String]]) {
+        self.init()
+        
+        
+        let deckCustom = deck.makeDeckCustom(data: customDeck)
+        
+        makeCustomDecks(playerDecks: deckCustom)
+        
+    }
+    // MARK: - Reload (aDecoder) and Save (aCoder) methods
+    
+    required init?(coder aDecoder: NSCoder) {
+        deck = aDecoder.decodeObject(forKey: "deck") as! Deck
+        //round = aDecoder.decodeObjectForKey("round") as! Round
+        data = aDecoder.decodeObject(forKey: "data") as! Data
+        player1 = aDecoder.decodeObject(forKey: "player1") as! Player
+        player2 = aDecoder.decodeObject(forKey: "player2") as! Player
+        
+        player1ID = aDecoder.decodeObject(forKey: "player1ID") as? String
+        player2ID = aDecoder.decodeObject(forKey: "player2ID") as? String
+        
+        timeStamp = aDecoder.decodeObject(forKey: "timeStamp") as? String
+        
+        print("required init")
+        
+        super.init()
     }
     
-    func flipDown() {
-        player1.hand[0]!.flipDown()
-        player2.hand[0]!.flipDown()
+    func encode(with aCoder: NSCoder) {
+        
+        print("encode")
+        
+        aCoder.encode(timeStamp, forKey: "timeStamp")
+        
+        aCoder.encode(deck, forKey: "deck")
+        aCoder.encode(round, forKey: "round")
+        aCoder.encode(data, forKey: "data")
+        aCoder.encode(player1, forKey: "player1")
+        aCoder.encode(player2, forKey: "player2")
+        aCoder.encode(player1ID, forKey: "player1ID")
+        aCoder.encode(player2ID, forKey: "player2ID")
+        
     }
     
-    func resizeCards(cardFrame: CGRect) {
-        player1.hand[0]!.resizeCards(cardFrame)
-        player2.hand[0]!.resizeCards(cardFrame)
-    }
     
-    func getP1Numerator() -> Card {
-        return player1.getNumerator()
+    @objc func saveChanges() -> Bool {
+        print("Saving items to: \(gameArchiveURL.path)")
+        
+        //return true
+        return NSKeyedArchiver.archiveRootObject(self, toFile: gameArchiveURL.path)
     }
 
-    func getP1Denominator() -> Card {
-        return player1.getDenominator()
+    
+    func makeCustomDecks(playerDecks: [[Card]]) {
+        player1.subDeck = playerDecks[0]
+        player2.subDeck = playerDecks[1]
     }
     
-    func warHands() -> [Hand]? {
+    func makePlayerDecks(_ deckType: [Card]) {
+        player1.subDeck.removeAll()
+        player2.subDeck.removeAll()
         
-        if player1.getWarHands() != nil {
-            let result = player1.getWarHands()
-            return result
+        //Get number of elements in half the original deck
+        let length = deckType.count / 2
+        
+        deck.deckRandom.removeLast() //???
+        
+        //Append half the elements from the original deck to player1-deck
+        for index in 0..<length {
+            player1.subDeck.append(deckType[index])
         }
-        return nil
+        
+        //Append final cards from the original deck to player2-deck
+        for index in length..<deckType.count {
+            player2.subDeck.append(deckType[index])
+        }
     }
+    
+    func makeHands(_ gameState: GameState) {
+        
+        if (player1.subDeck.count > 1 && player2.subDeck.count > 1) {
+            
+            //print("MakeHand")
+            player1.makeHand(gameState)
+            player2.makeHand(gameState)
+        }
+    }
+    
+    
+    //MARK: - Setter & Getter methods
     
     func getCards() -> Cards {
         
@@ -93,6 +205,32 @@ class Game: CustomStringConvertible {
         return cards
     }
     
+    
+    func setGameState(_ gameState: GameState) {
+        self.gameState = gameState
+    }
+    
+    func getGameState() -> GameState {
+        return self.gameState
+    }
+    
+    func setPlayer1ID(_ playerID: String) {
+        self.player1ID = playerID
+    }
+    
+    func getPlayer1ID() -> String? {
+        return self.player1ID
+    }
+    
+    func setPlayer2ID(_ playerID: String) {
+        self.player2ID = playerID
+    }
+    
+    func getPlayer2ID() -> String? {
+        return self.player2ID
+    }
+    
+    
     func getPlayer1() -> Player {
         return player1
     }
@@ -101,19 +239,59 @@ class Game: CustomStringConvertible {
         return player2
     }
     
-    func getRound() -> Round {
+    func getP1Numerator() -> Card {
+        return player1.getNumerator()
+    }
+    
+    func getP1Denominator() -> Card {
+        return player1.getDenominator()
+    }
+    
+    func getTimeStamp() -> String {
+        return self.timeStamp!
+    }
+    
+    //MARK: - Save Data
+    func saveDataImmediate(_ swipeTime: Double) {
+        data.saveRoundData(round, swipeTime: swipeTime, highHand: highHand)
+        //print("XXXXXXX:\(info)")
+        //data.saveToTextImmediately(info)
+        
+    }
+}
+
+extension Game {
+    
+    var highHand: String {
+        
+        if player1.getHand().decimalValue - player2.getHand().decimalValue > 0 {
+            return "player1"
+        }
+        else if player1.getHand().decimalValue - player2.getHand().decimalValue < 0 {
+            return "player2"
+        }
+        else {
+            return "tie"
+        }
+    }
+    
+    func addHandsToWinnerDeck(_ player: String) {
+        
+        let hands = player1.hand + player2.hand
+        
+        switch player {
+        case "player1":
+            player1.addCardsToPlayerDeck(hands)
+            break
+        case "player2":
+            player2.addCardsToPlayerDeck(hands)
+            break
+        default: break
+        }
+    }
+    
+    
+    func getRound() -> Int {
         return round
-    }
-    
-    func imageClean() {
-        round.imageClean()
-    }
-    
-    func highHand() -> String {
-        return round.highHand
-    }
-    
-    func addRoundData(swipeTime: Double) {
-        self.data.addRoundData(self.round.getRound(), swipeTime: swipeTime, highHand: self.round.highHand)
     }
 }

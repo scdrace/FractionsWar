@@ -8,8 +8,20 @@
 
 import Foundation
 import UIKit
+import MessageUI
 
-class DataCollectionViewController: UIViewController {
+class DataCollectionViewController: UIViewController, MFMailComposeViewControllerDelegate {
+    
+    /*
+    //TODO: This is temporary
+    let itemArchiveURL: NSURL = {
+        let documentsDirectories = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        
+        let documentDirectory = documentsDirectories.first!
+        
+        return documentDirectory.URLByAppendingPathComponent("textFile0.txt")
+    }()
+    */
     
     @IBOutlet weak var backToSettingsButton: UIButton!
     @IBOutlet weak var dataCollectionLabel: UILabel!
@@ -22,8 +34,8 @@ class DataCollectionViewController: UIViewController {
     
     // Custom game fonts
     var gameFont: UIFont {
-        switch UIDevice.currentDevice().userInterfaceIdiom {
-        case .Phone:
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
             return UIFont(name: "DINCond-Bold", size: 17)!
         default:
             return UIFont(name: "DINCond-Bold", size: 32)!
@@ -47,58 +59,76 @@ class DataCollectionViewController: UIViewController {
     
     // MARK: - Data Collection Screen Interactions
     
-    @IBAction func pressBackToSettingsButton(sender: AnyObject) {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.dismissViewControllerAnimated(false, completion: nil)
+    @IBAction func pressBackToSettingsButton(_ sender: AnyObject) {
+        DispatchQueue.main.async(execute: {
+            self.dismiss(animated: false, completion: nil)
+            
+            let x = self.presentingViewController as! SettingsViewController
+            print(x.collectData)
         })
     }
     
-    @IBAction func pressBeginCollectingDataButton(sender: AnyObject) {
-        if (beginCollectingDataButton.selected) {
-            sH.saveToSettings(false, settingsKey: sH.isCollectingDataDictionaryKey)
-            beginCollectingDataButton.selected = false
-        } else {
-            sH.saveToSettings(true, settingsKey: sH.isCollectingDataDictionaryKey)
-            beginCollectingDataButton.selected = true
+    @IBAction func pressBeginCollectingDataButton(_ sender: AnyObject) {
+        
+        
+        func dataCollection() {
+            // TODO: Set variable in plist to true or false;
+            // TODO: Look in SwipeLogicExt for 'game.saveDataImmediate(swipeTime)'
+            // TODO: wrap that call in test (if or switch) based on plist value
+            
+            let x = self.presentingViewController as! SettingsViewController
+            
+            if (beginCollectingDataButton.isSelected) {
+                sH.saveToSettings(false as AnyObject, settingsKey: sH.isCollectingDataDictionaryKey)
+                beginCollectingDataButton.isSelected = false
+                
+                //TODO: Better implementation; SettingsHelper?
+                x.collectData = false
+            } else {
+                sH.saveToSettings(true as AnyObject, settingsKey: sH.isCollectingDataDictionaryKey)
+                beginCollectingDataButton.isSelected = true
+                
+                //TODO: Better implementation; SettingsHelper?
+                x.collectData = true
+            }
+            updateDataCollectionLabelText()
         }
-        updateDataCollectionLabelText()
+        
+        self.enterPassword(dataCollection)
     }
     
-    @IBAction func pressExportDataButton(sender: AnyObject) {
+    
+    @IBAction func pressExportDataButton(_ sender: AnyObject) {
         
-        let exportAlert = UIAlertController(title: "Export Data", message: "Click Export to share your swipe data.", preferredStyle: UIAlertControllerStyle.Alert)
+        func exportData() {
+            let export = ExportDataViewController()
+
+            present(export, animated: false, completion: nil)
+        }
         
-        exportAlert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
-            textField.text = "Enter destination email address"
-        })
-        
-        exportAlert.addAction(UIAlertAction(title: "Export", style: .Default, handler: { (action: UIAlertAction!) in
-            
-            // Handle export logic here
-            
-            let textField = exportAlert.textFields![0] as UITextField
-            print("Text field: \(textField.text)")
-        }))
-        
-        exportAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-        }))
-        
-        presentViewController(exportAlert, animated: true, completion: nil)
+        self.enterPassword(exportData)
     }
     
-    @IBAction func pressClearDataButton(sender: AnyObject) {
+    
+    @IBAction func pressClearDataButton(_ sender: AnyObject) {
         
-        let clearAlert = UIAlertController(title: "Clear Data", message: "All swipe data will be lost.\n\n Consider exporting your data first.", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        clearAlert.addAction(UIAlertAction(title: "Clear Data", style: .Default, handler: { (action: UIAlertAction!) in
+        func clearData() {
+            let clearAlert = UIAlertController(title: "Clear Data", message: "All swipe data will be lost.\n\n Consider exporting your data first.", preferredStyle: UIAlertControllerStyle.alert)
             
-            // Handle clear logic here
-        }))
+            
+            clearAlert.addAction(UIAlertAction(title: "Clear Data", style: .default, handler: { (action: UIAlertAction!) in
+                
+                // Handle clear logic here
+                deleteDatafiles()
+            }))
+            
+            clearAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            }))
+            
+            present(clearAlert, animated: true, completion: nil)
+        }
         
-        clearAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-        }))
-        
-        presentViewController(clearAlert, animated: true, completion: nil)
+        self.enterPassword(clearData)
     }
     
     // MARK: - Data Collection Screen Display Setup
@@ -106,12 +136,12 @@ class DataCollectionViewController: UIViewController {
     internal func prepareDataCollectionScreen() {
         
         backToSettingsButton.titleLabel?.font = gameFont
-        backToSettingsButton.setTitleColor(UIColor.whiteColor().colorWithAlphaComponent(0.7), forState: UIControlState.Normal)
+        backToSettingsButton.setTitleColor(UIColor.white.withAlphaComponent(0.7), for: UIControlState())
         backToSettingsButton.sizeToFit()
         
         updateDataCollectionLabelText()
-        dataCollectionLabel.textColor = UIColor.whiteColor()
-        dataCollectionLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        dataCollectionLabel.textColor = UIColor.white
+        dataCollectionLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         dataCollectionLabel.sizeToFit()
         
         beginCollectingDataButton.titleLabel?.font = gameFont
@@ -126,19 +156,18 @@ class DataCollectionViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
     }
     
-    private func updateDataCollectionLabelText() {
+    fileprivate func updateDataCollectionLabelText() {
         var text = ""
         
         let isCollecting = sH.retrieveFromSettings(sH.isCollectingDataDictionaryKey) as! Bool
-        let collectionLimit = sH.retrieveFromSettings(sH.dataCollectionLimitDictionaryKey) as! NSNumber
-        let collectionSize = dH.retrieveDataPlistSize()
+        //let collectionLimit = sH.retrieveFromSettings(sH.dataCollectionLimitDictionaryKey) as! NSNumber
+        //let collectionSize = dH.retrieveDataPlistSize()
         
         text += "Fractions War can collect swipe data as users play the game. The app will store data about each swipe on the device as long as data collection is active."+"\n\n"
         
         if (isCollecting) {
             text += "You are currently collecting data on this device."+"\n\n"
-            text += "Current number of data entries stored on device: "+collectionSize.stringValue+"\n"
-            text += "Maximum number of data entries that can be stored: "+collectionLimit.stringValue+"\n\n"
+            text += "Periodically clear your data to keep the application size from inflating."+"\n\n"
         } else {
             text += "You are currently not collecting data on this device."
         }
@@ -151,9 +180,40 @@ class DataCollectionViewController: UIViewController {
         let isCollecting = sH.retrieveFromSettings(sH.isCollectingDataDictionaryKey) as! Bool
         
         if (isCollecting) {
-            beginCollectingDataButton.selected = true
+            beginCollectingDataButton.isSelected = true
         } else {
-            beginCollectingDataButton.selected = false
+            beginCollectingDataButton.isSelected = false
         }
+    }
+    
+    func enterPassword(_ passwordAction: @escaping ()->()) {
+        
+        // TODO: Password cannot exist here
+        let password = sH.retrieveFromSettings(sH.dataCollectionPasswordDictionaryKey) as! String
+        
+        let passwordAlert = UIAlertController(title: "Enter Password", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        
+        passwordAlert.addTextField(configurationHandler: { (textField) -> Void in
+            
+            //textField.placeholder = "password"
+        })
+        
+        passwordAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+        }))
+        
+        passwordAlert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { (action: UIAlertAction!) in
+            
+            if passwordAlert.textFields?.first!.text! == String(password) {
+                print("Password Match")
+                passwordAction()
+                return
+            }
+            print(passwordAlert.textFields?.first?.text)
+            print("password mismatch")
+        }))
+        
+        present(passwordAlert, animated: true) {
+        }
+
     }
 }

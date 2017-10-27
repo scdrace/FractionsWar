@@ -10,36 +10,36 @@ import Foundation
 
 struct Settings {
     
-    enum PlistError: ErrorType {
-        case FileNotWritten
-        case FileDoesNotExist
+    enum PlistError: Error {
+        case fileNotWritten
+        case fileDoesNotExist
     }
     
     let name = "Settings"
     
     var sourcePath: String? {
-        guard let path = NSBundle.mainBundle().pathForResource(name, ofType: "plist") else { return .None }
+        guard let path = Bundle.main.path(forResource: name, ofType: "plist") else { return .none }
         return path
     }
     
     var destPath: String? {
-        guard sourcePath != .None else { return .None }
-        let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        return (dir as NSString).stringByAppendingPathComponent("\(name).plist")
+        guard sourcePath != .none else { return .none }
+        let dir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        return (dir as NSString).appendingPathComponent("\(name).plist")
     }
     
     init?() {
 
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
 
         guard let source = sourcePath else { return nil }
         guard let destination = destPath else { return nil }
-        guard fileManager.fileExistsAtPath(source) else { return nil }
+        guard fileManager.fileExists(atPath: source) else { return nil }
 
-        if !fileManager.fileExistsAtPath(destination) {
+        if !fileManager.fileExists(atPath: destination) {
 
             do {
-                try fileManager.copyItemAtPath(source, toPath: destination)
+                try fileManager.copyItem(atPath: source, toPath: destination)
             } catch let error as NSError {
                 print("Unable to copy file. ERROR: \(error.localizedDescription)")
                 return nil
@@ -48,34 +48,34 @@ struct Settings {
     }
     
     func getValuesInPlistFile() -> NSDictionary? {
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(destPath!) {
-            guard let dict = NSDictionary(contentsOfFile: destPath!) else { return .None }
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: destPath!) {
+            guard let dict = NSDictionary(contentsOfFile: destPath!) else { return .none }
             return dict
         } else {
-            return .None
+            return .none
         }
     }
 
     func getMutablePlistFile() -> NSMutableDictionary? {
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(destPath!) {
-            guard let dict = NSMutableDictionary(contentsOfFile: destPath!) else { return .None }
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: destPath!) {
+            guard let dict = NSMutableDictionary(contentsOfFile: destPath!) else { return .none }
             return dict
         } else {
-            return .None
+            return .none
         }
     }
 
-    func addValuesToPlistFile(dictionary:NSDictionary) throws {
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(destPath!) {
-            if !dictionary.writeToFile(destPath!, atomically: false) {
+    func addValuesToPlistFile(_ dictionary:NSDictionary) throws {
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: destPath!) {
+            if !dictionary.write(toFile: destPath!, atomically: false) {
                 print("File not written successfully")
-                throw PlistError.FileNotWritten
+                throw PlistError.fileNotWritten
             }
         } else {
-            throw PlistError.FileDoesNotExist
+            throw PlistError.fileDoesNotExist
         }
     }
 }
@@ -115,11 +115,14 @@ class SettingsHelper {
     let dataCollectionLimitDictionaryKey = "DataCollectionLimit"
     var dataCollectionLimitDictionaryData: AnyObject?
     
-    private init() { }
+    let dataCollectionPasswordDictionaryKey = "DataCollectionPassword"
+    var dataCollectionPasswordDictionaryData: AnyObject?
+    
+    fileprivate init() { }
     
     // MARK: - Settings Storage Helper Methods
     
-    internal func saveToSettings(settingsData: AnyObject, settingsKey: String) {
+    internal func saveToSettings(_ settingsData: AnyObject, settingsKey: String) {
         
         let dict = settings!.getMutablePlistFile()!
         dict[settingsKey] = settingsData
@@ -131,7 +134,7 @@ class SettingsHelper {
         }
     }
     
-    internal func retrieveFromSettings(settingsKey: String) -> AnyObject {
+    internal func retrieveFromSettings(_ settingsKey: String) -> AnyObject {
         
         let dict = settings!.getValuesInPlistFile()!
         
@@ -139,38 +142,41 @@ class SettingsHelper {
             if (myStringVal == "") {
                 return setDefaultSettingsValue(settingsKey)
             }
-            return myStringVal
+            return myStringVal as AnyObject
         } else if let myNumVal = dict[settingsKey] as? NSNumber {
             return myNumVal
         } else if let myBoolVal = dict[settingsKey] as? Bool {
-            return myBoolVal
+            return myBoolVal as AnyObject
         } else {
             return setDefaultSettingsValue(settingsKey)
         }
     }
     
-    internal func setDefaultSettingsValue(settingsKey: String) -> AnyObject {
+    internal func setDefaultSettingsValue(_ settingsKey: String) -> AnyObject {
         
         if (settingsKey == cardTypeDictionaryKey) {
-            saveToSettings("r", settingsKey: cardTypeDictionaryKey)
-            return "r"
+            saveToSettings("r" as AnyObject, settingsKey: cardTypeDictionaryKey)
+            return "r" as AnyObject
         } else if (settingsKey == deckSizeDictionaryKey) {
-            saveToSettings("n", settingsKey: deckSizeDictionaryKey)
-            return "n"
+            saveToSettings("n" as AnyObject, settingsKey: deckSizeDictionaryKey)
+            return "n" as AnyObject
         } else if (settingsKey == computerSpeedDictionaryKey) {
-            saveToSettings("s", settingsKey: computerSpeedDictionaryKey)
-            return "s"
+            saveToSettings("s" as AnyObject, settingsKey: computerSpeedDictionaryKey)
+            return "s" as AnyObject
         } else if (settingsKey == isCollectingDataDictionaryKey) {
-            saveToSettings(false, settingsKey: isCollectingDataDictionaryKey)
-            return false
+            saveToSettings(false as AnyObject, settingsKey: isCollectingDataDictionaryKey)
+            return false as AnyObject
         } else if (settingsKey == dataCollectionEmailDictionaryKey) {
-            saveToSettings("undefined", settingsKey: dataCollectionEmailDictionaryKey)
-            return "undefined"
+            saveToSettings("undefined" as AnyObject, settingsKey: dataCollectionEmailDictionaryKey)
+            return "undefined" as AnyObject
         } else if (settingsKey == dataCollectionLimitDictionaryKey) {
-            saveToSettings(4000, settingsKey: dataCollectionLimitDictionaryKey)
-            return 4000
+            saveToSettings(4000 as AnyObject, settingsKey: dataCollectionLimitDictionaryKey)
+            return 4000 as AnyObject
+        } else if (settingsKey == dataCollectionPasswordDictionaryKey) {
+            saveToSettings("0000" as AnyObject, settingsKey: dataCollectionPasswordDictionaryKey)
+            return "0000" as AnyObject
         } else {
-            return ""
+            return "" as AnyObject
         }
     }
 }

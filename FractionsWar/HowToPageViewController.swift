@@ -10,10 +10,12 @@ import UIKit
 
 class HowToPageViewController: UIPageViewController {
     
-    private(set) lazy var orderedViewControllers: [UIViewController] = {
+    fileprivate(set) lazy var orderedViewControllers: [UIViewController] = {
         return [self.newHowToViewController("1"),
                 self.newHowToViewController("2"),
-                self.newHowToViewController("3")]
+                self.newHowToViewController("3"),
+                self.newHowToViewController("4"),
+                self.newHowToViewController("5")]
     }()
     
     override func viewDidLoad() {
@@ -23,7 +25,7 @@ class HowToPageViewController: UIPageViewController {
         
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
-                               direction: .Forward,
+                               direction: .forward,
                                animated: true,
                                completion: nil)
         }
@@ -31,9 +33,9 @@ class HowToPageViewController: UIPageViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
     }
     
-    private func newHowToViewController(number: String) -> UIViewController {
+    fileprivate func newHowToViewController(_ number: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewControllerWithIdentifier("HowToPage\(number)")
+            instantiateViewController(withIdentifier: "HowToPage\(number)")
     }
 }
 
@@ -41,9 +43,9 @@ class HowToPageViewController: UIPageViewController {
 
 extension HowToPageViewController: UIPageViewControllerDataSource {
     
-    func pageViewController(pageViewController: UIPageViewController,
-                            viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = orderedViewControllers.indexOf(viewController) else {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
         }
         
@@ -62,9 +64,9 @@ extension HowToPageViewController: UIPageViewControllerDataSource {
         return orderedViewControllers[previousIndex]
     }
     
-    func pageViewController(pageViewController: UIPageViewController,
-                            viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = orderedViewControllers.indexOf(viewController) else {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
         }
         
@@ -84,13 +86,13 @@ extension HowToPageViewController: UIPageViewControllerDataSource {
         return orderedViewControllers[nextIndex]
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return orderedViewControllers.count
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         guard let firstViewController = viewControllers?.first,
-            firstViewControllerIndex = orderedViewControllers.indexOf(firstViewController) else {
+            let firstViewControllerIndex = orderedViewControllers.index(of: firstViewController) else {
                 return 0
         }
         

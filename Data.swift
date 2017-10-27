@@ -10,108 +10,175 @@ import Foundation
 
 class Data {
     
-    var player1: Player
-    var player2: Player
-    var gameData = [[String]]()
+    weak var game: Game!
+    var customDeck = [[String]]()
     
-    init(player1: Player, player2: Player) {
-        self.player1 = player1
-        self.player2 = player2
+    var swipeTimeCumulative: Double =  0.0
+    var swipeDirection = "empty"
+    var swipeDirectionCorrect = "empty"
+    
+    var header: String {
         
+        //TODO
+        //total time, additive round time, swipe direction
+        let a = "Round,SwipeTime,SwipeTimeCumulative,SwipeDirection,SwipeDirectionCorrect,RoundWinner,"
+        
+        let b = "player1ID,Player1Points,"
+        let c = "Player1NumeratorRank,Player1NumeratorSuit,Player1NumeratorCardType,"
+        let d = "Player1DenominatorRank,Player1DenominatorSuit,Player1DenominatorCardType,"
+        let player1 = b + c + d
+        
+        let e = "Player2ID,Player2Points,"
+        let f = "Player2NumeratorRank,Player2NumeratorSuit,Player2NumeratorCardType,"
+        let g = "Player2DenominatorRank,Player2DenominatorSuit,Player2DenominatorCardType"
+        let player2 = e + f + g
+        
+        
+        let result = a + player1 + player2 + "\n"
+        return result
     }
     
-    func addRoundData(round: Int, swipeTime: Double, highHand: String) {
+    func setSwipeDirection(swipeDirection: String) {
+        self.swipeDirection = swipeDirection
+    }
+    
+    func setSwipeDirectionCorrect(swipeDirectionCorrect: String) {
+        self.swipeDirectionCorrect = swipeDirectionCorrect
+    }
+    
+    func saveRoundData(_ round: Int, swipeTime: Double, highHand: String) {
+        
+        // Update swipeTimeCumulative
+        swipeTimeCumulative += swipeTime
         
         let round = String(round)
         let swipeTime = String(swipeTime)
-        let highHand = String(highHand)
+        let highHand = highHand
+        let roundData = [round, swipeTime, String(swipeTimeCumulative), swipeDirection, swipeDirectionCorrect, highHand]
         
-        let player1 = playerData(self.player1, addCardType: true)
-        let player2 = playerData(self.player2, addCardType: false)
+        let player1Data = playerData(game.getPlayer1())
+        let player2Data = playerData(game.getPlayer2())
         
-        var result = [String]()
-        result.append(round)
-        result.append(swipeTime)
-        result.append(highHand)
-        result.appendContentsOf(player1)
-        result.appendContentsOf(player2)
+        let player1ID = [game.getPlayer1ID()!]
+        var player2ID = ["computer"]
         
-        gameData.append(result)
+        if game.getPlayer2ID() != nil {
+            player2ID = [game.getPlayer2ID()!]
+        }
         
-        print(gameData)
+    
+        var result = roundData + player1ID
+        result = result + player1Data
+        result = result + player2ID
+        result = result + player2Data
+        
+        let resultString = result.joined(separator: ",") + "\n"
+        
+        print("Player1Data: \(resultString)")
+        
+        saveToFile(resultString)
+    }
+    
+    /*
+     Return: [String], with info about the hand
+     */
+    func playerData(_ player: Player) -> [String] {
+        
+        func cardData(_ card: Card) -> [String] {
+            let rank = String(Int(card.rank))
+            let suit = card.suit
+            let type = card.cardType
+            
+            return [rank, suit, type]
+        }
+        
+        let name = player.name
+        let points = String(player.points)
+        
+        let numeratorData = cardData(player.hand.first!.numerator)
+        let denominatorData = cardData(player.hand.first!.denominator)
+        
+        let playerDataArray = [points] + numeratorData + denominatorData
+        
+        return playerDataArray
     }
     
     
-    func cardData(card: Card, addCardType: Bool ) -> [String] {
-        let rank = String(card.rank)
-        let suit = card.suit
-        let cardType = card.cardType
+    func saveToFile(_ line: String) {
         
-        if addCardType == true {
-            return [cardType, rank, suit]
+        do {
+            
+            // Make fileName
+            var fileName = "fracWar_" + game.getPlayer1ID()!
+            
+            if game.getPlayer2ID() != nil {
+                fileName = fileName + "_" + game.getPlayer2ID()!
+            }
+            
+            fileName = fileName + "_" + game.getTimeStamp()
+            
+            //print(fileName)
+            
+            // Final fileName URL
+            let playerDataURL = documentDirectoryURL().appendingPathComponent(fileName)
+            
+            // Test whether file exists
+            // If not, begin by writing file header line
+            if !FileManager.default.fileExists(atPath: playerDataURL.path) {
+                try header.write(to: playerDataURL, atomically: true, encoding: String.Encoding.utf8)
+            }
+        
+            // Write data from round (one line) to file
+            let fileHandle =  try FileHandle(forWritingTo: playerDataURL)
+            fileHandle.seekToEndOfFile()
+            fileHandle.write(line.data(using: String.Encoding.utf8)!)
+            
+            fileHandle.closeFile()
+            
+        }
+        catch {
+            print("SaveError!")
         }
         
-        return [rank, suit]
     }
-    
-    func playerData(player: Player, addCardType: Bool) -> [String] {
-        
-        let name = player.getName()
-        var numerator = [String]()
-        
-        if addCardType == true {
-            numerator = cardData(player.getNumerator(), addCardType: true)
-        }
-        else {
-            numerator = cardData(player.getNumerator(), addCardType: false)
-        }
-        let denominator = cardData(player.getDenominator(), addCardType: false)
-        
-        let points = [String(player.getPoints())]
-        
-        var result = [String]()
-        result.append(name)
-        result.appendContentsOf(numerator)
-        result.appendContentsOf(denominator)
-        result.appendContentsOf(points)
-        
-        return result
-    }
+
 }
+
+
 
 
 struct DataFile {
     
-    enum PlistError: ErrorType {
-        case FileNotWritten
-        case FileDoesNotExist
+    enum PlistError: Error {
+        case fileNotWritten
+        case fileDoesNotExist
     }
     
     let name = "Data"
     
     var sourcePath: String? {
-        guard let path = NSBundle.mainBundle().pathForResource(name, ofType: "plist") else { return .None }
+        guard let path = Bundle.main.path(forResource: name, ofType: "plist") else { return .none }
         return path
     }
     
     var destPath: String? {
-        guard sourcePath != .None else { return .None }
-        let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        return (dir as NSString).stringByAppendingPathComponent("\(name).plist")
+        guard sourcePath != .none else { return .none }
+        let dir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        return (dir as NSString).appendingPathComponent("\(name).plist")
     }
     
     init?() {
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
         guard let source = sourcePath else { return nil }
         guard let destination = destPath else { return nil }
-        guard fileManager.fileExistsAtPath(source) else { return nil }
+        guard fileManager.fileExists(atPath: source) else { return nil }
         
-        if !fileManager.fileExistsAtPath(destination) {
+        if !fileManager.fileExists(atPath: destination) {
             
             do {
-                try fileManager.copyItemAtPath(source, toPath: destination)
+                try fileManager.copyItem(atPath: source, toPath: destination)
             } catch let error as NSError {
                 print("Unable to copy file. ERROR: \(error.localizedDescription)")
                 return nil
@@ -120,38 +187,78 @@ struct DataFile {
     }
     
     func getValuesInPlistFile() -> NSDictionary? {
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(destPath!) {
-            guard let dict = NSDictionary(contentsOfFile: destPath!) else { return .None }
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: destPath!) {
+            guard let dict = NSDictionary(contentsOfFile: destPath!) else { return .none }
             return dict
         } else {
-            return .None
+            return .none
         }
     }
     
     func getMutablePlistFile() -> NSMutableDictionary? {
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(destPath!) {
-            guard let dict = NSMutableDictionary(contentsOfFile: destPath!) else { return .None }
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: destPath!) {
+            guard let dict = NSMutableDictionary(contentsOfFile: destPath!) else { return .none }
             return dict
         } else {
-            return .None
+            return .none
         }
     }
     
-    func addValuesToPlistFile(dictionary:NSDictionary) throws {
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(destPath!) {
-            if !dictionary.writeToFile(destPath!, atomically: false) {
+    func addValuesToPlistFile(_ dictionary:NSDictionary) throws {
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: destPath!) {
+            if !dictionary.write(toFile: destPath!, atomically: false) {
                 print("File not written successfully")
-                throw PlistError.FileNotWritten
+                throw PlistError.fileNotWritten
             }
         } else {
-            throw PlistError.FileDoesNotExist
+            throw PlistError.fileDoesNotExist
         }
     }
 }
 
+extension Data {
+    
+    static func readDeckData(fileName: String) -> [[String]] {
+        
+        /*
+        do {
+            let x = try FileManager.default.contentsOfDirectory(atPath: documentDirectoryURL().path)
+            print(FileManager.default.contents(atPath: x[1]))
+        } catch {
+            
+        }
+         */
+        
+        
+        let fileURL = documentDirectoryURL().appendingPathComponent("deck.txt")
+        //print(documentDirectoryURL())
+        //print(FileManager.default.fileExists(atPath: filePath.path))
+        
+        
+        // Reading back from the file
+        var customDeck = [[String]]()
+        var inString = ""
+        do {
+            inString = try String(contentsOf: fileURL)
+            let q = inString.components(separatedBy: .newlines)
+            for line in q {
+                let r = line.components(separatedBy: ",")
+                print(r)
+                customDeck.append(r)
+            }
+           
+        } catch {
+            print("Failed reading from URL: \(fileURL), Error: " + error.localizedDescription)
+        }
+        
+        return customDeck
+    
+    }
+    
+}
 
 class DataHelper {
     
@@ -164,11 +271,11 @@ class DataHelper {
     let dataPlist = "Data.plist"
     var dataPlistPath: String = ""
     
-    private init() { }
+    fileprivate init() { }
     
     // MARK: - Data Storage Helper Methods
     
-    internal func saveToData(data: AnyObject, dataKey: String) {
+    internal func saveToData(_ data: AnyObject, dataKey: String) {
         
         let dict = dataFile!.getMutablePlistFile()!
         dict[dataKey] = data
@@ -184,6 +291,6 @@ class DataHelper {
         
         let dict = dataFile!.getValuesInPlistFile()!
         
-        return dict.count
+        return dict.count as NSNumber
     }
 }

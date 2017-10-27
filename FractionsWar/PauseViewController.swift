@@ -16,8 +16,8 @@ class PauseViewController: UIViewController {
     
     // Custom game fonts
     var gameFont: UIFont {
-        switch UIDevice.currentDevice().userInterfaceIdiom {
-        case .Phone:
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
             return UIFont(name: "DINCond-Bold", size: 32)!
         default:
             return UIFont(name: "DINCond-Bold", size: 42)!
@@ -37,15 +37,15 @@ class PauseViewController: UIViewController {
     
     // MARK: - Pause Screen Interactions
     
-    @IBAction func pressForfeitButton(sender: AnyObject) {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("unwindToMenuFromPause", sender: self)
+    @IBAction func pressForfeitButton(_ sender: AnyObject) {
+        DispatchQueue.main.async(execute: {
+            self.performSegue(withIdentifier: "unwindToMenuFromPause", sender: self)
         })
     }
     
-    @IBAction func pressReturnToGameButton(sender: AnyObject) {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.dismissViewControllerAnimated(false, completion: nil)
+    @IBAction func pressReturnToGameButton(_ sender: AnyObject) {
+        DispatchQueue.main.async(execute: {
+            self.dismiss(animated: false, completion: nil)
         })
     }
     
