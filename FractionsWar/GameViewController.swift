@@ -647,7 +647,9 @@ extension GameViewController {
             game.roundStartTime = CACurrentMediaTime()
             
             if game.playerMode == 1 {
-                game.computerTimer = Timer.scheduledTimer(timeInterval: difficulty, target:self, selector: #selector(self.computerSwipe), userInfo: nil, repeats: false)
+                game.computerTimer = Timer.scheduledTimer(withTimeInterval: difficulty, repeats: true) { (Timer) in
+                    self.computerSwipe()
+                }
             }
             
             if (p1NumeratorWar.isHidden) {

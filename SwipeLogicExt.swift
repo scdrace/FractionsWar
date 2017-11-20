@@ -31,7 +31,7 @@ extension GameViewController {
     /**
      Sends computer swipe
      */
-    func computerSwipe() {
+    @objc func computerSwipe() {
         
         let highHand = game.highHand
 
