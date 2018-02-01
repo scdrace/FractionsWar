@@ -74,26 +74,27 @@ class MenuViewController: UIViewController {
     internal func prepareMenu() {
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.png")!)
-        
-        aboutButton.titleLabel?.font = gameGlobalFont
+        /*
+        //aboutButton.titleLabel?.font = gameFont //gameGlobalFont
         aboutButton.setTitleColor(UIColor.white.withAlphaComponent(0.7), for: UIControlState())
         aboutButton.sizeToFit()
         
-        onePlayerButton.titleLabel?.font = gameFont
+        //onePlayerButton.titleLabel?.font = gameFont
         onePlayerButton.setTitleColor(UIColor.white, for: UIControlState())
         onePlayerButton.sizeToFit()
         
-        twoPlayerButton.titleLabel?.font = gameFont
+        //twoPlayerButton.titleLabel?.font = gameFont
         twoPlayerButton.setTitleColor(UIColor.white, for: UIControlState())
         twoPlayerButton.sizeToFit()
         
-        settingsButton.titleLabel?.font = gameFont
+        //settingsButton.titleLabel?.font = gameFont
         settingsButton.setTitleColor(UIColor.white, for: UIControlState())
         settingsButton.sizeToFit()
         
-        howToPlayButton.titleLabel?.font = gameFont
+        //howToPlayButton.titleLabel?.font = gameFont
         howToPlayButton.setTitleColor(UIColor.white, for: UIControlState())
         howToPlayButton.sizeToFit()
+        */
     }
     
     // MARK: - Navigation
