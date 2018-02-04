@@ -13,6 +13,7 @@
 		5534AFDA1C84E516006188CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFD81C84E516006188CB /* LaunchScreen.storyboard */; };
 		5534B0071C877045006188CB /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534B0061C877045006188CB /* Deck.swift */; };
 		5567B67F1D4AA85D00FF6545 /* CardFlipType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567B67E1D4AA85D00FF6545 /* CardFlipType.swift */; };
+		556BEF1D20270085005F24A7 /* CardFlipType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF1C20270085005F24A7 /* CardFlipType.swift */; };
 		559AB2081D6238B500FAA0F2 /* ExportDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559AB2071D6238B500FAA0F2 /* ExportDataViewController.swift */; };
 		559AB21D1D6A2CAE00FAA0F2 /* MoveAnimationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559AB21C1D6A2CAE00FAA0F2 /* MoveAnimationExt.swift */; };
 		559AB21F1D6CC25200FAA0F2 /* SetUpCardsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559AB21E1D6CC25200FAA0F2 /* SetUpCardsExt.swift */; };
@@ -60,6 +61,7 @@
 		5534AFDB1C84E516006188CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5534B0061C877045006188CB /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Deck.swift; path = FractionsWar/Deck.swift; sourceTree = "<group>"; };
 		5567B67E1D4AA85D00FF6545 /* CardFlipType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFlipType.swift; sourceTree = "<group>"; };
+		556BEF1C20270085005F24A7 /* CardFlipType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFlipType.swift; sourceTree = "<group>"; };
 		559AB2071D6238B500FAA0F2 /* ExportDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExportDataViewController.swift; path = ../ExportDataViewController.swift; sourceTree = "<group>"; };
 		559AB21C1D6A2CAE00FAA0F2 /* MoveAnimationExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveAnimationExt.swift; sourceTree = "<group>"; };
 		559AB21E1D6CC25200FAA0F2 /* SetUpCardsExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetUpCardsExt.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		55B8CD6B1D08AA0C00D6DC00 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				556BEF1C20270085005F24A7 /* CardFlipType.swift */,
 				55B8CD691D08A9AE00D6DC00 /* ResponseType.swift */,
 				55B8CD671D08A96100D6DC00 /* PlayerType.swift */,
 				DCD927701CD1A17900FF7FAE /* Difficulty.swift */,
@@ -306,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				556BEF1D20270085005F24A7 /* CardFlipType.swift in Sources */,
 				DC5A20E91CC86A3F004986D2 /* PauseViewController.swift in Sources */,
 				DCC89E451CBEF00D0047657B /* GameViewController.swift in Sources */,
 				5567B67F1D4AA85D00FF6545 /* CardFlipType.swift in Sources */,
