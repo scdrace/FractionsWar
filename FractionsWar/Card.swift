@@ -9,7 +9,116 @@
 import Foundation
 import UIKit
 
-class Card: NSObject, NSCoding {
+public class Card: Codable, CustomStringConvertible {
+    
+    var imageName: String {
+        var suitNameShort: String! {
+            switch(suit) {
+            case "clubs":
+                return "cl"
+            case "diamonds":
+                return "dm"
+            case "hearts":
+                return "hr"
+            case "spades":
+                return "sp"
+            default:
+                return nil
+            }
+        }
+        
+        return String(rank) + suitNameShort + cardType
+    }
+    
+    var backImageName: String {
+        return "back2"
+    }
+    
+    var cardSize: CGRect {
+        return CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 100, height: 100))
+    }
+    
+    var cardType: String
+    var rank: Double
+    var suit: String
+    
+    var cardView: UIView {
+        let view = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 100, height: 100)))
+        view.addSubview(back)
+        return view
+    }
+    
+    var back: UIImageView {
+        return UIImageView(image: UIImage(named: "back2"))
+    }
+    
+    var front: UIImageView {
+        return UIImageView(image: UIImage(named: imageName))
+    }
+    
+    init(rank: Double, suit: String, cardType: String) {
+        self.cardType = cardType
+        self.rank = rank
+        self.suit = suit
+    }
+    
+    public var description: String {
+        return "\(Int(rank)) of \(suit)"
+    }
+    
+    /*
+     Resize card.frame to dimensions of Card-View(Interface Builder)
+     - Parameter frame: CGRect representing the size of the cardView property
+     */
+    func resizeCard(_ frame: CGRect) {
+        self.cardView.frame = frame
+        self.back.frame = frame
+        self.front.frame = frame
+    }
+    
+    /*
+     Remove the Back and Face images from cardView
+     */
+    func imageClean() {
+        self.front.removeFromSuperview()
+        self.back.removeFromSuperview()
+    }
+    
+    
+    // MARK: - Card Data
+    /*
+     Return information about card. Used for saving data
+     Return [String]: rank, suit, cardType
+     */
+    func data() -> [String] {
+        let rank = String(self.rank)
+        
+        //TODO: Include cardType
+        return [rank, suit, cardType]
+    }
+    
+    // MARK: - Card flip methods
+    
+    /*
+     Flip the cardView from Back to Face
+     //TODO: Centralize the Duration parameter
+     */
+    func flipCard() {
+        UIView.transition(from: back, to: self.front, duration: 0.5, options: [
+            .transitionFlipFromLeft], completion: nil)
+    }
+    
+    /*
+     Flip the carView from Face to Back
+     */
+    func flipDown() {
+        UIView.transition(from: front, to: self.back, duration: 0.5, options: [
+            .transitionFlipFromRight], completion: nil)
+    }
+}
+
+/*
+class CardX: NSObject, NSCoding {
     
     var rank: Double
     var suit: String
@@ -36,8 +145,6 @@ class Card: NSObject, NSCoding {
         self.suit = suit
         self.cardType = cardType
         
-        let shortSuit = Card.shortenSuitName(suit)
-        self.imageName =  String(Int(self.rank))+"-"+shortSuit+"-"+cardType
         self.backImageName = "back" + deck
             
         //TODO: Centralize Size parameter
@@ -167,6 +274,5 @@ class Card: NSObject, NSCoding {
         //TODO: Include cardType
         return [rank, suit, cardType]
     }
-
-    
 }
+ */

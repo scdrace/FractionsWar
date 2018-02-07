@@ -9,13 +9,79 @@
 import Foundation
 import UIKit
 
+struct Hand: CustomStringConvertible {
+    var numerator: Card
+    var denominator: Card
+    
+    var decimalValue: Double {
+        return self.numerator.rank / self.denominator.rank
+    }
+    
+    init(card1: Card, card2: Card) {
+        
+        //Make sure that the card with the lower rank is in the numerator
+        if card1.rank > card2.rank {
+            self.numerator = card2
+            self.denominator = card1
+        }
+        else {
+            self.numerator = card1
+            self.denominator = card2
+        }
+    }
+    
+    var description: String {
+        return "\(self.numerator), \(self.denominator), \(self.decimalValue)"
+    }
+    
+    func getDecimalValue() -> Double {
+        return self.decimalValue
+    }
+    
+    func imageClean() {
+        numerator.imageClean()
+        denominator.imageClean()
+    }
+    
+    
+    // MARK: - Flip methods
+    
+    /*
+     Flip cards in hand, (numerator & denominator), from Back to Face
+     */
+    func flipCards() {
+        numerator.flipCard()
+        denominator.flipCard()
+    }
+    
+    /*
+     Flip cards in hand, (numerator & denominator), from Face to Back
+     */
+    func flipDown() {
+        numerator.flipDown()
+        denominator.flipDown()
+    }
+    
+    // MARK: - Card Maintenence Methods
+    
+    /*
+     Resize the UIView (i.e. cardView) to fit cardPorts-(Interface Builder)
+     */
+    func resizeCards(_ cardFrame: CGRect) {
+        numerator.resizeCard(cardFrame)
+        denominator.resizeCard(cardFrame)
+    }
+}
+
+
+/*
 class Hand: NSObject, NSCoding {
     var numerator: Card!
     var denominator: Card!
     
     // Dedicam value of the hand-(fraction)
     var decimalValue: Double {
-        return self.numerator.getRank() / self.denominator.getRank()
+        return self.numerator.rank / self.denominator.rank
     }
     
     override var description: String {
@@ -107,3 +173,4 @@ class Hand: NSObject, NSCoding {
     }
     
 }
+*/
