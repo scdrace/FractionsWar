@@ -21,6 +21,7 @@
 		556BEF2D20270441005F24A7 /* SetUpCardsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2A20270441005F24A7 /* SetUpCardsExt.swift */; };
 		556BEF2E20270441005F24A7 /* MoveAnimationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2B20270441005F24A7 /* MoveAnimationExt.swift */; };
 		556BEF2F20270441005F24A7 /* SwipeLogicExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2C20270441005F24A7 /* SwipeLogicExt.swift */; };
+		556BEF4F202D0CA5005F24A7 /* DeckRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF4E202D0CA5005F24A7 /* DeckRandomizer.swift */; };
 		55CF7E241CA5182500B1BE0C /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E231CA5182500B1BE0C /* Card.swift */; };
 		55CF7E261CA51DF700B1BE0C /* Hand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E251CA51DF700B1BE0C /* Hand.swift */; };
 		55CF7E281CA51EFA00B1BE0C /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E271CA51EFA00B1BE0C /* Round.swift */; };
@@ -68,6 +69,7 @@
 		556BEF2A20270441005F24A7 /* SetUpCardsExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetUpCardsExt.swift; sourceTree = "<group>"; };
 		556BEF2B20270441005F24A7 /* MoveAnimationExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveAnimationExt.swift; sourceTree = "<group>"; };
 		556BEF2C20270441005F24A7 /* SwipeLogicExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeLogicExt.swift; sourceTree = "<group>"; };
+		556BEF4E202D0CA5005F24A7 /* DeckRandomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckRandomizer.swift; sourceTree = "<group>"; };
 		55CF7E231CA5182500B1BE0C /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = FractionsWar/Card.swift; sourceTree = "<group>"; };
 		55CF7E251CA51DF700B1BE0C /* Hand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hand.swift; path = FractionsWar/Hand.swift; sourceTree = "<group>"; };
 		55CF7E271CA51EFA00B1BE0C /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Round.swift; path = FractionsWar/Round.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				DCA1D0B61CCF27F1007179BB /* Settings.swift */,
 				DCD5CBBB1CDB36D300C082D8 /* Sounds.swift */,
 				55CF7E271CA51EFA00B1BE0C /* Round.swift */,
+				556BEF4E202D0CA5005F24A7 /* DeckRandomizer.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -311,6 +314,7 @@
 				DCC89E451CBEF00D0047657B /* GameViewController.swift in Sources */,
 				556BEF2620270136005F24A7 /* PlayerType.swift in Sources */,
 				556BEF2520270136005F24A7 /* ResponseType.swift in Sources */,
+				556BEF4F202D0CA5005F24A7 /* DeckRandomizer.swift in Sources */,
 				DCD927711CD1A17900FF7FAE /* Difficulty.swift in Sources */,
 				DC762AA41CC490F3002A6445 /* MenuViewController.swift in Sources */,
 				556BEF2D20270441005F24A7 /* SetUpCardsExt.swift in Sources */,

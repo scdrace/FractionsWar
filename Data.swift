@@ -56,14 +56,14 @@ class Data {
         let highHand = highHand
         let roundData = [round, swipeTime, String(swipeTimeCumulative), swipeDirection, swipeDirectionCorrect, highHand]
         
-        let player1Data = playerData(game.getPlayer1())
-        let player2Data = playerData(game.getPlayer2())
+        let player1Data = playerData(game.player1)
+        let player2Data = playerData(game.player2)
         
-        let player1ID = [game.getPlayer1ID()!]
+        let player1ID = [game.player1.id]
         var player2ID = ["computer"]
         
-        if game.getPlayer2ID() != nil {
-            player2ID = [game.getPlayer2ID()!]
+        if game.player2.id != nil {
+            player2ID = [game.player2.id]
         }
         
     
@@ -95,8 +95,8 @@ class Data {
         let name = player.name
         let points = String(player.points)
         
-        let numeratorData = cardData(player.hand.first!.numerator)
-        let denominatorData = cardData(player.hand.first!.denominator)
+        let numeratorData = cardData(player.hand!.numerator)
+        let denominatorData = cardData(player.hand!.denominator)
         
         let playerDataArray = [points] + numeratorData + denominatorData
         
@@ -109,13 +109,13 @@ class Data {
         do {
             
             // Make fileName
-            var fileName = "fracWar_" + game.getPlayer1ID()!
+            var fileName = "fracWar_" + game.player1.id
             
-            if game.getPlayer2ID() != nil {
-                fileName = fileName + "_" + game.getPlayer2ID()!
+            if game.player2.id != nil {
+                fileName = fileName + "_" + game.player2.id
             }
             
-            fileName = fileName + "_" + game.getTimeStamp()
+            fileName = fileName + "_" + game.timeStamp!
             
             //print(fileName)
             

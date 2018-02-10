@@ -10,17 +10,22 @@ import Foundation
 import UIKit
 
 //CustomStringConvertible
-class Game: NSObject, NSCoding {
+class Game: CustomStringConvertible {
     
     var warDeck = false
     
     let appBeginTime = CACurrentMediaTime()
-    fileprivate var timeStamp: String?
-    var deck = Deck()
+    fileprivate var _timeStamp: String?
+    var timeStamp: String? { return _timeStamp }
     var round: Int = 0
     var data = Data()
-    fileprivate var player1 = Player(name: "player1")
-    fileprivate var player2 = Player(name: "player2")
+    
+    
+    fileprivate var _player1 = Player(name: "player1")
+    var player1: Player { return _player1 }
+    fileprivate var _player2 = Player(name: "player2")
+    var player2: Player { return _player2 }
+    
     fileprivate var player1ID: String?
     fileprivate var player2ID: String?
     
@@ -36,7 +41,15 @@ class Game: NSObject, NSCoding {
     var computerTimer =  Timer()
     
     var playerMode = 0
-    fileprivate var gameState = GameState.start
+    fileprivate var _gameState = GameState.start
+    var gameState: GameState {
+        get {
+            return _gameState
+        }
+        set {
+            _gameState = (newValue)
+        }
+    }
     
     
     struct Cards {
@@ -47,7 +60,7 @@ class Game: NSObject, NSCoding {
         
     }
     
-    override var description: String {
+    var description: String {
         return "x"
     }
     
@@ -63,7 +76,7 @@ class Game: NSObject, NSCoding {
         return documentDirectory.appendingPathComponent("gameData.archive")
     }()
     
-    override init() {
+    init() {
         
         func timeStamp() -> String {
             let dateFormatter = DateFormatter()
@@ -78,9 +91,7 @@ class Game: NSObject, NSCoding {
         //print("init")
         //print("FilePath \(pathURL("david"))")
         
-        self.timeStamp = timeStamp()
-        
-        super.init()
+        _timeStamp = timeStamp()
         
         self.data.game = self
         self.round = 1
@@ -99,10 +110,13 @@ class Game: NSObject, NSCoding {
                                                          name: NSNotification.Name(rawValue: "ResignActive"), object: nil)
         
         
-        let deckRandom = deck.deckRandom
+        //let deckRandom = deck.deckRandom
         //let deckWar = deck.deckWar
         
-        makePlayerDecks(deckRandom)
+        //makePlayerDecks(deckRandom)
+        
+        let deck = DeckRandomizer()
+        deck.dealCards(player1: player1, player2: player2)
         
     }
     
@@ -110,145 +124,29 @@ class Game: NSObject, NSCoding {
         self.init()
         
         
-        let deckCustom = deck.makeDeckCustom(data: customDeck)
+        //let deckCustom = deck.makeDeckCustom(data: customDeck)
         
-        makeCustomDecks(playerDecks: deckCustom)
-        
-    }
-    // MARK: - Reload (aDecoder) and Save (aCoder) methods
-    
-    required init?(coder aDecoder: NSCoder) {
-        deck = aDecoder.decodeObject(forKey: "deck") as! Deck
-        //round = aDecoder.decodeObjectForKey("round") as! Round
-        data = aDecoder.decodeObject(forKey: "data") as! Data
-        player1 = aDecoder.decodeObject(forKey: "player1") as! Player
-        player2 = aDecoder.decodeObject(forKey: "player2") as! Player
-        
-        player1ID = aDecoder.decodeObject(forKey: "player1ID") as? String
-        player2ID = aDecoder.decodeObject(forKey: "player2ID") as? String
-        
-        timeStamp = aDecoder.decodeObject(forKey: "timeStamp") as? String
-        
-        print("required init")
-        
-        super.init()
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        
-        print("encode")
-        
-        aCoder.encode(timeStamp, forKey: "timeStamp")
-        
-        aCoder.encode(deck, forKey: "deck")
-        aCoder.encode(round, forKey: "round")
-        aCoder.encode(data, forKey: "data")
-        aCoder.encode(player1, forKey: "player1")
-        aCoder.encode(player2, forKey: "player2")
-        aCoder.encode(player1ID, forKey: "player1ID")
-        aCoder.encode(player2ID, forKey: "player2ID")
+        //makeCustomDecks(playerDecks: deckCustom)
         
     }
-    
     
     @objc func saveChanges() -> Bool {
         print("Saving items to: \(gameArchiveURL.path)")
         
         //return true
-        return NSKeyedArchiver.archiveRootObject(self, toFile: gameArchiveURL.path)
+        //return NSKeyedArchiver.archiveRootObject(self, toFile: gameArchiveURL.path)
+        return false
     }
-
-    
-    func makeCustomDecks(playerDecks: [[Card]]) {
-        player1.subDeck = playerDecks[0]
-        player2.subDeck = playerDecks[1]
-    }
-    
-    func makePlayerDecks(_ deckType: [Card]) {
-        player1.subDeck.removeAll()
-        player2.subDeck.removeAll()
-        
-        //Get number of elements in half the original deck
-        let length = deckType.count / 2
-        
-        deck.deckRandom.removeLast() //???
-        
-        //Append half the elements from the original deck to player1-deck
-        for index in 0..<length {
-            player1.subDeck.append(deckType[index])
-        }
-        
-        //Append final cards from the original deck to player2-deck
-        for index in length..<deckType.count {
-            player2.subDeck.append(deckType[index])
-        }
-    }
-    
-    func makeHands(_ gameState: GameState) {
-        
-        if (player1.subDeck.count > 1 && player2.subDeck.count > 1) {
-            
-            //print("MakeHand")
-            player1.makeHand(gameState)
-            player2.makeHand(gameState)
-        }
-    }
-    
     
     //MARK: - Setter & Getter methods
     
     func getCards() -> Cards {
         
-        let cards = Cards(p1Numerator: player1.getNumerator(), p1Denominator: player1.getDenominator(),
-                          p2Numerator: player2.getNumerator(), p2Denominator: player2.getDenominator())
+        
+        let cards = Cards(p1Numerator: player1.hand!.numerator, p1Denominator: player1.hand!.denominator,
+                          p2Numerator: player2.hand!.numerator, p2Denominator: player2.hand!.denominator)
         
         return cards
-    }
-    
-    
-    func setGameState(_ gameState: GameState) {
-        self.gameState = gameState
-    }
-    
-    func getGameState() -> GameState {
-        return self.gameState
-    }
-    
-    func setPlayer1ID(_ playerID: String) {
-        self.player1ID = playerID
-    }
-    
-    func getPlayer1ID() -> String? {
-        return self.player1ID
-    }
-    
-    func setPlayer2ID(_ playerID: String) {
-        self.player2ID = playerID
-    }
-    
-    func getPlayer2ID() -> String? {
-        return self.player2ID
-    }
-    
-    
-    func getPlayer1() -> Player {
-        return player1
-    }
-    
-    func getPlayer2() -> Player {
-        return player2
-    }
-    
-    func getP1Numerator() -> Card {
-        return player1.getNumerator()
-    }
-    
-    func getP1Denominator() -> Card {
-        return player1.getDenominator()
-    }
-    
-    func getTimeStamp() -> String {
-        return self.timeStamp!
     }
     
     //MARK: - Save Data
@@ -264,10 +162,10 @@ extension Game {
     
     var highHand: String {
         
-        if player1.getHand().decimalValue - player2.getHand().decimalValue > 0 {
+        if player1.hand!.decimalValue - player2.hand!.decimalValue > 0 {
             return "player1"
         }
-        else if player1.getHand().decimalValue - player2.getHand().decimalValue < 0 {
+        else if player1.hand!.decimalValue - player2.hand!.decimalValue < 0 {
             return "player2"
         }
         else {
@@ -275,8 +173,10 @@ extension Game {
         }
     }
     
+    
     func addHandsToWinnerDeck(_ player: String) {
         
+        /*
         let hands = player1.hand + player2.hand
         
         switch player {
@@ -288,6 +188,7 @@ extension Game {
             break
         default: break
         }
+        */
     }
     
     

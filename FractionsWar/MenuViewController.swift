@@ -230,13 +230,13 @@ class MenuViewController: UIViewController {
             
             //Pass player1ID
             if self.player1ID != nil {
-                controller.game.setPlayer1ID(self.player1ID!)
+                controller.game.player1.id = self.player1.id
                 controller.p1NameText = self.player1ID!
             }
             
             //Pass player2ID
             if self.player2ID != nil {
-                controller.game.setPlayer2ID(self.player2ID!)
+                controller.game.player2.id = self.player2.id
                 controller.p2NameText = self.player2ID!
             }
         }

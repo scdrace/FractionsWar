@@ -143,7 +143,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
        s.playBegin()
          
         
-        print(game.getPlayer1ID(), game.getPlayer2ID())
+        print(game.player1.id, game.player2.id)
     
     }
     
@@ -300,8 +300,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         let p2DiffStr = p2Score.text!.substring(to: p2DiffIdx)
         
         // Get differnce in current vs updated values
-        let p1Diff =  game.getPlayer1().getPoints() - Int(p1DiffStr)!
-        let p2Diff =  game.getPlayer2().getPoints() - Int(p2DiffStr)!
+        let p1Diff =  game.player1.points - Int(p1DiffStr)!
+        let p2Diff =  game.player2.points - Int(p2DiffStr)!
         
         // Get appropriate distance depending on device
         var dst: CGFloat?
@@ -316,7 +316,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         if (p1Diff > 0) {
 
             // Set new counter values
-            p1Score.text = String(game.getPlayer1().points) + " Points"
+            p1Score.text = String(game.player1.points) + " Points"
             
             // Prepare update counter for player one
             let p1: CGPoint = (p1Score.superview?.convert(p1Score.center, to: self.view))!
@@ -337,7 +337,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         else if (p2Diff > 0) {
             
             // Set new counter values
-            p2Score.text = String(game.getPlayer2().getPoints()) + " Points"
+            p2Score.text = String(game.player2.points) + " Points"
             
             // Prepare update counter for player two
             let p2: CGPoint = (p2Score.superview?.convert(p2Score.center, to: self.view))!
@@ -361,8 +361,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     internal func updateCardCounters() {
         
         // Get difference in current vs updated values
-        var p1Diff = game.getPlayer1().subDeck.count - Int(p1Cards.text!)!
-        var p2Diff = game.getPlayer2().subDeck.count - Int(p2Cards.text!)!
+        var p1Diff = game.player1.deck.count - Int(p1Cards.text!)!
+        var p2Diff = game.player2.deck.count - Int(p2Cards.text!)!
         
         // Adjust for war mode wonkiness (displays +10 on war win, should be +12)
         if (p1Diff == 10) { p1Diff = 12 }
@@ -378,8 +378,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         // Set new counter values
-        p1Cards.text = String(game.getPlayer1().subDeck.count)
-        p2Cards.text = String(game.getPlayer2().subDeck.count)
+        p1Cards.text = String(game.player1.deck.count)
+        p2Cards.text = String(game.player2.deck.count)
         
         // Prepare update counter for player one
         let p1: CGPoint = (p1Cards.superview?.convert(p1Cards.center, to: self.view))!
@@ -505,22 +505,22 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             var p1Pts: String?
             var p2Pts: String?
             
-            if (game.getPlayer1().getPoints() > game.getPlayer2().getPoints()) {
+            if (game.player1.points > game.player2.points) {
                 winner = p1Name.text!+" wins!"
-            } else if (game.getPlayer1().getPoints() < game.getPlayer2().getPoints()) {
+            } else if (game.player1.points < game.player2.points) {
                 winner = p2Name.text!+" wins!"
             } else {
                 winner = "It's a tie!"
             }
             
-            if (game.getPlayer1().subDeck.count > game.getPlayer2().subDeck.count) {
+            if (game.player1.deck.count > game.player2.deck.count) {
                 out = p2Name.text!+" ran out of cards"
             } else {
                 out = p1Name.text!+" ran out of cards"
             }
             
-            p1Pts = p1Name.text! + " points: " + game.getPlayer1().getPoints().description + "     "
-            p2Pts = "     " + p2Name.text! + " points: " + game.getPlayer2().getPoints().description
+            p1Pts = p1Name.text! + " points: " + game.player1.points.description + "     "
+            p2Pts = "     " + p2Name.text! + " points: " + game.player2.points.description
             
             let vc = segue.destination as! GameOverViewController
             vc.winner = winner

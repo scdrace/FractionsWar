@@ -8,6 +8,7 @@
 
 import UIKit
 
+/*
 class Deck: NSObject, NSCoding {
     let rank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     let suit = ["clubs", "diamonds", "hearts", "spades"]
@@ -248,3 +249,4 @@ class Deck: NSObject, NSCoding {
          */
     }
 }
+*/

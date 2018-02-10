@@ -23,21 +23,21 @@ extension GameViewController {
             func addHandsToWinnerDeck() {
                 // Add hands to winning Players subDeck
                 // Only add hands when game is in state(.Normal)
-                if game.getGameState()  == .normal {
+                if game.gameState  == .normal {
                     
                     // Add cards to winning player's deck
                     game.addHandsToWinnerDeck(game.highHand)
                     
                     // Clear the cards from the players hand
-                    game.getPlayer1().hand.removeAll()
-                    game.getPlayer2().hand.removeAll()
+                    game.player1.removeHands()
+                    game.player2.removeHands()
                 }
             }
             
             // Update GameState now (before hands are dealt),
             // ...so that appropriate number of hands are dealt for .War state
-            if game.getGameState() == .declareWar {
-                game.setGameState(.war)
+            if game.gameState == .declareWar {
+                game.gameState = .war
             }
             
             self.flipCards(.faceDown)
@@ -51,31 +51,31 @@ extension GameViewController {
         func updateGameStateByWinningHand() {
             
             //Set the next hands based on the current GameState
-            game.makeHands(game.getGameState())
+            game.makeHands(game.gameState)
             
-            print("GameState before hand is dealt: \(game.getGameState())")
+            print("GameState before hand is dealt: \(game.gameState)")
             
             //Update GameState
             switch game.highHand {
             case "tie":
-                game.setGameState(.declareWar)
+                game.gameState = .declareWar
                 break
-            case "player1" where game.getGameState() == .declareWar:
-                game.setGameState(.war)
+            case "player1" where game.gameState == .declareWar:
+                game.gameState = .war
                 break
-            case "player2" where game.getGameState() == .declareWar:
-                game.setGameState(.war)
+            case "player2" where game.gameState == .declareWar:
+                game.gameState = .war
                 break
-            case "player1" where game.getGameState() != .declareWar:
-                game.setGameState(.normal)
+            case "player1" where game.gameState != .declareWar:
+                game.gameState = .normal
                 break
-            case "player2" where game.getGameState() != .declareWar:
-                game.setGameState(.normal)
+            case "player2" where game.gameState != .declareWar:
+                game.gameState = .normal
                 break
             default:
                 break
             }
-            print("GameState after hand is dealt: \(game.getGameState())")
+            print("GameState after hand is dealt: \(game.gameState)")
         }
 
         
@@ -83,19 +83,19 @@ extension GameViewController {
         func gameOver() {
             
             // End the game if someone's deck is too small to continue
-            if (game.getGameState() == GameState.war && (game.getPlayer1().subDeck.count < 4 || game.getPlayer2().subDeck.count < 4)) {
+            if (game.gameState == GameState.war && (game.player1.deck.count < 4 || game.player2.deck.count < 4)) {
                 
                 // Set gameState to .GameOver
-                game.setGameState(.gameOver)
+                game.gameState = .gameOver
                 
                 // Segue to GameOverViewController
                 DispatchQueue.main.async(execute: {
                     self.performSegue(withIdentifier: "goToGameOver", sender: self)
                 })
-            } else if (game.getPlayer1().subDeck.count < 2 || game.getPlayer2().subDeck.count < 2) {
+            } else if (game.player1.deck.count < 2 || game.player2.deck.count < 2) {
                 
                 // Set gameState to .GameOver
-                game.setGameState(.gameOver)
+                game.gameState = .gameOver
                 
                 // Segue to GameOverViewController
                 DispatchQueue.main.async(execute: {
@@ -106,7 +106,7 @@ extension GameViewController {
         
         func setUpCardsWar() {
             
-            if game.getGameState() == .war {
+            if game.gameState == .war {
                 s.playWar()
                 warBoomImageView.isHidden = false
                 p1NumeratorWar.isHidden = false
@@ -161,12 +161,12 @@ extension GameViewController {
         gameOver()
         
         print("Player1")
-        print("Points: \(game.getPlayer1().getPoints()), DeckCount: \(game.getPlayer1().subDeck.count)")
-        print(game.getPlayer1().subDeck)
+        print("Points: \(game.player1.points), DeckCount: \(game.player1.deck.count)")
+        print(game.player1.deck)
         
         print("Player2")
-        print("Points: \(game.getPlayer2().getPoints()), DeckCount: \(game.getPlayer2().subDeck.count)")
-        print(game.getPlayer1().subDeck)
+        print("Points: \(game.player2.points), DeckCount: \(game.player2.deck.count)")
+        print(game.player1.deck)
         
         
         //print("Player1: \(game.getPlayer1().getPoints()), \(game.getPlayer1().subDeck.count)")

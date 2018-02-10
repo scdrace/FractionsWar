@@ -239,16 +239,16 @@ extension GameViewController {
         
         switch player {
         case .player1 where correctAnswer == true:
-            game.getPlayer1().addPoints(pointsToAdd)
+            game.player1.addPoints(pointsToAdd)
             break
         case .player1 where correctAnswer == false:
-            game.getPlayer2().addPoints(pointsToAdd)
+            game.player2.addPoints(pointsToAdd)
             break
         case .player2 where correctAnswer == true:
-            game.getPlayer2().addPoints(pointsToAdd)
+            game.player2.addPoints(pointsToAdd)
             break
         case .player2 where correctAnswer == false:
-            game.getPlayer1().addPoints(pointsToAdd)
+            game.player1.addPoints(pointsToAdd)
         default:
             break
         }
@@ -256,7 +256,7 @@ extension GameViewController {
         // Since this function is called before cards are setup for next round...
         // ...must setup points for next round here
         // GameStates listed below are for currentState, this may change in the next-round
-        switch game.getGameState() {
+        switch game.gameState {
         case .normal:
             pointsToAdd = 1
             break
