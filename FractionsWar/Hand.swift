@@ -34,15 +34,14 @@ struct Hand: CustomStringConvertible {
         return "\(self.numerator), \(self.denominator), \(self.decimalValue)"
     }
     
-    func getDecimalValue() -> Double {
-        return self.decimalValue
-    }
-    
     func imageClean() {
         numerator.imageClean()
         denominator.imageClean()
     }
     
+    func flatHand() -> [Card] {
+        return [numerator, denominator]
+    }
     
     // MARK: - Flip methods
     

@@ -11,7 +11,7 @@ import Foundation
 extension GameViewController {
     
     
-    internal func setupCards() {
+    public func setupCards() {
         
         func preRoundMaintenance() {
             

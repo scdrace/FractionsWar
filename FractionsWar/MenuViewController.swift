@@ -228,15 +228,16 @@ class MenuViewController: UIViewController {
             //Pass number of players
             controller.game.playerMode = self.playerQuantity
             
+            //TODO: More secure way to handle ID
             //Pass player1ID
             if self.player1ID != nil {
-                controller.game.player1.id = self.player1.id
+                controller.game.player1.id = self.player1ID!
                 controller.p1NameText = self.player1ID!
             }
             
             //Pass player2ID
             if self.player2ID != nil {
-                controller.game.player2.id = self.player2.id
+                controller.game.player2.id = self.player2ID!
                 controller.p2NameText = self.player2ID!
             }
         }
