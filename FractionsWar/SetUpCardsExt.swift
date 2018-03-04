@@ -50,6 +50,7 @@ extension GameViewController {
         
         func updateGameStateByWinningHand() {
             
+            /*
             //Set the next hands based on the current GameState
             game.makeHands(game.gameState)
             
@@ -76,6 +77,7 @@ extension GameViewController {
                 break
             }
             print("GameState after hand is dealt: \(game.gameState)")
+            */
         }
 
         

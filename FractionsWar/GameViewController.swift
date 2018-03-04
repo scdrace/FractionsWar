@@ -11,11 +11,71 @@ import UIKit
 
 class GameViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    @IBOutlet weak var p1Numerator: UIView!
+    @IBOutlet weak var p1Denominator: UIView!
+    @IBOutlet weak var p1Vinculum: UIView!
+    
+    @IBOutlet weak var p1Pause: UIButton!
+    @IBOutlet weak var p1Name: UIButton!
+    @IBOutlet weak var p1Points: UIButton!
+    @IBOutlet weak var p1Deck: UIButton!
+    @IBOutlet weak var p1CardCount: UIButton!
+    @IBOutlet weak var p1War: UIButton!
+    
+    
+    @IBOutlet weak var p2Numerator: UIView!
+    @IBOutlet weak var p2Denominator: UIView!
+    @IBOutlet weak var p2Vinculum: UIView!
+    
+    @IBOutlet weak var p2Pause: UIButton!
+    @IBOutlet weak var p2Name: UIButton!
+    @IBOutlet weak var p2Points: UIButton!
+    @IBOutlet weak var p2Deck: UIButton!
+    @IBOutlet weak var p2CardCount: UIButton!
+    @IBOutlet weak var p2War: UIButton!
+    
+    @IBOutlet weak var warEffect: UIImageView!
+    
+    var p1NumeratorImage: UIImageView?
+    var p1DenominatorImage: UIImageView?
+    var p2NumeratorImage: UIImageView?
+    var p2DenominatorImage: UIImageView?
+    
+    var cardViews: [UIView] {
+        return [p1Numerator, p1Denominator, p2Numerator, p2Denominator]
+    }
+    
+    var cardImageViews: [UIImageView]? {
+        guard
+            let p1Numerator = p1NumeratorImage,
+            let p1Denominator = p1DenominatorImage,
+            let p2Numerator = p2NumeratorImage,
+            let p2Denominator = p2DenominatorImage
+            else { return nil }
+        
+        return [p1Numerator, p1Denominator, p2Numerator, p2Denominator]
+    }
+    
+    var spaceVertCardToVinculum: CGFloat  { return heightProportion(distance: 10) }
+    var spaceHorDeckButtonToHand: CGFloat { return heightProportion(distance: 50) }
+    var spaceVertNameToNumerator: CGFloat { return heightProportion(distance: 10) }
+    var spaceVertDeckButtonToDenominator: CGFloat { return heightProportion(distance: 10) }
+    var spaceVertDeckButonToWar: CGFloat { return heightProportion(distance: 20) }
+    var spaceHorVinculumToViewCenter: CGFloat { return heightProportion(distance: 40) }
+    var spaceVertPauseToView: CGFloat { return heightProportion(distance: 20) }
+    var spaceHorPauseToView: CGFloat { return heightProportion(distance: 20) }
+    
+    var imageViews: [UIImageView] = []
+    var containerGuide = UILayoutGuide()
+    var spacerGuides: [UILayoutGuide] = []
+    var imageConstraints: [NSLayoutConstraint] = []
+    
     var warDeck = false
     // Player info
     var p1NameText: String!
     var p2NameText: String!
     
+    /*
     // On screen information labels
     @IBOutlet weak var p1Name: UILabel!
     @IBOutlet weak var p2Name: UILabel!
@@ -31,6 +91,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var p2WarButton: UIButton!
     @IBOutlet weak var p1DeckButton: UIButton!
     @IBOutlet weak var p2DeckButton: UIButton!
+    */
     
     // Custom game fonts
     var gameFont: UIFont {
@@ -50,6 +111,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    /*
     // Ports in which Card.view is placed
     // Ports are used so that we can set up constraints in IB
     @IBOutlet weak var p1Numerator: UIView!
@@ -78,6 +140,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var p2PauseButtonView: UIView!
     @IBOutlet weak var p1DeckView: UIView!
     @IBOutlet weak var p2DeckView: UIView!
+    */
     
     // These view sit on top of everything, so that they can detect a touch
     var p1AreaX: UIView!
@@ -113,7 +176,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        /*
         //self.game = Game(deckType: warDeck)
         //print(game.gameArchiveURL.path!)
  
@@ -144,10 +207,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
          
         
         print(game.player1.id, game.player2.id)
-    
+        */
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        /*
         super.viewDidAppear(animated)
         
         
@@ -163,6 +227,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.bringSubview(toFront: p2DeckView)
         
         setupCards()
+    */
     }
     
     override func didReceiveMemoryWarning() {
