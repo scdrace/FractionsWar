@@ -170,53 +170,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - On Screen Button Presses
-    @IBAction func pressPauseP1Button(_ sender: AnyObject) {
-        DispatchQueue.main.async(execute: {
-            self.performSegue(withIdentifier: "goToPause", sender: self)
-        })
-        s.playPause()
-    }
-    
-    @IBAction func pressPauseP2Button(_ sender: AnyObject) {
-        DispatchQueue.main.async(execute: {
-            self.performSegue(withIdentifier: "goToPause", sender: self)
-        })
-        s.playPause()
-    }
-    
-    @IBAction func pressP1DeckButton(_ sender: AnyObject) {
-       
-        // Set Player1 to "ready"
-        game.p1ready = true
-        p1DeckButton.isHidden = true
-        
-        // Flip cards if both players are "ready"
-        if (game.p1ready && game.p2ready) {
-            flipCards(.faceUp)
-            s.playPlace()
-        }
-        // Set Player2 to ready if we are in one player mode
-        else if (game.playerMode == 1) {
-            pressP2DeckButton(sender)
-        }
-    }
-    
-    @IBAction func pressP2DeckButton(_ sender: AnyObject) {
-        
-        // Set Player2 to "ready"
-        game.p2ready = true
-        if (game.playerMode == 2) {
-            p2DeckButton.isHidden = true
-        }
-            
-        // Flip cards if both players are "ready"
-        if (game.p1ready && game.p2ready) {
-            flipCards(.faceUp)
-            s.playPlace()
-        }
-    }
-    
     // MARK: - Game Display Setup
     
     internal func prepareBoard() {
@@ -527,6 +480,55 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             vc.out = out
             vc.p1Pts = p1Pts
             vc.p2Pts = p2Pts
+        }
+    }
+}
+
+// Button-Press Handler
+extension GameViewController {
+    @IBAction func pressPauseP1Button(_ sender: AnyObject) {
+        DispatchQueue.main.async(execute: {
+            self.performSegue(withIdentifier: "goToPause", sender: self)
+        })
+        s.playPause()
+    }
+    
+    @IBAction func pressPauseP2Button(_ sender: AnyObject) {
+        DispatchQueue.main.async(execute: {
+            self.performSegue(withIdentifier: "goToPause", sender: self)
+        })
+        s.playPause()
+    }
+    
+    @IBAction func pressP1DeckButton(_ sender: AnyObject) {
+        
+        // Set Player1 to "ready"
+        game.p1ready = true
+        p1DeckButton.isHidden = true
+        
+        // Flip cards if both players are "ready"
+        if (game.p1ready && game.p2ready) {
+            flipCards(.faceUp)
+            s.playPlace()
+        }
+            // Set Player2 to ready if we are in one player mode
+        else if (game.playerMode == 1) {
+            pressP2DeckButton(sender)
+        }
+    }
+    
+    @IBAction func pressP2DeckButton(_ sender: AnyObject) {
+        
+        // Set Player2 to "ready"
+        game.p2ready = true
+        if (game.playerMode == 2) {
+            p2DeckButton.isHidden = true
+        }
+        
+        // Flip cards if both players are "ready"
+        if (game.p1ready && game.p2ready) {
+            flipCards(.faceUp)
+            s.playPlace()
         }
     }
 }
