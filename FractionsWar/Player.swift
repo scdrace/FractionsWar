@@ -8,27 +8,41 @@
 
 import Foundation
 
-class Player: CustomStringConvertible {
+class Player: Codable, CustomStringConvertible {
     
     let name: String        // Player name
-    var id: String
+    //var id: String
     var warHands = 2
-    
+
     fileprivate var _deck = [Card]()    // Deck that is subset of the Main-Deck; Player selects from this deck
     var deck: [Card] {
         get { return _deck }
         set { _deck = newValue }
     }
     
+    fileprivate var _deckDifferential = 0
+    var deckDifferential: Int {
+        get { return _deckDifferential }
+        set { _deckDifferential = newValue }
+    }
+    
     fileprivate var _hands = [Hand]()
     var hand: Hand? { return _hands.last }
     
     fileprivate var _points = 0
-    var points: Int { return _points }
+    var points: Int {
+        get { return _points }
+    }
+    
+    fileprivate var _scoreDifferential = 0
+    var scoreDifferential: Int {
+        get { return _scoreDifferential }
+        set { _scoreDifferential = newValue }
+    }
     
     init (name: String) {
         self.name = name
-        self.id = "qwe"
+        //self.id = "qwe"
         
         makeHands(totalHands: 1)
     }
@@ -71,10 +85,14 @@ class Player: CustomStringConvertible {
      Add the cards from each hand to the winner's deck
      */
     func addCardsToDeck(cards: [Card]) {
-        deck.append(contentsOf: cards)
+        _deckDifferential = cards.count        
+        deck = cards + deck
+        print(self.name, deck.count)
     }
     
     func addPoints(_ value: Int) {
+        let oldValue = _points
         _points += value
-    }
+        scoreDifferential = _points - oldValue
+   }
 }

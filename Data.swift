@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
-class Data {
+/*
+class RoundData {
     
     weak var game: Game!
     var customDeck = [[String]]()
@@ -37,7 +37,7 @@ class Data {
         let result = a + player1 + player2 + "\n"
         return result
     }
-    
+        
     func setSwipeDirection(swipeDirection: String) {
         self.swipeDirection = swipeDirection
     }
@@ -62,10 +62,11 @@ class Data {
         let player1ID = [game.player1.id]
         var player2ID = ["computer"]
         
+        /*
         if game.player2.id != nil {
             player2ID = [game.player2.id]
         }
-        
+        */
     
         var result = roundData + player1ID
         result = result + player1Data
@@ -115,7 +116,7 @@ class Data {
                 fileName = fileName + "_" + game.player2.id
             }
             
-            fileName = fileName + "_" + game.timeStamp!
+            //fileName = fileName + "_" + game.timeStamp
             
             //print(fileName)
             
@@ -294,3 +295,4 @@ class DataHelper {
         return dict.count as NSNumber
     }
 }
+*/

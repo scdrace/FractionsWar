@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import MessageUI
 
+/*
 class DataCollectionViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     /*
@@ -217,3 +218,4 @@ class DataCollectionViewController: UIViewController, MFMailComposeViewControlle
 
     }
 }
+*/

@@ -9,40 +9,36 @@
 import Foundation
 import UIKit
 
-//CustomStringConvertible
-class Game: CustomStringConvertible {
+class Game: Codable, CustomStringConvertible {
     
+    var data = [[String:String]]()
     var warDeck = false
-    
-    let appBeginTime = CACurrentMediaTime()
-    fileprivate var _timeStamp: String?
-    var timeStamp: String? { return _timeStamp }
-    var round: Int = 0
-    var data = Data()
-    
-    
-    fileprivate var _player1 = Player(name: "player1")
-    var player1: Player { return _player1 }
-    fileprivate var _player2 = Player(name: "player2")
-    var player2: Player { return _player2 }
-    
-    fileprivate var player1ID: String?
-    fileprivate var player2ID: String?
-    
-    // Game state variables
-    var p1ready = false
-    var p2ready = false
-    var cardsAreUp = false
-    var inAction = false
-    
-    //Misc. variables
+    var warMode = false
+    var shouldShowWarCards = false
     var roundStartTime = 0.0
     var swipeTime = 0.0
-    var computerTimer =  Timer()
-    
-    let deckRandomizer = DeckRandomizer()
-    
     var playerMode = 0
+    let player1: Player
+    let player2: Player
+    var customDeck = false
+    
+    let fileTimeStamp: String
+    let deckRandomizer = DeckRandomizer()
+    let appBeginTime = CACurrentMediaTime()
+    
+    var loadGame = false
+//    fileprivate var _player1: Player
+//    var player1: Player { return _player1 }
+//
+//    fileprivate var _player2: Player
+//    var player2: Player { return _player2 }
+    
+    fileprivate var _round = 0
+    var round: Int {
+        get { return _round }
+        set { _round = (newValue) }
+    }
+    
     fileprivate var _gameState = GameState.start
     var gameState: GameState {
         get {
@@ -53,51 +49,37 @@ class Game: CustomStringConvertible {
         }
     }
     
-    
-    struct Cards {
-        var p1Numerator: Card
-        var p1Denominator: Card
-        var p2Numerator: Card
-        var p2Denominator: Card
-        
-    }
-    
     var description: String {
         return "x"
     }
     
+    let gameStartTime: Double
+    var _cumulativeTime: Double = 0.0
+    var cumulativeTime: Double {
+        get { return _cumulativeTime }
+        set { _cumulativeTime = newValue }
+    }
     
-    let gameArchiveURL: URL = {
-        
-        
-        //Create path-name for file
-        let documentsDirectories = FileManager.default.urls(for: .documentDirectory,
-                                                                                   in: .userDomainMask)
-        let documentDirectory = documentsDirectories.first!
-        
-        return documentDirectory.appendingPathComponent("gameData.archive")
-    }()
     
-    init() {
+    init(player1Name: String, player2Name: String) {
+        
+        player1 = Player(name: player1Name)
+        player2 = Player(name: player2Name)
+
         
         func timeStamp() -> String {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy'_'MM'_'dd'_'a'_'HH'_'mm'_'ss"
+            dateFormatter.dateFormat = "yyyy'_'MM'_'dd'__'HH'_'mm'_'a"
             
-            let date = Date()
-            let dateX = dateFormatter.string(from: date)
-            
-            return dateX
+            let date = dateFormatter.string(from: Date())
+            return date
         }
         
-        //print("init")
-        //print("FilePath \(pathURL("david"))")
+        gameStartTime = CACurrentMediaTime()
         
-        _timeStamp = timeStamp()
-        
-        self.data.game = self
-        self.round = 1
-        
+        //self.data.game = self
+        _round = 1
+
         /*
         do {
             player1.id = try String(contentsOfURL: player1IDURL(), encoding: NSUTF8StringEncoding)
@@ -108,52 +90,75 @@ class Game: CustomStringConvertible {
         }
         */
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.saveChanges),
-                                                         name: NSNotification.Name(rawValue: "ResignActive"), object: nil)
+        fileTimeStamp = timeStamp()
         
-        
-        //let deckRandom = deck.deckRandom
-        //let deckWar = deck.deckWar
-        
-        //makePlayerDecks(deckRandom)
-        
-       
         deckRandomizer.dealCards(player1: player1, player2: player2)
+        //player1.deck = deckRandomizer.p1WarDeck
+        //player2.deck = deckRandomizer.p2WarDeck
         
     }
     
-    convenience init(customDeck: [[String]]) {
-        self.init()
+//    convenience init(customDeck: [[String]]) {
+//        self.init()
+//        
+//        
+//        //let deckCustom = deck.makeDeckCustom(data: customDeck)
+//        
+//        //makeCustomDecks(playerDecks: deckCustom)
+//        
+//    }
+    
+    func dealCards() {
+        // If game is loaded from memory and hands have been dealt
+        // ...leave hands alone
+        guard gameState != .cardsDealt else { return }
         
+        print("Before deal:", player1.deck.count, player2.deck.count)
+        if warMode == true {
+            player1.makeHands(totalHands: 2)
+            player2.makeHands(totalHands: 2)
+        } else {
+            player1.makeHands()
+            player2.makeHands()
+        }
+
+        print("After  deal:", player1.deck.count, player2.deck.count)
+
+        if highHand == "tie" {
+            warMode = true
+        } else {
+            warMode = false
+        }
         
-        //let deckCustom = deck.makeDeckCustom(data: customDeck)
-        
-        //makeCustomDecks(playerDecks: deckCustom)
+        // Update State
+        gameState = .cardsDealt
         
     }
-    
+}
+
+// Methods for saving data
+extension Game {
     @objc func saveChanges() -> Bool {
-        print("Saving items to: \(gameArchiveURL.path)")
+        //print("Saving items to: \(gameArchiveURL.path)")
         
-        //return true
-        //return NSKeyedArchiver.archiveRootObject(self, toFile: gameArchiveURL.path)
+        let fName = player1.name + "_" + player2.name
+        do {
+            let jsonURL = FileManager.documentDirectoryURL.appendingPathComponent(fName).appendingPathExtension("json")
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(self)
+            try jsonData.write(to:jsonURL)
+            print("SAVED FILE", jsonURL)
+            return true
+        } catch {
+            
+        }
+        
         return false
-    }
-    
-    //MARK: - Setter & Getter methods
-    
-    func getCards() -> Cards {
-        
-        
-        let cards = Cards(p1Numerator: player1.hand!.numerator, p1Denominator: player1.hand!.denominator,
-                          p2Numerator: player2.hand!.numerator, p2Denominator: player2.hand!.denominator)
-        
-        return cards
     }
     
     //MARK: - Save Data
     func saveDataImmediate(_ swipeTime: Double) {
-        data.saveRoundData(round, swipeTime: swipeTime, highHand: highHand)
+        //data.saveRoundData(round, swipeTime: swipeTime, highHand: highHand)
         //print("XXXXXXX:\(info)")
         //data.saveToTextImmediately(info)
         
@@ -163,7 +168,6 @@ class Game: CustomStringConvertible {
 extension Game {
     
     var highHand: String {
-        
         if player1.hand!.decimalValue - player2.hand!.decimalValue > 0 {
             return "player1"
         }
@@ -184,15 +188,14 @@ extension Game {
         return nil
     }
     
-    func addHandsToWinnerDeck(_ player: String) {
-        guard let winner = roundWinner() else { return }
+    func addHandsToWinnerDeck(winner: Player) {
         let shuffledCards: [Card] = (player1.flatHands() + player2.flatHands()).shuffle()
         winner.addCardsToDeck(cards: shuffledCards)
     }
     
-    
-    func getRound() -> Int {
-        return round
+    func removeHands() {
+        player1.removeHands()
+        player2.removeHands()
     }
 }
 

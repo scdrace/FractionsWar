@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DeckRandomizer {
+class DeckRandomizer: Codable {
     let ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10"]
     let suits = ["clubs", "diamonds", "hearts", "spades"]
     
@@ -20,6 +20,94 @@ class DeckRandomizer {
             }
         }
         return result
+    }
+    
+    var p1WarDeck: [Card] {
+        
+        let result =  [
+            
+            Card(rank: 2, suit: "spades", cardType: "r"),
+            Card(rank: 3, suit: "diamonds", cardType: "r"),
+            
+            Card(rank: 2, suit: "clubs", cardType: "r"),
+            Card(rank: 2, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 2, suit: "clubs", cardType: "r"),
+            Card(rank: 2, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 2, suit: "spades", cardType: "r"),
+            Card(rank: 3, suit: "diamonds", cardType: "r"),
+            
+            Card(rank: 2, suit: "clubs", cardType: "r"),
+            Card(rank: 2, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 2, suit: "clubs", cardType: "r"),
+            Card(rank: 2, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 2, suit: "spades", cardType: "r"),
+            Card(rank: 3, suit: "diamonds", cardType: "r"),
+            
+            Card(rank: 2, suit: "clubs", cardType: "r"),
+            Card(rank: 2, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 2, suit: "clubs", cardType: "r"),
+            Card(rank: 2, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 2, suit: "spades", cardType: "r"),
+            Card(rank: 3, suit: "diamonds", cardType: "r"),
+            
+            Card(rank: 2, suit: "clubs", cardType: "r"),
+            Card(rank: 2, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 2, suit: "clubs", cardType: "r"),
+            Card(rank: 2, suit: "hearts", cardType: "r")
+        ]
+        
+        print("p1Deck:", result.count)
+        
+        return result
+    }
+    
+    var p2WarDeck: [Card] {
+        
+        return [
+            
+            Card(rank: 2, suit: "spades", cardType: "r"),
+            Card(rank: 7, suit: "diamonds", cardType: "r"),
+            
+            Card(rank: 4, suit: "clubs", cardType: "r"),
+            Card(rank: 4, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 4, suit: "clubs", cardType: "r"),
+            Card(rank: 4, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 2, suit: "spades", cardType: "r"),
+            Card(rank: 7, suit: "diamonds", cardType: "r"),
+            
+            Card(rank: 4, suit: "clubs", cardType: "r"),
+            Card(rank: 4, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 4, suit: "clubs", cardType: "r"),
+            Card(rank: 4, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 2, suit: "spades", cardType: "r"),
+            Card(rank: 7, suit: "diamonds", cardType: "r"),
+            
+            Card(rank: 4, suit: "clubs", cardType: "r"),
+            Card(rank: 4, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 4, suit: "clubs", cardType: "r"),
+            Card(rank: 4, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 2, suit: "spades", cardType: "r"),
+            Card(rank: 7, suit: "diamonds", cardType: "r"),
+            
+            Card(rank: 4, suit: "clubs", cardType: "r"),
+            Card(rank: 4, suit: "hearts", cardType: "r"),
+            
+            Card(rank: 4, suit: "clubs", cardType: "r"),
+            Card(rank: 4, suit: "hearts", cardType: "r")
+        ]
     }
     
     func shuffle(deck: [String], multiplier: Int=1) -> [String] {
@@ -58,6 +146,6 @@ class DeckRandomizer {
         let rank = Double(nameArray[0])!
         let suit = String(nameArray[1])
         
-        return Card(rank: rank, suit: suit, cardType: "2")
+        return Card(rank: rank, suit: suit, cardType: "r")
     }
 }

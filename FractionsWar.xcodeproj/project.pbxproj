@@ -11,23 +11,29 @@
 		5534AFD51C84E516006188CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFD31C84E516006188CB /* Main.storyboard */; };
 		5534AFD71C84E516006188CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFD61C84E516006188CB /* Assets.xcassets */; };
 		5534AFDA1C84E516006188CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5534AFD81C84E516006188CB /* LaunchScreen.storyboard */; };
-		5534B0071C877045006188CB /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534B0061C877045006188CB /* Deck.swift */; };
+		55488A29205C497300D3065D /* Ext+FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55488A28205C497300D3065D /* Ext+FileManager.swift */; };
+		55488A2B205C542500D3065D /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55488A2A205C542500D3065D /* DataHandler.swift */; };
+		555927602051AEC600564408 /* PauseBtn+GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559275F2051AEC600564408 /* PauseBtn+GameVC.swift */; };
+		555927622053298C00564408 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555927612053298C00564408 /* CardView.swift */; };
+		55592766205705B500564408 /* Animate+GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55592765205705B500564408 /* Animate+GameVC.swift */; };
+		5559276A2058663000564408 /* DisplayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555927692058663000564408 /* DisplayType.swift */; };
+		5559276C2059BDAE00564408 /* Displays+GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5559276B2059BDAE00564408 /* Displays+GameVC.swift */; };
 		556BEF1F20270121005F24A7 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF1E20270121005F24A7 /* Functions.swift */; };
 		556BEF2420270136005F24A7 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2020270136005F24A7 /* GameState.swift */; };
 		556BEF2520270136005F24A7 /* ResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2120270136005F24A7 /* ResponseType.swift */; };
 		556BEF2620270136005F24A7 /* PlayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2220270136005F24A7 /* PlayerType.swift */; };
 		556BEF2720270136005F24A7 /* CardFlipType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2320270136005F24A7 /* CardFlipType.swift */; };
 		556BEF2920270420005F24A7 /* ExportDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2820270420005F24A7 /* ExportDataViewController.swift */; };
-		556BEF2D20270441005F24A7 /* SetUpCardsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2A20270441005F24A7 /* SetUpCardsExt.swift */; };
-		556BEF2E20270441005F24A7 /* MoveAnimationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2B20270441005F24A7 /* MoveAnimationExt.swift */; };
-		556BEF2F20270441005F24A7 /* SwipeLogicExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2C20270441005F24A7 /* SwipeLogicExt.swift */; };
+		556BEF2D20270441005F24A7 /* RoundOver+GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2A20270441005F24A7 /* RoundOver+GameVC.swift */; };
+		556BEF2F20270441005F24A7 /* Response+GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF2C20270441005F24A7 /* Response+GameVC.swift */; };
 		556BEF4F202D0CA5005F24A7 /* DeckRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BEF4E202D0CA5005F24A7 /* DeckRandomizer.swift */; };
 		55CF7E241CA5182500B1BE0C /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E231CA5182500B1BE0C /* Card.swift */; };
 		55CF7E261CA51DF700B1BE0C /* Hand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E251CA51DF700B1BE0C /* Hand.swift */; };
-		55CF7E281CA51EFA00B1BE0C /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E271CA51EFA00B1BE0C /* Round.swift */; };
 		55CF7E2A1CA51F1700B1BE0C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E291CA51F1700B1BE0C /* Game.swift */; };
 		55CF7E2C1CA8E44C00B1BE0C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF7E2B1CA8E44C00B1BE0C /* Player.swift */; };
-		55E171EA204BCE35007DF935 /* Contraints+GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E171E9204BCE35007DF935 /* Contraints+GameViewController.swift */; };
+		55E171EA204BCE35007DF935 /* Contraints+GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E171E9204BCE35007DF935 /* Contraints+GameVC.swift */; };
+		55FBDC97204DD16B00A31565 /* Prepare+GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FBDC96204DD16B00A31565 /* Prepare+GameVC.swift */; };
+		55FBDC99204EE22F00A31565 /* DeckBtn+GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FBDC98204EE22F00A31565 /* DeckBtn+GameVC.swift */; };
 		DC0038C81CDAE44F00BFDE9C /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0038C71CDAE44F00BFDE9C /* GameOverViewController.swift */; };
 		DC5A20E91CC86A3F004986D2 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5A20E81CC86A3F004986D2 /* PauseViewController.swift */; };
 		DC5A20EB1CC876B7004986D2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5A20EA1CC876B7004986D2 /* SettingsViewController.swift */; };
@@ -60,23 +66,29 @@
 		5534AFD61C84E516006188CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5534AFD91C84E516006188CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5534AFDB1C84E516006188CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5534B0061C877045006188CB /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Deck.swift; path = FractionsWar/Deck.swift; sourceTree = "<group>"; };
+		55488A28205C497300D3065D /* Ext+FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+FileManager.swift"; sourceTree = "<group>"; };
+		55488A2A205C542500D3065D /* DataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
+		5559275F2051AEC600564408 /* PauseBtn+GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PauseBtn+GameVC.swift"; sourceTree = "<group>"; };
+		555927612053298C00564408 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		55592765205705B500564408 /* Animate+GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animate+GameVC.swift"; sourceTree = "<group>"; };
+		555927692058663000564408 /* DisplayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayType.swift; sourceTree = "<group>"; };
+		5559276B2059BDAE00564408 /* Displays+GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Displays+GameVC.swift"; sourceTree = "<group>"; };
 		556BEF1E20270121005F24A7 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		556BEF2020270136005F24A7 /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		556BEF2120270136005F24A7 /* ResponseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseType.swift; sourceTree = "<group>"; };
 		556BEF2220270136005F24A7 /* PlayerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerType.swift; sourceTree = "<group>"; };
 		556BEF2320270136005F24A7 /* CardFlipType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFlipType.swift; sourceTree = "<group>"; };
 		556BEF2820270420005F24A7 /* ExportDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportDataViewController.swift; sourceTree = "<group>"; };
-		556BEF2A20270441005F24A7 /* SetUpCardsExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetUpCardsExt.swift; sourceTree = "<group>"; };
-		556BEF2B20270441005F24A7 /* MoveAnimationExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveAnimationExt.swift; sourceTree = "<group>"; };
-		556BEF2C20270441005F24A7 /* SwipeLogicExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeLogicExt.swift; sourceTree = "<group>"; };
+		556BEF2A20270441005F24A7 /* RoundOver+GameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RoundOver+GameVC.swift"; sourceTree = "<group>"; };
+		556BEF2C20270441005F24A7 /* Response+GameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Response+GameVC.swift"; sourceTree = "<group>"; };
 		556BEF4E202D0CA5005F24A7 /* DeckRandomizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckRandomizer.swift; sourceTree = "<group>"; };
 		55CF7E231CA5182500B1BE0C /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = FractionsWar/Card.swift; sourceTree = "<group>"; };
 		55CF7E251CA51DF700B1BE0C /* Hand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hand.swift; path = FractionsWar/Hand.swift; sourceTree = "<group>"; };
-		55CF7E271CA51EFA00B1BE0C /* Round.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Round.swift; path = FractionsWar/Round.swift; sourceTree = "<group>"; };
 		55CF7E291CA51F1700B1BE0C /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = FractionsWar/Game.swift; sourceTree = "<group>"; };
 		55CF7E2B1CA8E44C00B1BE0C /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = FractionsWar/Player.swift; sourceTree = "<group>"; };
-		55E171E9204BCE35007DF935 /* Contraints+GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contraints+GameViewController.swift"; sourceTree = "<group>"; };
+		55E171E9204BCE35007DF935 /* Contraints+GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contraints+GameVC.swift"; sourceTree = "<group>"; };
+		55FBDC96204DD16B00A31565 /* Prepare+GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Prepare+GameVC.swift"; sourceTree = "<group>"; };
+		55FBDC98204EE22F00A31565 /* DeckBtn+GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeckBtn+GameVC.swift"; sourceTree = "<group>"; };
 		DC0038C71CDAE44F00BFDE9C /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		DC5A20E81CC86A3F004986D2 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
 		DC5A20EA1CC876B7004986D2 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -173,11 +185,10 @@
 				55CF7E251CA51DF700B1BE0C /* Hand.swift */,
 				DCD9276E1CD1A0B000FF7FAE /* Data.swift */,
 				55CF7E231CA5182500B1BE0C /* Card.swift */,
-				5534B0061C877045006188CB /* Deck.swift */,
 				DCA1D0B61CCF27F1007179BB /* Settings.swift */,
 				DCD5CBBB1CDB36D300C082D8 /* Sounds.swift */,
-				55CF7E271CA51EFA00B1BE0C /* Round.swift */,
 				556BEF4E202D0CA5005F24A7 /* DeckRandomizer.swift */,
+				555927612053298C00564408 /* CardView.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -187,10 +198,15 @@
 			isa = PBXGroup;
 			children = (
 				DCC89E441CBEF00D0047657B /* GameViewController.swift */,
-				55E171E9204BCE35007DF935 /* Contraints+GameViewController.swift */,
-				556BEF2B20270441005F24A7 /* MoveAnimationExt.swift */,
-				556BEF2A20270441005F24A7 /* SetUpCardsExt.swift */,
-				556BEF2C20270441005F24A7 /* SwipeLogicExt.swift */,
+				5559276B2059BDAE00564408 /* Displays+GameVC.swift */,
+				55FBDC98204EE22F00A31565 /* DeckBtn+GameVC.swift */,
+				5559275F2051AEC600564408 /* PauseBtn+GameVC.swift */,
+				55FBDC96204DD16B00A31565 /* Prepare+GameVC.swift */,
+				55E171E9204BCE35007DF935 /* Contraints+GameVC.swift */,
+				556BEF2A20270441005F24A7 /* RoundOver+GameVC.swift */,
+				556BEF2C20270441005F24A7 /* Response+GameVC.swift */,
+				55592765205705B500564408 /* Animate+GameVC.swift */,
+				55488A2A205C542500D3065D /* DataHandler.swift */,
 			);
 			name = GameVC;
 			sourceTree = "<group>";
@@ -212,6 +228,8 @@
 				556BEF2020270136005F24A7 /* GameState.swift */,
 				556BEF2220270136005F24A7 /* PlayerType.swift */,
 				556BEF2120270136005F24A7 /* ResponseType.swift */,
+				555927692058663000564408 /* DisplayType.swift */,
+				55488A28205C497300D3065D /* Ext+FileManager.swift */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -313,34 +331,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC5A20E91CC86A3F004986D2 /* PauseViewController.swift in Sources */,
-				556BEF2E20270441005F24A7 /* MoveAnimationExt.swift in Sources */,
 				DCC89E451CBEF00D0047657B /* GameViewController.swift in Sources */,
 				556BEF2620270136005F24A7 /* PlayerType.swift in Sources */,
-				55E171EA204BCE35007DF935 /* Contraints+GameViewController.swift in Sources */,
+				55E171EA204BCE35007DF935 /* Contraints+GameVC.swift in Sources */,
 				556BEF2520270136005F24A7 /* ResponseType.swift in Sources */,
 				556BEF4F202D0CA5005F24A7 /* DeckRandomizer.swift in Sources */,
 				DCD927711CD1A17900FF7FAE /* Difficulty.swift in Sources */,
 				DC762AA41CC490F3002A6445 /* MenuViewController.swift in Sources */,
-				556BEF2D20270441005F24A7 /* SetUpCardsExt.swift in Sources */,
+				5559276A2058663000564408 /* DisplayType.swift in Sources */,
+				556BEF2D20270441005F24A7 /* RoundOver+GameVC.swift in Sources */,
 				DCD2CC361CE54AAF00526EB5 /* HowToViewController.swift in Sources */,
-				5534B0071C877045006188CB /* Deck.swift in Sources */,
+				55FBDC97204DD16B00A31565 /* Prepare+GameVC.swift in Sources */,
 				DCA1D0B71CCF27F1007179BB /* Settings.swift in Sources */,
+				5559276C2059BDAE00564408 /* Displays+GameVC.swift in Sources */,
+				55488A29205C497300D3065D /* Ext+FileManager.swift in Sources */,
+				555927622053298C00564408 /* CardView.swift in Sources */,
 				55CF7E261CA51DF700B1BE0C /* Hand.swift in Sources */,
+				55592766205705B500564408 /* Animate+GameVC.swift in Sources */,
 				55CF7E241CA5182500B1BE0C /* Card.swift in Sources */,
 				556BEF2920270420005F24A7 /* ExportDataViewController.swift in Sources */,
 				DCDA46BD1CF8BD6C00A3F4EE /* DataCollectionViewController.swift in Sources */,
 				DCD9276F1CD1A0B000FF7FAE /* Data.swift in Sources */,
 				556BEF1F20270121005F24A7 /* Functions.swift in Sources */,
-				55CF7E281CA51EFA00B1BE0C /* Round.swift in Sources */,
 				556BEF2420270136005F24A7 /* GameState.swift in Sources */,
 				DCD2CC341CE5492600526EB5 /* HowToPageViewController.swift in Sources */,
 				DCD5CBBC1CDB36D300C082D8 /* Sounds.swift in Sources */,
+				55FBDC99204EE22F00A31565 /* DeckBtn+GameVC.swift in Sources */,
 				DC62D9C21CE3CFB000F02B5A /* AboutViewController.swift in Sources */,
-				556BEF2F20270441005F24A7 /* SwipeLogicExt.swift in Sources */,
+				556BEF2F20270441005F24A7 /* Response+GameVC.swift in Sources */,
+				555927602051AEC600564408 /* PauseBtn+GameVC.swift in Sources */,
 				5534AFD01C84E516006188CB /* AppDelegate.swift in Sources */,
 				556BEF2720270136005F24A7 /* CardFlipType.swift in Sources */,
 				DC0038C81CDAE44F00BFDE9C /* GameOverViewController.swift in Sources */,
 				55CF7E2C1CA8E44C00B1BE0C /* Player.swift in Sources */,
+				55488A2B205C542500D3065D /* DataHandler.swift in Sources */,
 				55CF7E2A1CA51F1700B1BE0C /* Game.swift in Sources */,
 				DC5A20EB1CC876B7004986D2 /* SettingsViewController.swift in Sources */,
 			);
@@ -456,7 +480,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = EBJBYP322E;
 				INFOPLIST_FILE = FractionsWar/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FractionsWar.FractionsWar1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -474,7 +498,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = EBJBYP322E;
 				INFOPLIST_FILE = FractionsWar/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FractionsWar.FractionsWar1;
 				PRODUCT_NAME = "$(TARGET_NAME)";

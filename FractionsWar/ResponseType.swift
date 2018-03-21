@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ResponseType {
+enum ResponseType: String {
     case swipeLeft
     case swipeRight
     case tapP1

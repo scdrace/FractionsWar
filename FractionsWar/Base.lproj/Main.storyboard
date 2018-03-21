@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1270,6 +1269,16 @@ Good luck and happy playing!</string>
                                     <constraint firstItem="9gJ-WJ-WVe" firstAttribute="leading" secondItem="9lO-DW-itb" secondAttribute="trailing" id="yB1-3V-fQn"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XjM-my-3Z9">
+                                <rect key="frame" x="901" y="30" width="93" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Custom Deck">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="customDeckWithSender:" destination="Zsr-hK-NA6" eventType="touchUpInside" id="Swe-qS-iwW"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5o2-qj-cph">
                                 <rect key="frame" x="118.5" y="442" width="291.5" height="138"/>
                                 <constraints>
@@ -1319,19 +1328,11 @@ Good luck and happy playing!</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiR-mO-pxu">
                                 <rect key="frame" x="0.0" y="404" width="1024" height="38.5"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XjM-my-3Z9">
-                                <rect key="frame" x="457" y="510" width="87" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="WarDeck"/>
-                                <connections>
-                                    <action selector="readWarDeckWithSender:" destination="Zsr-hK-NA6" eventType="touchUpInside" id="TdY-G0-2Xc"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="SG5-dM-0PQ" firstAttribute="width" secondItem="R0j-Ct-Z0S" secondAttribute="width" id="2fm-CT-IBQ"/>
+                            <constraint firstItem="XjM-my-3Z9" firstAttribute="top" secondItem="pBb-ud-Wxf" secondAttribute="bottom" constant="10" id="3aE-bf-HBd"/>
                             <constraint firstItem="veA-UG-2ht" firstAttribute="width" secondItem="OGg-cX-fYU" secondAttribute="width" multiplier="0.2" id="8aZ-Zl-3HD"/>
                             <constraint firstItem="is8-PY-Z4X" firstAttribute="centerX" secondItem="OGg-cX-fYU" secondAttribute="centerX" id="A66-m9-Vj8"/>
                             <constraint firstItem="is8-PY-Z4X" firstAttribute="width" secondItem="OGg-cX-fYU" secondAttribute="width" id="CN8-Yz-pLp"/>
@@ -1339,6 +1340,7 @@ Good luck and happy playing!</string>
                             <constraint firstItem="is8-PY-Z4X" firstAttribute="top" secondItem="pBb-ud-Wxf" secondAttribute="bottom" id="Qtv-By-JSb"/>
                             <constraint firstItem="veA-UG-2ht" firstAttribute="height" secondItem="OGg-cX-fYU" secondAttribute="height" multiplier="0.4" id="RL8-cB-4ch"/>
                             <constraint firstItem="H3m-41-beU" firstAttribute="centerX" secondItem="R0j-Ct-Z0S" secondAttribute="centerX" id="RZH-oM-W3s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XjM-my-3Z9" secondAttribute="trailing" constant="10" id="Rgm-mz-iUA"/>
                             <constraint firstItem="R0j-Ct-Z0S" firstAttribute="leading" secondItem="veA-UG-2ht" secondAttribute="trailing" id="S7e-fa-g3T"/>
                             <constraint firstItem="OiR-mO-pxu" firstAttribute="height" secondItem="OGg-cX-fYU" secondAttribute="height" multiplier="0.05" id="SPM-0i-is4"/>
                             <constraint firstItem="R0j-Ct-Z0S" firstAttribute="top" secondItem="OiR-mO-pxu" secondAttribute="bottom" id="UVM-Te-h2a"/>
@@ -2023,17 +2025,22 @@ Each round, both players place two cards on the field: a numerator card and a de
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psN-tk-C2T">
+                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="war-boom" translatesAutoresizingMaskIntoConstraints="NO" id="yCY-QB-fRX" userLabel="WarBoom">
+                                <rect key="frame" x="193" y="64" width="638" height="640"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yCY-QB-fRX" secondAttribute="height" multiplier="319:320" id="W6z-EN-h78"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psN-tk-C2T">
                                 <rect key="frame" x="56" y="140" width="154" height="154"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="psN-tk-C2T" secondAttribute="height" multiplier="1:1" id="TcZ-7W-aII"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Points: 0" backgroundImage="paper">
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IP0-kD-ZcK" userLabel="P1NameButton">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IP0-kD-ZcK" userLabel="P1Name">
                                 <rect key="frame" x="43" y="127" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IP0-kD-ZcK" secondAttribute="height" multiplier="3:1" id="UdT-VQ-sRR"/>
@@ -2041,12 +2048,11 @@ Each round, both players place two cards on the field: a numerator card and a de
                                 <inset key="contentEdgeInsets" minX="2" minY="0.0" maxX="2" maxY="0.0"/>
                                 <state key="normal" title="Player 1 Name" backgroundImage="p1back"/>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4k-H9-txL">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4k-H9-txL">
                                 <rect key="frame" x="790" y="139" width="154" height="154"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="g4k-H9-txL" secondAttribute="height" multiplier="1:1" id="7pd-AF-Y11"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Points: 0" backgroundImage="paper">
                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -2076,7 +2082,7 @@ Each round, both players place two cards on the field: a numerator card and a de
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="250"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Zqc-ja-4YP" firstAttribute="top" secondItem="TJl-Ul-I4G" secondAttribute="top" id="751-cO-EPE"/>
                                     <constraint firstAttribute="bottom" secondItem="Zqc-ja-4YP" secondAttribute="bottom" id="FrW-ss-AVh"/>
@@ -2092,7 +2098,7 @@ Each round, both players place two cards on the field: a numerator card and a de
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="250"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="R6A-AR-ynj" secondAttribute="trailing" id="0hY-IW-eUx"/>
                                     <constraint firstItem="R6A-AR-ynj" firstAttribute="leading" secondItem="0Zm-SN-Gao" secondAttribute="leading" id="B1Z-64-DlH"/>
@@ -2108,7 +2114,7 @@ Each round, both players place two cards on the field: a numerator card and a de
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="250"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="aR8-wc-eio" firstAttribute="leading" secondItem="f0r-FY-RuP" secondAttribute="leading" id="1dK-Ma-uf7"/>
                                     <constraint firstAttribute="width" secondItem="f0r-FY-RuP" secondAttribute="height" multiplier="18:25" id="4KJ-Tl-8w1"/>
@@ -2124,7 +2130,7 @@ Each round, both players place two cards on the field: a numerator card and a de
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="250"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="YTS-lo-D4q" secondAttribute="trailing" id="1SX-Wi-K8C"/>
                                     <constraint firstAttribute="bottom" secondItem="YTS-lo-D4q" secondAttribute="bottom" id="FmD-BE-Oa6"/>
@@ -2133,35 +2139,47 @@ Each round, both players place two cards on the field: a numerator card and a de
                                     <constraint firstAttribute="width" secondItem="Wma-p7-ztz" secondAttribute="height" multiplier="18:25" id="xbP-O5-YcJ"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uW-5v-wtD" userLabel="P1CardButton">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uW-5v-wtD" userLabel="P1Deck">
                                 <rect key="frame" x="40" y="400" width="183" height="253"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2uW-5v-wtD" secondAttribute="height" multiplier="183:253" id="3vL-1W-kqk"/>
                                 </constraints>
                                 <state key="normal" image="ready" backgroundImage="deck-stack"/>
+                                <connections>
+                                    <action selector="pressP1DeckButton:" destination="FgI-4a-AjT" eventType="touchUpInside" id="lth-8a-Hhh"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUq-6H-OAm" userLabel="P2CardButton">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUq-6H-OAm" userLabel="P2Deck">
                                 <rect key="frame" x="770" y="400" width="183" height="253"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fUq-6H-OAm" secondAttribute="height" multiplier="183:253" id="Y25-VZ-27g"/>
                                 </constraints>
                                 <state key="normal" image="ready" backgroundImage="deck-stack"/>
+                                <connections>
+                                    <action selector="pressP2DeckButton:" destination="FgI-4a-AjT" eventType="touchUpInside" id="KiC-oI-aON"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNC-V1-O91" userLabel="P1Declare War">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNC-V1-O91" userLabel="P1War">
                                 <rect key="frame" x="41" y="672" width="182" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="BNC-V1-O91" secondAttribute="height" multiplier="182:59" id="rPa-c4-Rxg"/>
                                 </constraints>
                                 <state key="normal" title="Declare War" backgroundImage="button"/>
+                                <connections>
+                                    <action selector="pressDeclareWarP1Button:" destination="FgI-4a-AjT" eventType="touchUpInside" id="cMT-Wc-Zkk"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUx-PX-V5p" userLabel="P1Declare War">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUx-PX-V5p" userLabel="P2War">
                                 <rect key="frame" x="771" y="672" width="182" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="nUx-PX-V5p" secondAttribute="height" multiplier="182:59" id="B0f-f9-Ild"/>
                                 </constraints>
                                 <state key="normal" title="Declare War" backgroundImage="button"/>
+                                <connections>
+                                    <action selector="pressDeclareWarP2Button:" destination="FgI-4a-AjT" eventType="touchUpInside" id="eR0-9w-akQ"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTe-Rd-3xV">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTe-Rd-3xV" userLabel="P2Name">
                                 <rect key="frame" x="776" y="127" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PTe-Rd-3xV" secondAttribute="height" multiplier="3:1" id="bHg-o9-L2R"/>
@@ -2169,49 +2187,76 @@ Each round, both players place two cards on the field: a numerator card and a de
                                 <inset key="contentEdgeInsets" minX="2" minY="0.0" maxX="2" maxY="0.0"/>
                                 <state key="normal" title="Player 1 Name" backgroundImage="p1back"/>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pl3-k7-ce9">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pl3-k7-ce9" userLabel="P1Pause">
                                 <rect key="frame" x="38" y="40" width="180" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pl3-k7-ce9" secondAttribute="height" multiplier="36:11" id="2cQ-9P-SWg"/>
                                 </constraints>
                                 <state key="normal" image="pause"/>
+                                <connections>
+                                    <action selector="pressPauseP1Button:" destination="FgI-4a-AjT" eventType="touchUpInside" id="NeE-Sk-Jzb"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh2-xc-XdI">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xh2-xc-XdI" userLabel="P2Pause">
                                 <rect key="frame" x="776" y="40" width="180" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Xh2-xc-XdI" secondAttribute="height" multiplier="36:11" id="ATi-uf-DBT"/>
                                 </constraints>
                                 <state key="normal" image="pause"/>
+                                <connections>
+                                    <action selector="pressPauseP2Button:" destination="FgI-4a-AjT" eventType="touchUpInside" id="7ri-5s-JJZ"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXz-mf-3kz">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXz-mf-3kz" userLabel="P2CardCount">
                                 <rect key="frame" x="744" y="378" width="53" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SXz-mf-3kz" secondAttribute="height" multiplier="1:1" id="MfH-Bu-k4F"/>
                                 </constraints>
                                 <state key="normal" title="0" backgroundImage="dot"/>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0r8-wg-aLv">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0r8-wg-aLv" userLabel="P1CardCount">
                                 <rect key="frame" x="193" y="368" width="53" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0r8-wg-aLv" secondAttribute="height" multiplier="1:1" id="KY2-81-98Q"/>
                                 </constraints>
                                 <state key="normal" title="0" backgroundImage="dot"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zY-s1-tic">
-                                <rect key="frame" x="478" y="697" width="68" height="38"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Update"/>
-                            </button>
-                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2-cl-n" translatesAutoresizingMaskIntoConstraints="NO" id="yCY-QB-fRX">
-                                <rect key="frame" x="422" y="259" width="180" height="250"/>
-                            </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score DIfferential" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgv-9R-Aji">
+                                <rect key="frame" x="67" y="330" width="133" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score DIfferential" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wd4-e4-mcC">
+                                <rect key="frame" x="801" y="330" width="133" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Deck Differential" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATr-wK-h0X">
+                                <rect key="frame" x="227" y="706" width="128" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Deck Differential" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d32-rY-hQC">
+                                <rect key="frame" x="591" y="707" width="128" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="yCY-QB-fRX" firstAttribute="centerX" secondItem="OKd-Nx-ysC" secondAttribute="centerX" id="AF3-2b-uSS"/>
                             <constraint firstItem="Xh2-xc-XdI" firstAttribute="width" secondItem="Xh2-xc-XdI" secondAttribute="height" multiplier="36:11" id="DFd-rO-IMR"/>
+                            <constraint firstItem="yCY-QB-fRX" firstAttribute="centerY" secondItem="OKd-Nx-ysC" secondAttribute="centerY" id="IMh-3h-04c"/>
                             <constraint firstItem="yCY-QB-fRX" firstAttribute="centerY" secondItem="OKd-Nx-ysC" secondAttribute="centerY" id="RAt-wg-f4a"/>
                             <constraint firstItem="nUx-PX-V5p" firstAttribute="width" secondItem="nUx-PX-V5p" secondAttribute="height" multiplier="182:59" id="Uar-X2-v8z"/>
-                            <constraint firstItem="0zY-s1-tic" firstAttribute="top" secondItem="0Zm-SN-Gao" secondAttribute="bottom" constant="20" id="Zve-FY-hA8"/>
                             <constraint firstItem="PTe-Rd-3xV" firstAttribute="width" secondItem="PTe-Rd-3xV" secondAttribute="height" multiplier="3:1" id="aJb-W2-ZDB"/>
                             <constraint firstItem="g4k-H9-txL" firstAttribute="width" secondItem="g4k-H9-txL" secondAttribute="height" multiplier="1:1" id="aXG-TO-4g7"/>
                             <constraint firstItem="gdv-8k-N3f" firstAttribute="width" secondItem="f0r-FY-RuP" secondAttribute="width" id="iAf-VJ-Yek"/>
@@ -2219,6 +2264,31 @@ Each round, both players place two cards on the field: a numerator card and a de
                             <constraint firstItem="BEN-Bw-jJq" firstAttribute="width" secondItem="gdv-8k-N3f" secondAttribute="width" id="vJG-DB-vf3"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="p1CardCount" destination="0r8-wg-aLv" id="cZr-ay-fwe"/>
+                        <outlet property="p1Deck" destination="2uW-5v-wtD" id="e0x-i3-Gyw"/>
+                        <outlet property="p1DeckDiffLabel" destination="ATr-wK-h0X" id="jnU-nb-x6i"/>
+                        <outlet property="p1Denominator" destination="TJl-Ul-I4G" id="iSf-9D-hjE"/>
+                        <outlet property="p1Name" destination="IP0-kD-ZcK" id="m8j-Gv-VWG"/>
+                        <outlet property="p1Numerator" destination="f0r-FY-RuP" id="cXe-Ez-Git"/>
+                        <outlet property="p1Pause" destination="pl3-k7-ce9" id="1O5-eF-cjh"/>
+                        <outlet property="p1Points" destination="psN-tk-C2T" id="IuN-wb-ORC"/>
+                        <outlet property="p1ScoreDiffLabel" destination="Vgv-9R-Aji" id="bgc-y0-H1j"/>
+                        <outlet property="p1Vinculum" destination="gdv-8k-N3f" id="mHJ-An-Isw"/>
+                        <outlet property="p1War" destination="BNC-V1-O91" id="cvt-go-VZG"/>
+                        <outlet property="p2CardCount" destination="SXz-mf-3kz" id="LCV-XV-00a"/>
+                        <outlet property="p2Deck" destination="fUq-6H-OAm" id="7WJ-uP-i6x"/>
+                        <outlet property="p2DeckDiffLabel" destination="d32-rY-hQC" id="lug-iX-PBE"/>
+                        <outlet property="p2Denominator" destination="0Zm-SN-Gao" id="Dqo-KS-JhG"/>
+                        <outlet property="p2Name" destination="PTe-Rd-3xV" id="tc7-r8-YSi"/>
+                        <outlet property="p2Numerator" destination="Wma-p7-ztz" id="LwF-mq-SQI"/>
+                        <outlet property="p2Pause" destination="Xh2-xc-XdI" id="E5W-e2-jLw"/>
+                        <outlet property="p2Points" destination="g4k-H9-txL" id="g9W-zc-CIC"/>
+                        <outlet property="p2ScoreDiffLabel" destination="wd4-e4-mcC" id="j6J-KF-6Ml"/>
+                        <outlet property="p2Vinculum" destination="BEN-Bw-jJq" id="ioV-Qt-qMS"/>
+                        <outlet property="p2War" destination="nUx-PX-V5p" id="bBn-F2-d42"/>
+                        <outlet property="warBoom" destination="yCY-QB-fRX" id="Lol-fN-UxO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FLj-ba-mJn" sceneMemberID="firstResponder"/>
             </objects>
@@ -2227,7 +2297,6 @@ Each round, both players place two cards on the field: a numerator card and a de
     </scenes>
     <resources>
         <image name="1p-button" width="306" height="145"/>
-        <image name="2-cl-n" width="180" height="250"/>
         <image name="2-cl-r" width="180" height="250"/>
         <image name="2p-button" width="306" height="145"/>
         <image name="3-cl-r" width="180" height="250"/>

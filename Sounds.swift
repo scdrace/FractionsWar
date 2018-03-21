@@ -8,9 +8,49 @@
 
 import Foundation
 import AudioToolbox
+import AVFoundation
 
 class Sounds {
     
+    static let shared = Sounds()
+    
+    var sound: AVAudioPlayer?
+    
+    
+    func playSound(name: String, ext: String="wav") {
+        do {
+            if let url = Bundle.main.url(forResource: name, withExtension: ext) {
+                sound = try AVAudioPlayer(contentsOf:url)
+                sound?.play()
+            }
+        } catch {}
+    }
+    
+    func playBegin() {
+        playSound(name: "begin")
+    }
+
+    func playError() {
+        playSound(name: "error")
+    }
+    
+    func playMove() {
+        playSound(name: "move")
+    }
+    
+    func playPause() {
+        playSound(name: "pause")
+    }
+    
+    func playPlace() {
+        playSound(name: "place")
+    }
+    
+    func playWar() {
+        playSound(name: "war")
+    }
+    
+    /*
     static let shared = Sounds()
     
     fileprivate var begin: SystemSoundID?
@@ -20,8 +60,8 @@ class Sounds {
     fileprivate var place: SystemSoundID?
     fileprivate var war: SystemSoundID?
     
-    fileprivate init() {
     
+    fileprivate init() {
         if let beginURL = Bundle.main.url(forResource: "begin", withExtension: "wav") {
             begin = 0
             AudioServicesCreateSystemSoundID(beginURL as CFURL, &begin!)
@@ -73,4 +113,5 @@ class Sounds {
     internal func playWar() {
         AudioServicesPlaySystemSound(war!)
     }
+ */
 }

@@ -8,10 +8,15 @@
 
 import Foundation
 
-enum GameState {
+enum GameState: String, Codable {
+    
     case start
-    case normal
-    case declareWar
-    case war
     case gameOver
+    case pause
+    
+    case roundStart
+    case cardsDealt
+    case cardsFlipped
+    case playerResponded
+    case roundEnd
 }

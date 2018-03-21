@@ -10,16 +10,24 @@ import UIKit
 
 extension GameViewController {
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-    }
-    
     func proportionHandler() {
-        view.translatesAutoresizingMaskIntoConstraints = false
+        //view.translatesAutoresizingMaskIntoConstraints = false
         p1CardCount.translatesAutoresizingMaskIntoConstraints = false
         p2CardCount.translatesAutoresizingMaskIntoConstraints = false
-        setupImageConstraints(forSize: p1Numerator.bounds.size)
+        p1Pause.translatesAutoresizingMaskIntoConstraints = false
+        p2Pause.translatesAutoresizingMaskIntoConstraints = false
+        p1Points.translatesAutoresizingMaskIntoConstraints = false
+        p1ScoreDiffLabel.translatesAutoresizingMaskIntoConstraints = false
+        p2ScoreDiffLabel.translatesAutoresizingMaskIntoConstraints = false
+        p1DeckDiffLabel.translatesAutoresizingMaskIntoConstraints = false
+        p2DeckDiffLabel.translatesAutoresizingMaskIntoConstraints = false
+        warBoom.translatesAutoresizingMaskIntoConstraints = false
+        for cardView in cardViews {
+            cardView.translatesAutoresizingMaskIntoConstraints = false
+        }
+//        setupImageConstraints(forSize: p1Numerator.bounds.size)
+        setupImageConstraints(forSize: view.bounds.size)
+
     }
     
     private func setupImageConstraints(forSize size: CGSize) {
@@ -34,8 +42,9 @@ extension GameViewController {
         deckConstraints()
         cardCountConstraints()
         pauseConstraints()
-        
-        
+        pointsWonConstraints()
+        deckDiffConstraints()
+        //warBackConstraints()
         
         NSLayoutConstraint.activate(imageConstraints)
     }
@@ -162,6 +171,38 @@ extension GameViewController {
         imageConstraints.append(p2Pause.topAnchor.constraint(equalTo: view.topAnchor,
                                                              constant: spaceVertPauseToView))
     }
+    
+    // TODO: Think about renaming "diff" name
+    func pointsWonConstraints() {
+        imageConstraints.append(p1ScoreDiffLabel.centerYAnchor.constraint(equalTo: p1Points.centerYAnchor))
+        imageConstraints.append(p1ScoreDiffLabel.leadingAnchor.constraint(equalTo: p1Points.trailingAnchor,
+                                                                      constant: spaceHorPointsToDiff))
+        
+        imageConstraints.append(p2ScoreDiffLabel.centerYAnchor.constraint(equalTo: p1ScoreDiffLabel.centerYAnchor))
+        imageConstraints.append(p2Points.leadingAnchor.constraint(equalTo: p2ScoreDiffLabel.trailingAnchor,
+                                                                  constant: spaceHorPointsToDiff))
+
+
+    }
+    
+    func deckDiffConstraints() {
+        imageConstraints.append(p1DeckDiffLabel.centerYAnchor.constraint(equalTo: p1CardCount.centerYAnchor))
+        imageConstraints.append(p1DeckDiffLabel.leadingAnchor.constraint(equalTo: p1CardCount.trailingAnchor,
+                                                                      constant: spaceHorDeckCountToDiff))
+        
+        imageConstraints.append(p2DeckDiffLabel.centerYAnchor.constraint(equalTo: p1DeckDiffLabel.centerYAnchor))
+        imageConstraints.append(p2CardCount.leadingAnchor.constraint(equalTo: p2DeckDiffLabel.trailingAnchor,
+                                                                         constant: spaceHorDeckCountToDiff))
+    }
+    
+//    func warBackConstraints() {
+//        for (index, warBack) in warBackImageViews.enumerated() {
+//            imageConstraints.append(cardViews[index].centerXAnchor.constraint(equalTo: warBack.centerXAnchor,
+//                                                                      constant: 10))
+//            imageConstraints.append(warBack.centerYAnchor.constraint(equalTo: cardViews[index].centerYAnchor,
+//                                                                     constant: 10))
+//        }
+//    }
 }
 
 extension UIView {
